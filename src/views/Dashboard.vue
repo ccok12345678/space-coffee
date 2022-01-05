@@ -1,11 +1,15 @@
 <template lang="pug">
-.row.gx-0
-  .col-md-3
-    SideBar
-  .col-md-9.bg-warning
+.bg-gray
+  .row.gx-0
+    .col-md-3
+      SideBar
+    .col-md-9
 </template>
 
 <style lang="scss" scoped>
+.bg-gray {
+  background: #f8f9fa;
+}
 </style>
 
 <script>
