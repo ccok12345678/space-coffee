@@ -1,24 +1,39 @@
 <template lang="pug">
 nav.nav.navbar-dark.bg-dark
-  .container
-    a.d-block.navbar-brand.p-2.p-sm-3.p-md-4.text-center.m-0.mb-md-4(href="#/dashboard" title="後台")
+  .container.d-flex.flex-column
+    a.d-block.navbar-brand.p-2.p-sm-3.p-md-4.text-center.m-0.mb-md-4(
+      href="#/dashboard/products" title="後台")
       h1.m-0.fs-2 Space Coffee
       small.d-none.d-sm-inline-block Dashboard
     .nav-tabs.fs-5.text-center.border-0.d-flex.flex-row.flex-md-column.justify-content-center
-      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(to="" title="管理商品")
+      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理商品"
+        to="/dashboard/products"
+        :class="{ 'nav-link-active': $route.name === 'Products' }")
         i.d-none.d-sm-inline-block.me-2.bi.bi-basket
         | 產品
-      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(to="" title="管理訂單")
+      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理訂單"
+        to="/dashboard/orders"
+        :class="{ 'nav-link-active': $route.name === 'Orders' }")
         i.d-none.d-sm-inline-block.me-2.bi.bi-card-checklist
         | 訂單
-      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(
-        to="" title="管理優惠卷")
+      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理優惠卷"
+        to="/dashboard/coupons"
+        :class="{ 'nav-link-active': $route.name === 'Coupons' }")
         i.d-none.d-sm-inline-block.me-2.bi.bi-ticket
         | 優惠卷
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(to="" title="Shop")
         i.d-none.d-sm-inline-block.me-2.bi.bi-shop
         | 商店
+    footer.text-center.p-3.mt-auto.d-none.d-md-block
+      small.text-muted.border-top.pt-2 © 2022, made by ccok
 </template>
+
+<script>
+export default {
+  created() {
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 $gray-100: #f8f9fa;

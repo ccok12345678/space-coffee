@@ -1,7 +1,7 @@
 <template lang="pug">
 .hello.text-center
   h1.hover-bg-gray {{ msg }}
-  router-link.btn.btn-primary(to="/dashboard") Dashboard
+  router-link.btn.btn-primary(to="/dashboard/products") Dashboard
 </template>
 
 <script>
