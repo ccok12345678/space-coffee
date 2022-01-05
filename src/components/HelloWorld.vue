@@ -1,8 +1,7 @@
-<template>
-  <div class="hello text-center">
-    <h1>{{ msg }}</h1>
-    <button class="btn btn-primary">Dashboard</button>
-  </div>
+<template lang="pug">
+.hello.text-center
+  h1.hover-bg-gray {{ msg }}
+  router-link.btn.btn-primary(to="/dashboard") Dashboard
 </template>
 
 <script>
