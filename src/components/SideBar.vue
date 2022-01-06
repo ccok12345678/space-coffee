@@ -1,7 +1,7 @@
 <template lang="pug">
 nav.nav.navbar-dark.bg-dark
   .container.d-flex.flex-column
-    a.d-block.navbar-brand.p-2.p-sm-3.p-md-4.text-center.m-0.mb-md-4(
+    a.d-block.navbar-brand.text-brand.p-2.p-sm-3.p-md-4.text-center.m-0.mb-md-4(
       href="#/dashboard/products" title="後台")
       h1.m-0.fs-2 Space Coffee
       small.d-none.d-sm-inline-block Dashboard
