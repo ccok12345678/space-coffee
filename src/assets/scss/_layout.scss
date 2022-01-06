@@ -12,3 +12,32 @@
 .backdrop-blur {
   backdrop-filter: blur(5px);
 }
+
+.hover {
+  &-red:hover {
+    color: #fff;
+    background: $red;
+  }
+  &-gray:hover {
+    color: #fff;
+    background: $gray-800;
+  }
+  &-half-transparent {
+    background: #6c757d77 ;
+    &:hover {
+    background: #6c757d ;
+    }
+  }
+}
+
+.btn-fixed {
+  position: fixed;
+  bottom: 60px;
+  right: 50px;
+
+
+  @include media-breakpoint-up(sm) {
+    bottom: 80px;
+    right: 80px;
+  }
+}
