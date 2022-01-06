@@ -27,8 +27,8 @@
 export default {
   data() {
     return {
-      email: '',
-      password: '',
+      email: 'ccok12345678@gmail.com',
+      password: 'sprint18',
     };
   },
   methods: {

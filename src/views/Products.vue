@@ -26,9 +26,12 @@ section.w-100.overflow-auto(v-if="!!products.length")
           button.border-0.hover-gray.py-2.d-block.w-100(type="button" title="編輯")
             i.bi.bi-pencil-square
           button.border-0.hover-red.py-2.d-block.w-100(type="button" title="刪除") X
+Pagination(:pages="pagination" @emit-page="getProducts")
 </template>
 
 <script>
+import Pagination from '@/components/Pagination.vue';
+
 export default {
   data() {
     return {
@@ -36,10 +39,13 @@ export default {
       pagination: {},
     };
   },
+  components: {
+    Pagination,
+  },
   inject: ['tokenValue'],
   methods: {
-    async getProducts() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products`;
+    async getProducts(page = 1) {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
       const http = await fetch(api, {
         headers: { Authorization: this.tokenValue },
       });
@@ -48,7 +54,7 @@ export default {
         const data = await http.json();
         this.products = data.products;
         this.pagination = data.pagination;
-        console.log(this.products);
+        // console.log(this.products);
       } catch (error) {
         console.error(error);
       }

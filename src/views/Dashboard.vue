@@ -3,7 +3,7 @@
   .row.gx-0
     .col-md-3
       SideBar
-    .col-md-9.p-1.p-sm-2.p-md-4.vh-100.overflow-auto
+    #table-container.col-md-9.p-1.p-sm-2.p-md-4.vh-100.overflow-auto
       router-view
       .bg-dashboard(v-if="$route.name === 'Dashboard'")
 </template>
