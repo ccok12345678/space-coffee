@@ -2,7 +2,7 @@
 nav.nav.navbar-dark.bg-dark
   .container.d-flex.flex-column
     a.d-block.navbar-brand.text-brand.p-2.p-sm-3.p-md-4.text-center.m-0.mb-md-4(
-      href="#/dashboard/products" title="後台")
+      href="#/dashboard" title="後台")
       h1.m-0.fs-2 Space Coffee
       small.d-none.d-sm-inline-block Dashboard
     .nav-tabs.fs-5.text-center.border-0.d-flex.flex-row.flex-md-column.justify-content-center
@@ -24,12 +24,31 @@ nav.nav.navbar-dark.bg-dark
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(to="" title="Shop")
         i.d-none.d-sm-inline-block.me-2.bi.bi-shop
         | 商店
+      button.nav-item.nav-link.py-2.px-0.px-sm-1.py-md-3(title="登出"
+        @click.prevent="logOut")
+        i.bi.bi-box-arrow-left.me-2
+        span.d-none.d-md-inline-block 登出
     footer.text-center.p-3.mt-auto.d-none.d-md-block
       small.text-muted.border-top.pt-2 © 2022, made by ccok
 </template>
 
 <script>
 export default {
+  inject: ['tokenValue'],
+  methods: {
+    async logOut() {
+      const api = `${process.env.VUE_APP_API}/logout`;
+      const http = await fetch(api, {
+        method: 'post',
+        headers: { Authorization: this.tokenValue },
+      });
+      const data = await http.json();
+      console.log(data);
+      if (data.success) {
+        this.$router.push('/');
+      }
+    },
+  },
   created() {
   },
 };

@@ -6,18 +6,59 @@
   main.card.mb-auto.border-0.overflow-hidden
     .card-body.d-flex.flex-column
       img.mx-auto(src="@/assets/images/ufo-catch-cow.svg" width="100")
-      form.d-flex.flex-column
+      form.d-flex.flex-column(
+        @submit="logIn"
+      )
         .my-3
           label.form-label.fw-bold(for="login_email") 登入信箱：
-          input#login_email.form-control(type="email" placeholder="✉" required)
+          input#login_email.form-control(type="email" placeholder="✉" required
+            v-model="email")
         .mb-3
           label.form-label.fw-bold(for="login_password") 密碼：
           input#login_password.form-control(type="password" placeholder="🔒︎"
-            autocomplete="current-password" required)
-        button.btn.btn-outline-blue.d-block(type="button")
+            autocomplete="current-password" required
+            v-model="password")
+        button.btn.btn-outline-blue.d-block(type="submit")
           i.bi.bi-door-open.me-1
           span 登入
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    async logIn() {
+      const api = `${process.env.VUE_APP_API}/admin/signin`;
+      const admin = {
+        username: this.email,
+        password: this.password,
+      };
+
+      try {
+        const http = await fetch(api, {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(admin),
+        });
+        const data = await http.json();
+        console.log('Log in:', data);
+        if (data.success) {
+          const { token, expired } = data;
+          document.cookie = `SpaceCoffeeToken=${token}; expired=${new Date(expired)}`;
+          this.$router.push('/dashboard/products');
+        }
+      } catch (error) {
+        console.log('Log in error:', error);
+      }
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .container-fluid {
