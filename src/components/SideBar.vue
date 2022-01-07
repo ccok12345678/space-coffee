@@ -74,6 +74,10 @@ $gray-100: #f8f9fa;
       color: black;
       background: $gray-100;
     }
+    &-active {
+      color: black;
+      background: $gray-100;
+    }
   }
 
   @media (min-width: 768px) {

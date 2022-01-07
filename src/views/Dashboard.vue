@@ -9,9 +9,6 @@
 </template>
 
 <style lang="scss" scoped>
-// .bg-gray {
-//   background: #f8f9fa;
-// }
 .bg-dashboard {
   width: 100%;
   height: 100%;
