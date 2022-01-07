@@ -9,6 +9,10 @@
   font-family: "Vujahday Script";
 }
 
+.text-nowrap {
+  word-wrap: normal;
+}
+
 .backdrop-blur {
   backdrop-filter: blur(5px);
 }
@@ -40,4 +44,8 @@
     bottom: 80px;
     right: 80px;
   }
+}
+
+table button {
+  background: transparent;
 }

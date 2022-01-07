@@ -1,5 +1,5 @@
 <template lang="pug">
-.bg-gray
+.bg-gray-100
   .row.gx-0
     .col-md-3
       SideBar
@@ -9,9 +9,9 @@
 </template>
 
 <style lang="scss" scoped>
-.bg-gray {
-  background: #f8f9fa;
-}
+// .bg-gray {
+//   background: #f8f9fa;
+// }
 .bg-dashboard {
   width: 100%;
   height: 100%;

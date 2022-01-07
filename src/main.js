@@ -5,4 +5,16 @@ import router from './router';
 // Icons
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-createApp(App).use(router).mount('#app');
+// filters
+import { currency, date } from './methods/filters';
+
+const app = createApp(App);
+app.use(router);
+
+// global properties
+app.config.globalProperties.$filters = {
+  currency,
+  date,
+};
+
+app.mount('#app');

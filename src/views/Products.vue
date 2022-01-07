@@ -3,8 +3,8 @@ a.btn.btn-secondary.btn-fixed.fs-3.hover-half-transparent.border-0(
   title="新增品項"
 )
   | +
-section.w-100.overflow-auto(v-if="!!products.length")
-  table.table.table-light.table-striped.table-hover.align-middle
+section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
+  table.table.table-sm.table-light.table-striped.table-hover.align-middle
     thead
       tr
         th.d-none.d-sm-table-cell 縮圖
@@ -22,7 +22,7 @@ section.w-100.overflow-auto(v-if="!!products.length")
         td.d-none.d-sm-table-cell {{ item.category }}
         td.text-end {{ item.price }}
         td.text-end {{ item.origin_price }}
-        td.text-end.vstack
+        td.text-end
           button.border-0.hover-gray.py-2.d-block.w-100(type="button" title="編輯")
             i.bi.bi-pencil-square
           button.border-0.hover-red.py-2.d-block.w-100(type="button" title="刪除") X
@@ -70,9 +70,5 @@ export default {
 .img {
   max-width: 50px;
   max-height: 50px;
-}
-
-table button {
-  background: transparent;
 }
 </style>
