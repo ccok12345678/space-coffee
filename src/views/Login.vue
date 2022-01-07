@@ -27,8 +27,8 @@
 export default {
   data() {
     return {
-      email: `${process.env.ADMIN_EMAIL}`,
-      password: `${process.env.ADMIN_PASSWORD}`,
+      email: `${process.env.VUE_APP_ADMIN_EMAIL}`,
+      password: `${process.env.VUE_APP_ADMIN_PASSWORD}`,
     };
   },
   methods: {
