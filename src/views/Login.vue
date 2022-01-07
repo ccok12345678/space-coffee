@@ -27,8 +27,8 @@
 export default {
   data() {
     return {
-      email: 'ccok12345678@gmail.com',
-      password: 'sprint18',
+      email: `${process.env.ADMIN_EMAIL}`,
+      password: `${process.env.ADMIN_PASSWORD}`,
     };
   },
   methods: {
