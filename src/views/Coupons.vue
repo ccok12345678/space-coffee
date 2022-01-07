@@ -20,8 +20,9 @@ section.w-100.overflow-auto.text-nowrap.text-center(v-if="!!coupons.length")
         td {{ coupon.percent/10 }}折
         td {{ $filters.date(coupon.due_date) }}
         td
-          span.text-success(v-if="coupon.is_enabled") 啟用
-          span.text-mute(v-else) 未啟用
+          .form-switch.text-center
+            input#productEnabled.form-check-input.me-0.shadow-0(type="checkbox" role="switch"
+              v-model="coupon.is_enabled" true-value="1" false-value="0")
         td
           button.border-0.hover-gray.py-2.d-block.w-100(type="button" title="編輯")
             i.bi.bi-pencil-square
