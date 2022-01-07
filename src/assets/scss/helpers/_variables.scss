@@ -89,7 +89,10 @@ $theme-colors: (
   "dark":       $dark,
   "blue":       $blue,
   "gray-100":   $gray-100,
+  "gray-200":   $gray-200,
+  "gray-300":   $gray-300,
   "gray-600":   $gray-600,
+  "cyan-600":   shade-color($cyan, 20%),
 ) !default;
 // scss-docs-end theme-colors-map
 

@@ -6,7 +6,9 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!orders.length")
         th 下單時間
         th 買家
         th.text-center.d-none.d-sm-table-cell 訂單內容
-        th.text-center.d-table-cell.d-sm-none 訂單編號(點擊察看)
+        th.text-center.d-table-cell.d-sm-none
+          | 訂單編號
+          i.bi.bi-pencil-square.ms-2
         th.text-center 金額
         th.text-center 付款
         th
@@ -19,7 +21,7 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!orders.length")
           p.m-0(v-for="(item, i) in order.products" :key="i")
             | • {{ item.product.title }}（{{ item.product.unit }}）*{{ item.product.num }}
         td.d-table-cell.d-sm-none
-          a.link-gray-600.text-decoration-none(href="#")
+          a.link-dark.text-decoration-none(href="#")
             |{{ order.id }}
         td {{ $filters.currency(order.total) }}
         td

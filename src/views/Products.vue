@@ -1,6 +1,6 @@
 <template lang="pug">
 a.btn.btn-secondary.btn-fixed.fs-3.hover-half-transparent.border-0(
-  title="新增品項"
+  title="新增品項" @click.prevent="openModal(true)"
 )
   | +
 section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
@@ -8,7 +8,9 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
     thead
       tr
         th 縮圖
-        th 名稱
+        th
+          | 商品名稱
+          i.bi.bi-pencil-square.ms-2
         th.d-none.d-sm-table-cell 分類
         th.text-center 售價
         th.text-center.d-none.d-sm-table-cell 原價
@@ -20,39 +22,53 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
           .img.overflow-hidden
             img.img-fluid(:src="item.imageUrl")
         td
-          a.link-gray-600.text-decoration-none(href="#")
+          a.link-dark.text-decoration-none(href="#"
+            @click.prevent="openModal(false, item)" title="編輯察看")
             | {{ item.title }}
         td.d-none.d-sm-table-cell {{ item.category }}
         td.text-end {{ $filters.currency(item.price) }}
         td.text-end.d-none.d-sm-table-cell {{ $filters.currency(item.origin_price) }}
         td.text-center
           .form-switch.text-center
-            input#productEnabled.form-check-input.me-0.shadow-0(type="checkbox" role="switch"
-              v-model="item.is_enabled" true-value="1" false-value="0")
+            input#productEnabled.form-check-input.me-0.p-2.shadow-0(type="checkbox" role="switch"
+              v-model="item.is_enabled" true-value="1" false-value="0"
+              @change="updateProduct(item)")
         td.text-center
-          button.border-0.hover-gray.py-2.px-2.d-block.w-100(type="button" title="編輯")
+          button.border-0.hover-gray.py-2.px-2.d-block.w-100(
+            type="button" title="編輯"
+            @click.prevent="openModal(false, item)")
             i.bi.bi-pencil-square
-          button.border-0.hover-red.py-2.px-2.d-block.w-100(type="button" title="刪除") X
+          button.border-0.hover-red.py-2.px-2.d-block.w-100(type="button" title="刪除")
+            i.bi.bi-trash
 Pagination(:pages="pagination" @emit-page="getProducts")
+ProductModal(ref="productModal"
+  :product="tempProduct"
+  @updateProduct="updateProduct")
 </template>
 
 <script>
 import Pagination from '@/components/Pagination.vue';
+import ProductModal from '@/components/Modal_Product.vue';
 
 export default {
   data() {
     return {
       products: [],
+      tempProduct: {},
       pagination: {},
+      currentPage: 1,
+      isNew: false,
     };
   },
   components: {
     Pagination,
+    ProductModal,
   },
   inject: ['tokenValue'],
   methods: {
     async getProducts(page = 1) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
+      this.currentPage = page;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${this.currentPage}`;
       const http = await fetch(api, {
         headers: { Authorization: this.tokenValue },
       });
@@ -61,10 +77,45 @@ export default {
         const data = await http.json();
         this.products = data.products;
         this.pagination = data.pagination;
-        console.log('products', this.products);
       } catch (error) {
         console.error(error);
       }
+    },
+    openModal(isNew, item) {
+      if (isNew) {
+        this.tempProduct = {};
+      } else {
+        this.tempProduct = { ...item };
+      }
+
+      this.isNew = isNew;
+      this.$refs.productModal.showModal();
+    },
+    async updateProduct(product) {
+      let api; let method; let page;
+
+      if (this.isNew) {
+        api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product`;
+        method = 'post'; page = 1;
+      } else {
+        api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${product.id}`;
+        method = 'put'; page = this.currentPage;
+      }
+
+      const http = await fetch(api, {
+        method,
+        headers: {
+          Authorization: this.tokenValue,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: { ...product } }),
+      });
+      const data = await http.json();
+      console.log('updateProduct', data);
+
+      this.$refs.productModal.hideModal();
+      this.isNew = false;
+      this.getProducts(page);
     },
   },
   created() {
