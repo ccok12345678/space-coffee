@@ -1,6 +1,6 @@
 <template lang="pug">
-#modal_product.modal(tabindex="-1" ref="modal")
-  .modal-dialog.modal-lg
+#modal_product.modal.fade(tabindex="-1" ref="modal")
+  .modal-dialog.modal-lg.modal-dialog-centered
     form.modal-content.p-3(@submit.prevent="update")
       .modal-header.p-2.mb-3
         h5.modal-title 編輯商品
@@ -59,8 +59,10 @@
             // 上傳功能
             // 多圖上傳
       .modal-footer.p-0.pt-2.mt-3
-        button.btn.btn-cyan-600.text-white(type="submit") 確認
-        button.btn.btn-secondary(type="button" data-bs-dismiss="modal") 取消
+        button.btn.btn-cyan-600.text-white.w-25(type="submit")
+          i.bi.bi-check-lg.me-2
+          | 送出
+        button.btn.btn-outline-gray-600.w-20(type="button" data-bs-dismiss="modal") 取消
 </template>
 
 <style lang="scss" scoped>
@@ -89,7 +91,6 @@ export default {
   watch: {
     product() {
       this.tempProduct = { ...this.product };
-      console.log('in modal', this.tempProduct);
     },
   },
   methods: {

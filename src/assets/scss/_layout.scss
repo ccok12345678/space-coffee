@@ -53,3 +53,9 @@
 table button {
   background: transparent;
 }
+
+.spinner {
+  &-slow {
+    animation: 17.5s linear infinite spinner-border;
+  }
+}
