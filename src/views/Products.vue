@@ -1,10 +1,9 @@
 <template lang="pug">
-a.btn.btn-secondary.btn-fixed.fs-3.hover-half-transparent.border-0(
-  title="新增品項" @click.prevent="openModal(true)"
-)
-  | +
+a.btn.btn-secondary.btn-fixed.fs-3.hover-half-transparent.text-light.border-0(
+  title="新增品項" @click.prevent="openModal(true)")
+  i.bi.bi-clipboard-plus
 section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
-  table.table.table-sm.table-light.table-striped.table-hover.align-middle
+  table.table.table-sm.table-light.table-striped.table-hover.align-middle.text-center
     thead
       tr
         th 縮圖
@@ -12,9 +11,9 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
           | 商品名稱
           i.bi.bi-pencil-square.ms-2
         th.d-none.d-sm-table-cell 分類
-        th.text-center 售價
-        th.text-center.d-none.d-sm-table-cell 原價
-        th(width="50") 上架
+        th 售價
+        th.d-none.d-sm-table-cell 原價
+        th.d-none.d-sm-table-cell(width="50") 上架
         th
     tbody
       tr(v-for="item in products" :key="item.id")
@@ -26,29 +25,34 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
             @click.prevent="openModal(false, item)" title="編輯察看")
             | {{ item.title }}
         td.d-none.d-sm-table-cell {{ item.category }}
-        td.text-end {{ $filters.currency(item.price) }}
-        td.text-end.d-none.d-sm-table-cell {{ $filters.currency(item.origin_price) }}
-        td.text-center
+        td ${{ $filters.currency(item.price) }}
+        td.d-none.d-sm-table-cell ${{ $filters.currency(item.origin_price) }}
+        td.d-none.d-sm-table-cell
           .form-switch.text-center
             input#productEnabled.form-check-input.me-0.p-2.shadow-0(type="checkbox" role="switch"
               v-model="item.is_enabled" true-value="1" false-value="0"
               @change="updateProduct(item)")
-        td.text-center
+        td
           button.border-0.hover-gray.py-2.px-2.d-block.w-100(
             type="button" title="編輯"
             @click.prevent="openModal(false, item)")
             i.bi.bi-pencil-square
-          button.border-0.hover-red.py-2.px-2.d-block.w-100(type="button" title="刪除")
+          button.border-0.hover-red.py-2.px-2.d-block.w-100(type="button" title="刪除"
+            @click.prevent="checkDelete(item)")
             i.bi.bi-trash
 Pagination(:pages="pagination" @emit-page="getProducts")
 ProductModal(ref="productModal"
   :product="tempProduct"
   @updateProduct="updateProduct")
+DeleteModal(ref="deleteModal"
+  :item="tempProduct" :itemClass="'商品'"
+  @emit-delete="delProduct")
 </template>
 
 <script>
 import Pagination from '@/components/Pagination.vue';
 import ProductModal from '@/components/Modal_Product.vue';
+import DeleteModal from '@/components/Modal_Delete.vue';
 
 export default {
   data() {
@@ -63,6 +67,7 @@ export default {
   components: {
     Pagination,
     ProductModal,
+    DeleteModal,
   },
   inject: ['tokenValue'],
   methods: {
@@ -116,6 +121,28 @@ export default {
       this.$refs.productModal.hideModal();
       this.isNew = false;
       this.getProducts(page);
+    },
+    checkDelete(item) {
+      this.tempProduct = { ...item };
+      this.$refs.deleteModal.showModal();
+    },
+    async delProduct(item) {
+      console.log(item);
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`;
+      const http = await fetch(api, {
+        method: 'delete',
+        headers: { Authorization: this.tokenValue },
+      });
+
+      try {
+        const data = await http.json();
+        console.log('delete', data);
+        this.getProducts(this.currentPage);
+      } catch (error) {
+        console.error(error);
+      }
+
+      this.$refs.deleteModal.hideModal();
     },
   },
   created() {

@@ -50,16 +50,22 @@
         //- 商品圖片
         .col-sm-5
           h6 商品圖片：
-          img.img-fluid(:src="tempProduct.imageUrl" v-if="tempProduct.imageUrl")
+          .text-center.p-3(v-if="isUploading")
+            .spinner-grow
+              .visually-hidden 載入中……
+          img.img-fluid(:src="tempProduct.imageUrl" v-if="tempProduct.imageUrl"
+            alt="圖片連結無效")
           input.form-control.form-control-sm.my-2(type="url" placeholder="圖片網址🔗"
             v-model="tempProduct.imageUrl")
           .mt-4
             label.form-label.mb-1(for="uploadImg") 或上傳檔案：
-            input#uploadImg.form-control.form-control-sm(type="file")
+            input#uploadImg.form-control.form-control-sm(type="file"
+              ref="imgInput"
+              @change.prevent="uploadImg")
             // 上傳功能
             // 多圖上傳
       .modal-footer.p-0.pt-2.mt-3
-        button.btn.btn-cyan-600.text-white.w-25(type="submit")
+        button.btn.btn-cyan-600.text-white.w-30(type="submit")
           i.bi.bi-check-lg.me-2
           | 送出
         button.btn.btn-outline-gray-600.w-20(type="button" data-bs-dismiss="modal") 取消
@@ -78,6 +84,7 @@ export default {
   data() {
     return {
       tempProduct: {},
+      isUploading: false,
     };
   },
   inject: ['tokenValue'],
@@ -96,6 +103,32 @@ export default {
   methods: {
     update() {
       this.$emit('updateProduct', this.tempProduct);
+    },
+    async uploadImg() {
+      this.tempProduct.imageUrl = '';
+      this.isUploading = true;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`;
+
+      const uploadImg = this.$refs.imgInput.files[0];
+      const formData = new FormData();
+      formData.append('file-to-upload', uploadImg);
+
+      const http = await fetch(api, {
+        method: 'post',
+        headers: { Authorization: this.tokenValue },
+        body: formData,
+      });
+
+      try {
+        const data = await http.json();
+        console.log('upload img', data);
+        if (data.success) {
+          this.tempProduct.imageUrl = data.imageUrl;
+          this.isUploading = false;
+        }
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 };
