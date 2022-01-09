@@ -6,10 +6,8 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!orders.length")
         th 下單時間
         th 買家
         th.text-center.d-none.d-sm-table-cell 訂單內容
-          i.bi.bi-pencil-square.ms-2
         th.text-center.d-table-cell.d-sm-none
           | 訂單編號
-          i.bi.bi-pencil-square.ms-2
         th.text-center 金額
         th.text-center 付款
         th
@@ -18,11 +16,12 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!orders.length")
         td {{ $filters.date(order.create_at) }}
         td {{ order.user.name }}
         td.d-none.d-sm-table-cell
-          a.link-dark.text-decoration-none(href="#" @click.prevent="openModal(order)")
+          a.link-dark.text-decoration-none(href="#"
+            @click.prevent="openModal(order, false)" title="僅可檢視")
             p.m-0(v-for="(item, i) in order.products" :key="i")
               | • {{ item.product.title }}（{{ item.product.unit }}）*{{ item.product.num }}
         td.d-table-cell.d-sm-none
-          a.link-dark.text-decoration-none(href="#" @click.prevent="openModal(order)")
+          a.link-dark.text-decoration-none(href="#" @click.prevent="openModal(order, false)")
             | • {{ order.id }}
         td {{ $filters.currency(order.total) }}
         td
@@ -30,12 +29,12 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!orders.length")
           span.text-danger(v-else) 未付款
         td.text-end
           button.border-0.hover-gray.p-2.d-block.w-100(type="button" title="檢視編輯"
-            @click.prevent="openModal(order)")
+            @click.prevent="openModal(order, true)")
             i.bi.bi-pencil-square
           button.border-0.hover-red.p-2.d-block.w-100(type="button" title="刪除")
             i.bi.bi-trash
 Pagination(:pages="pagination" @emit-page="getOrders")
-OrderModal(ref="orderModal" :order="tempOrder")
+OrderModal(ref="orderModal" :order="tempOrder" @emit-order="updateOrder")
 </template>
 
 <script>
@@ -48,6 +47,7 @@ export default {
       orders: [],
       tempOrder: {},
       pagination: {},
+      currentPage: 1,
     };
   },
   components: {
@@ -57,7 +57,8 @@ export default {
   inject: ['tokenValue'],
   methods: {
     async getOrders(page = 1) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/orders?page=${page}`;
+      this.currentPage = page;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/orders?page=${this.currentPage}`;
       const http = await fetch(api, {
         headers: { Authorization: this.tokenValue },
       });
@@ -66,9 +67,14 @@ export default {
       this.pagination = data.pagination;
       console.log('orders', data);
     },
-    openModal(order) {
+    openModal(order, isEditable) {
       this.tempOrder = { ...order };
+      this.tempOrder.isEditable = isEditable;
       this.$refs.orderModal.showModal();
+    },
+    async updateOrder(order) {
+      console.log(order);
+      this.$refs.orderModal.hideModal();
     },
   },
   created() {
