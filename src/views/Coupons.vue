@@ -1,6 +1,6 @@
 <template lang="pug">
 a.btn.btn-secondary.btn-fixed.fs-3.hover-half-transparent.text-light.border-0(
-  title="新增品項" @click.prevent="openModal(true)")
+  title="新增優惠卷" @click.prevent="openModal(true)")
   i.bi.bi-file-earmark-plus
 section.w-100.overflow-auto.text-nowrap.text-center(v-if="!!coupons.length")
   table.table.table-sm.table-light.table-striped.table-hover.align-middle
@@ -14,23 +14,26 @@ section.w-100.overflow-auto.text-nowrap.text-center(v-if="!!coupons.length")
         th
     tbody
       tr(v-for="coupon in coupons" :key="coupon.id")
-        td {{ coupon.title }}
+        td
+          a.link-dark.text-decoration-none(href="#" @click.prevent="openModal(false, coupon)")
+            | {{ coupon.title }}
         td {{ coupon.code }}
         td {{ coupon.percent/10 }}折
         td {{ $filters.date(coupon.due_date) }}
         td
           .form-switch.text-center
-            input#productEnabled.form-check-input.me-0.shadow-0(type="checkbox" role="switch"
-              v-model="coupon.is_enabled" true-value="1" false-value="0")
+            input#productEnabled.form-check-input.me-0.p-2.shadow-0(type="checkbox" role="switch"
+              v-model="coupon.is_enabled" :true-value="1" :false-value="0"
+              @change.prevent="updateCoupon(coupon)")
         td
           button.border-0.hover-gray.py-2.d-block.w-100(type="button" title="編輯"
-            @click.prevent="openModal(coupon)")
+            @click.prevent="openModal(false, coupon)")
             i.bi.bi-pencil-square
           button.border-0.hover-red.py-2.d-block.w-100(type="button" title="刪除")
             i.bi.bi-trash
 Pagination(:pages="pagination" @emit-page="getCoupons")
 CouponModal(ref="couponModal"
-  :coupon="tempCoupon")
+  :coupon="tempCoupon" @emit-coupon="updateCoupon")
 </template>
 
 <script>
@@ -43,6 +46,8 @@ export default {
       coupons: [],
       tempCoupon: {},
       pagination: {},
+      currentPage: 1,
+      isNew: false,
     };
   },
   components: {
@@ -52,6 +57,8 @@ export default {
   inject: ['tokenValue'],
   methods: {
     async getCoupons(page = 1) {
+      this.currentPage = page;
+
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`;
       const http = await fetch(api, {
         headers: { Authorization: this.tokenValue },
@@ -61,9 +68,47 @@ export default {
       this.pagination = data.pagination;
       console.log('coupons', data);
     },
-    openModal(coupon) {
-      this.tempCoupon = { ...coupon };
+    openModal(isNew, coupon) {
+      this.isNew = isNew;
+
+      if (isNew) {
+        this.tempCoupon = {};
+      } else {
+        this.tempCoupon = { ...coupon };
+      }
       this.$refs.couponModal.showModal();
+    },
+    async updateCoupon(coupon) {
+      this.$refs.couponModal.hideModal();
+      let api; let method; let page;
+
+      if (this.isNew) {
+        api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon`;
+        method = 'post';
+        page = 1;
+      } else {
+        api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon/${coupon.id}`;
+        method = 'put';
+        page = this.currentPage;
+      }
+      const couponData = { data: { ...coupon } };
+      const http = await fetch(api, {
+        method,
+        headers: {
+          Authorization: this.tokenValue,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(couponData),
+      });
+
+      try {
+        const data = await http.json();
+        console.log('update coupon', data);
+        this.getCoupons(page);
+      } catch (error) {
+        console.error(error);
+      }
+      this.isNew = false;
     },
   },
   created() {
