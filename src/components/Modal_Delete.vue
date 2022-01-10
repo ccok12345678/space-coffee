@@ -29,7 +29,16 @@ export default {
     };
   },
   mixins: [modalMixin],
-  props: ['item', 'itemClass'],
+  props: {
+    item: {
+      type: Object,
+      default() { return {}; },
+    },
+    itemClass: {
+      type: String,
+      default() { return '物件'; },
+    },
+  },
   watch: {
     item() {
       this.tempItem = { ...this.item };

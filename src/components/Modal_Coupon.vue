@@ -20,21 +20,21 @@
           .w-100
           label.col-3.col-form-label.py-1(for="couponDueDate")
             | 到期日：
-          .col-6.mb-2
+          .col.mb-2
             input#couponDueDate.form-control.ps-2(type="date" required
               v-model="due_date")
           .w-100
           label.col-3.col-form-label.py-1(for="couponPercent")
             | 折數：
-          .col-4.mb-2
+          .col-6.mb-2
             .input-group
-              input#couponPercent.form-control.ps-2(type="number" min="0" max="99.99"
-                v-model="tempCoupon.percent" required)
-              span.input-group-text /⏨ 折
+              input#couponPercent.form-control.ps-2(type="number" min="0.1" max="9.9" step="0.1"
+                v-model="discount" required)
+              span.input-group-text 折
           .w-100
           .col-3.py-1
             | 啟用：
-          .col-4.text-center
+          .col-6.text-center
             .form-switch.py-1
               input#couponIsEnabled.form-check-input.p-2.me-2(type="checkbox"
                 role="switch"
@@ -61,6 +61,7 @@ export default {
       tempCoupon: {},
       due_date: '',
       is_enabled: 1,
+      discount: 0.1,
     };
   },
   mixins: [modalmixin],
@@ -74,15 +75,18 @@ export default {
     coupon() {
       this.tempCoupon = { ...this.coupon };
 
-      // 轉換時間格式
       if (this.tempCoupon.due_date) {
+        // 轉換時間格式
         const date = new Date(this.tempCoupon.due_date * 1000)
           .toISOString().split('T');
         [this.due_date] = date;
+
         this.is_enabled = this.tempCoupon.is_enabled;
+        this.discount = this.tempCoupon.percent / 10;
       } else {
         this.due_date = '';
-        this.tempCoupon.is_enabled = this.is_enabled;
+        this.is_enabled = 0;
+        this.discount = 0;
       }
     },
     due_date() {
@@ -92,6 +96,7 @@ export default {
   methods: {
     update() {
       this.tempCoupon.is_enabled = this.is_enabled;
+      this.tempCoupon.percent = this.discount * 10;
       this.$emit('emit-coupon', this.tempCoupon);
     },
   },
