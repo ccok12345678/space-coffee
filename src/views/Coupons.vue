@@ -23,24 +23,31 @@ section.w-100.overflow-auto.text-nowrap.text-center(v-if="!!coupons.length")
             input#productEnabled.form-check-input.me-0.shadow-0(type="checkbox" role="switch"
               v-model="coupon.is_enabled" true-value="1" false-value="0")
         td
-          button.border-0.hover-gray.py-2.d-block.w-100(type="button" title="編輯")
+          button.border-0.hover-gray.py-2.d-block.w-100(type="button" title="編輯"
+            @click.prevent="openModal(coupon)")
             i.bi.bi-pencil-square
-          button.border-0.hover-red.py-2.d-block.w-100(type="button" title="刪除") X
+          button.border-0.hover-red.py-2.d-block.w-100(type="button" title="刪除")
+            i.bi.bi-trash
 Pagination(:pages="pagination" @emit-page="getCoupons")
+CouponModal(ref="couponModal"
+  :coupon="tempCoupon")
 </template>
 
 <script>
 import Pagination from '@/components/Pagination.vue';
+import CouponModal from '@/components/Modal_Coupon.vue';
 
 export default {
   data() {
     return {
       coupons: [],
+      tempCoupon: {},
       pagination: {},
     };
   },
   components: {
     Pagination,
+    CouponModal,
   },
   inject: ['tokenValue'],
   methods: {
@@ -53,6 +60,10 @@ export default {
       this.coupons = data.coupons;
       this.pagination = data.pagination;
       console.log('coupons', data);
+    },
+    openModal(coupon) {
+      this.tempCoupon = { ...coupon };
+      this.$refs.couponModal.showModal();
     },
   },
   created() {
