@@ -31,15 +31,20 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!orders.length")
           button.border-0.hover-gray.p-2.d-block.w-100(type="button" title="檢視編輯"
             @click.prevent="openModal(order, true)")
             i.bi.bi-pencil-square
-          button.border-0.hover-red.p-2.d-block.w-100(type="button" title="刪除")
+          button.border-0.hover-red.p-2.d-block.w-100(type="button" title="刪除"
+            @click.prevent="checkDelete(order)")
             i.bi.bi-trash
 Pagination(:pages="pagination" @emit-page="getOrders")
 OrderModal(ref="orderModal" :order="tempOrder" @emit-order="updateOrder")
+DeleteModal(ref="deleteModal"
+  :item="tempOrder" :itemClass="'訂單'"
+  @emit-delete="delOrder")
 </template>
 
 <script>
 import Pagination from '@/components/Pagination.vue';
 import OrderModal from '@/components/Modal_Order.vue';
+import DeleteModal from '@/components/Modal_Delete.vue';
 
 export default {
   data() {
@@ -53,6 +58,7 @@ export default {
   components: {
     Pagination,
     OrderModal,
+    DeleteModal,
   },
   inject: ['tokenValue'],
   methods: {
@@ -93,6 +99,22 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    checkDelete(item) {
+      this.tempOrder = { ...item };
+      this.$refs.deleteModal.showModal();
+    },
+    async delOrder(order) {
+      this.$refs.deleteModal.hideModal();
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${order.id}`;
+      const http = await fetch(api, {
+        method: 'delete',
+        headers: { Authorization: this.tokenValue },
+      });
+      const data = http.json();
+      console.log('delete order', data);
+
+      this.getOrders(this.currentPage);
     },
   },
   created() {
