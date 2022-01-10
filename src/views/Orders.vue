@@ -73,8 +73,26 @@ export default {
       this.$refs.orderModal.showModal();
     },
     async updateOrder(order) {
-      console.log(order);
       this.$refs.orderModal.hideModal();
+      console.log(order);
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${order.id}`;
+      const updateData = { data: { ...order } };
+      const http = await fetch(api, {
+        method: 'put',
+        headers: {
+          Authorization: this.tokenValue,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateData),
+      });
+
+      try {
+        const data = await http.json();
+        console.log('update order', data);
+        this.getOrders(this.currentPage);
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
   created() {

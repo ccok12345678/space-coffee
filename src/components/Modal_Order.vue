@@ -38,6 +38,11 @@
         h6.fw-bold 訂單狀態
         .row
           .col-3.py-1
+            | 訂單編號：
+          .col-9
+            .py-1.ps-2
+              | {{ tempOrder.id }}
+          .col-3.py-1
             | 下單日期：
           .col-9
             .py-1.ps-2
@@ -102,7 +107,6 @@ export default {
   watch: {
     order() {
       this.tempOrder = JSON.parse(JSON.stringify(this.order));
-      console.log('order modal', this.tempOrder);
     },
   },
   methods: {
