@@ -21,15 +21,21 @@
         button.btn.btn-outline-blue.d-block(type="submit")
           i.bi.bi-door-open.me-1
           span 登入
+PageTitle 管理員登入 ‧ Space Coffee
 </template>
 
 <script>
+import PageTitle from '@/components/PageTitle.vue';
+
 export default {
   data() {
     return {
       email: `${process.env.VUE_APP_ADMIN_EMAIL}`,
       password: `${process.env.VUE_APP_ADMIN_PASSWORD}`,
     };
+  },
+  components: {
+    PageTitle,
   },
   methods: {
     async logIn() {

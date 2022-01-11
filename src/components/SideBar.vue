@@ -30,10 +30,21 @@ nav.nav.navbar-dark.bg-dark
         span.d-none.d-md-inline-block 登出
     footer.text-center.p-3.mt-auto.d-none.d-md-block
       small.text-muted.border-top.pt-2 © 2022, made by ccok
+PageTitle  {{ pageTitle }} · Space Coffee 後台管理
 </template>
 
 <script>
+import PageTitle from '@/components/PageTitle.vue';
+
 export default {
+  data() {
+    return {
+      pageTitle: '',
+    };
+  },
+  components: {
+    PageTitle,
+  },
   inject: ['tokenValue'],
   methods: {
     async logOut() {
@@ -48,8 +59,28 @@ export default {
         this.$router.push('/');
       }
     },
+    changePageTitle() {
+      switch (this.$route.name) {
+        case 'Products':
+          this.pageTitle = '產品';
+          break;
+        case 'Orders':
+          this.pageTitle = '訂單';
+          break;
+        case 'Coupons':
+          this.pageTitle = '優惠卷';
+          break;
+        default:
+          this.pageTitle = '';
+          break;
+      }
+    },
   },
   created() {
+    this.changePageTitle();
+  },
+  updated() {
+    this.changePageTitle();
   },
 };
 </script>
