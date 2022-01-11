@@ -6,6 +6,7 @@
     #table-container.col-md-9.p-1.p-sm-2.p-md-4.vh-100.overflow-auto
       router-view
       .bg-dashboard(v-if="$route.name === 'Dashboard'")
+ToastMessages
 </template>
 
 <style lang="scss" scoped>
@@ -22,14 +23,20 @@
 <script>
 import SideBar from '@/components/SideBar.vue';
 import tokenValue from '@/methods/tokenValue';
+import emitter from '@/methods/emitter';
+import pushToast from '@/methods/pushToast';
+import ToastMessages from '@/components/ToastMessages.vue';
 
 export default {
   components: {
     SideBar,
+    ToastMessages,
   },
   provide() {
     return {
       tokenValue,
+      pushToast,
+      emitter,
     };
   },
   methods: {
@@ -42,7 +49,8 @@ export default {
 
       try {
         const data = await http.json();
-        console.log(data);
+        console.log('登入', data);
+        pushToast(data, '登入');
         if (!data.success) {
           this.$router.push('/login');
         }
