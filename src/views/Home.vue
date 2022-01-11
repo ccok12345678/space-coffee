@@ -15,5 +15,8 @@ export default {
   components: {
     HelloWorld,
   },
+  mounted() {
+    document.title = 'Home';
+  },
 };
 </script>
