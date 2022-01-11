@@ -47,6 +47,7 @@ ProductModal(ref="productModal"
 DeleteModal(ref="deleteModal"
   :item="tempProduct" :itemClass="'商品'"
   @emit-delete="delProduct")
+VueLoading(:active="isLoading")
 </template>
 
 <script>
@@ -62,6 +63,7 @@ export default {
       pagination: {},
       currentPage: 1,
       isNew: false,
+      isLoading: false,
     };
   },
   components: {
@@ -72,6 +74,7 @@ export default {
   inject: ['tokenValue'],
   methods: {
     async getProducts(page = 1) {
+      this.isLoading = true;
       this.currentPage = page;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${this.currentPage}`;
       const http = await fetch(api, {
@@ -85,6 +88,7 @@ export default {
       } catch (error) {
         console.error(error);
       }
+      this.isLoading = false;
     },
     openModal(isNew, item) {
       if (isNew) {

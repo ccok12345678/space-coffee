@@ -39,6 +39,7 @@ CouponModal(ref="couponModal"
 DeleteModal(ref="deleteModal"
   :item="tempCoupon" :itemClass="'優惠卷'"
   @emit-delete="delCoupon")
+VueLoading(:active="isLoading")
 </template>
 
 <script>
@@ -54,6 +55,7 @@ export default {
       pagination: {},
       currentPage: 1,
       isNew: false,
+      isLoading: false,
     };
   },
   components: {
@@ -64,6 +66,7 @@ export default {
   inject: ['tokenValue'],
   methods: {
     async getCoupons(page = 1) {
+      this.isLoading = true;
       this.currentPage = page;
 
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`;
@@ -74,6 +77,7 @@ export default {
       this.coupons = data.coupons;
       this.pagination = data.pagination;
       console.log('coupons', data);
+      this.isLoading = false;
     },
     openModal(isNew, coupon) {
       this.isNew = isNew;

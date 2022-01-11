@@ -8,6 +8,7 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!orders.length")
         th.text-center.d-none.d-sm-table-cell 訂單內容
         th.text-center.d-table-cell.d-sm-none
           | 訂單編號
+          i.bi.bi-eye.ms-2
         th.text-center 金額
         th.text-center 付款
         th
@@ -39,6 +40,7 @@ OrderModal(ref="orderModal" :order="tempOrder" @emit-order="updateOrder")
 DeleteModal(ref="deleteModal"
   :item="tempOrder" :itemClass="'訂單'"
   @emit-delete="delOrder")
+VueLoading(:active="isLoading")
 </template>
 
 <script>
@@ -53,6 +55,7 @@ export default {
       tempOrder: {},
       pagination: {},
       currentPage: 1,
+      isLoading: false,
     };
   },
   components: {
@@ -63,6 +66,7 @@ export default {
   inject: ['tokenValue'],
   methods: {
     async getOrders(page = 1) {
+      this.isLoading = true;
       this.currentPage = page;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/orders?page=${this.currentPage}`;
       const http = await fetch(api, {
@@ -72,6 +76,7 @@ export default {
       this.orders = data.orders;
       this.pagination = data.pagination;
       console.log('orders', data);
+      this.isLoading = false;
     },
     openModal(order, isEditable) {
       this.tempOrder = { ...order };
