@@ -1,8 +1,6 @@
 import emitter from './emitter';
 
 export default function pushToast(data, title) {
-  console.log('toast', data, title);
-
   let message;
 
   if (typeof data.message === 'string') {
