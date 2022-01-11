@@ -63,19 +63,20 @@ export default {
     OrderModal,
     DeleteModal,
   },
-  inject: ['tokenValue'],
+  inject: ['tokenValue', 'pushToast'],
   methods: {
     async getOrders(page = 1) {
       this.isLoading = true;
       this.currentPage = page;
+
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/orders?page=${this.currentPage}`;
       const http = await fetch(api, {
         headers: { Authorization: this.tokenValue },
       });
       const data = await http.json();
+
       this.orders = data.orders;
       this.pagination = data.pagination;
-      console.log('orders', data);
       this.isLoading = false;
     },
     openModal(order, isEditable) {
@@ -85,7 +86,7 @@ export default {
     },
     async updateOrder(order) {
       this.$refs.orderModal.hideModal();
-      console.log(order);
+
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${order.id}`;
       const updateData = { data: { ...order } };
       const http = await fetch(api, {
@@ -99,8 +100,8 @@ export default {
 
       try {
         const data = await http.json();
-        console.log('update order', data);
         this.getOrders(this.currentPage);
+        this.pushToast(data, '訂單');
       } catch (error) {
         console.error(error);
       }
@@ -117,7 +118,7 @@ export default {
         headers: { Authorization: this.tokenValue },
       });
       const data = http.json();
-      console.log('delete order', data);
+      this.pushToast(data, '訂單');
 
       this.getOrders(this.currentPage);
     },

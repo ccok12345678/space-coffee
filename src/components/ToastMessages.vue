@@ -1,5 +1,5 @@
 <template lang="pug">
-.toast-container.position-fixed.pe-3.pb-3.mt-5.bottom-0.end-0
+.toast-container.position-fixed.pe-3.pb-3.mb-4.bottom-0.end-0
   Toast(v-for="(msg, key) in messages" :key="key"
     :message="msg")
 </template>

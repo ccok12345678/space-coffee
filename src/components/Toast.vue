@@ -1,9 +1,10 @@
 <template lang="pug">
 .toast(role='alert' aria-live='assertive' aria-atomic='true' ref='toast')
   .toast-header(:class="`bg-${message.style}`")
-    strong.me-auto {{ message.title }} hhhhh
+    strong.me-auto {{ message.title }}
     button.btn-close(type='button' data-bs-dismiss='toast' aria-label='Close')
   .toast-body(v-if="message.message")
+    i.bi.bi-info-circle.me-2
     | {{ message.message }}
 </template>
 
@@ -25,10 +26,9 @@ export default {
   mounted() {
     const toastEl = this.$refs.toast;
     const toast = new Toast(toastEl, {
-      delay: 3000,
+      delay: 60000,
     });
     toast.show();
-    console.log('in toast');
   },
 };
 </script>

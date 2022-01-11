@@ -14,7 +14,7 @@ export default function pushToast(data, title) {
   }
 
   const successMsg = {
-    style: 'success',
+    style: 'white',
     title,
     message,
   };

@@ -49,8 +49,7 @@ export default {
 
       try {
         const data = await http.json();
-        console.log('登入', data);
-        pushToast(data, '登入');
+        pushToast(data, '已登入');
         if (!data.success) {
           this.$router.push('/login');
         }

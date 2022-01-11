@@ -63,7 +63,7 @@ export default {
     CouponModal,
     DeleteModal,
   },
-  inject: ['tokenValue'],
+  inject: ['tokenValue', 'pushToast'],
   methods: {
     async getCoupons(page = 1) {
       this.isLoading = true;
@@ -74,9 +74,9 @@ export default {
         headers: { Authorization: this.tokenValue },
       });
       const data = await http.json();
+
       this.coupons = data.coupons;
       this.pagination = data.pagination;
-      console.log('coupons', data);
       this.isLoading = false;
     },
     openModal(isNew, coupon) {
@@ -114,8 +114,8 @@ export default {
 
       try {
         const data = await http.json();
-        console.log('update coupon', data);
         this.getCoupons(page);
+        this.pushToast(data, '優惠卷');
       } catch (error) {
         console.error(error);
       }
@@ -134,7 +134,7 @@ export default {
         headers: { Authorization: this.tokenValue },
       });
       const data = await http.json();
-      console.log('delete coupon', data);
+      this.pushToast(data, '優惠卷');
       if (data.success) {
         this.getCoupons(this.currentPage);
       }

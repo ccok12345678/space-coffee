@@ -71,7 +71,7 @@ export default {
     ProductModal,
     DeleteModal,
   },
-  inject: ['tokenValue'],
+  inject: ['tokenValue', 'pushToast'],
   methods: {
     async getProducts(page = 1) {
       this.isLoading = true;
@@ -122,6 +122,7 @@ export default {
       const data = await http.json();
       console.log('updateProduct', data);
 
+      this.pushToast(data, '產品');
       this.$refs.productModal.hideModal();
       this.isNew = false;
       this.getProducts(page);
@@ -140,7 +141,7 @@ export default {
 
       try {
         const data = await http.json();
-        console.log('delete', data);
+        this.pushToast(data, '產品');
         this.getProducts(this.currentPage);
       } catch (error) {
         console.error(error);
