@@ -1,22 +1,57 @@
 <template lang="pug">
-.home.text-center
-  img.my-3(alt='Vue logo'
-    src='https://i.etsystatic.com/6190990/r/il/d6d312/1421734737/il_1588xN.1421734737_dwln.jpg'
-    width="200")
-  HelloWorld(msg='Welcome to Space Coffee ☕')
+UserNavbar(:areas="categories")
+.box
 </template>
 
+<style lang="scss" scoped>
+.box {
+  width: 200px;
+  height: 300px;
+}
+</style>
+
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import UserNavbar from '@/components/User_Navbar.vue';
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
+    UserNavbar,
+  },
+  data() {
+    return {
+      products: [],
+      categories: [],
+      isLoading: false,
+    };
+  },
+  methods: {
+    async getProducts() {
+      this.isLoading = true;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
+      const http = await fetch(api);
+      const data = await http.json();
+
+      this.isLoading = false;
+      return data;
+    },
+    async sortProducts() {
+      const data = await this.getProducts();
+      this.products = data.products;
+
+      this.products.forEach((item) => {
+        if (!this.categories.includes(item.category)) {
+          this.categories.push(item.category);
+        }
+      });
+      console.log(this.categories);
+    },
+  },
+  created() {
+    this.sortProducts();
   },
   mounted() {
-    document.title = 'Home';
+    document.title = '宇宙咖啡 Space Coffee | 瀰漫星際的咖啡香';
   },
 };
 </script>

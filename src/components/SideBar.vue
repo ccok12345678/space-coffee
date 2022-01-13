@@ -21,7 +21,7 @@ nav.nav.navbar-dark.bg-dark
         :class="{ 'nav-link-active': $route.name === 'Coupons' }")
         i.d-none.d-sm-inline-block.me-2.bi.bi-ticket
         | 優惠卷
-      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(to="" title="Shop")
+      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(to="/" title="前往商店")
         i.d-none.d-sm-inline-block.me-2.bi.bi-shop
         | 商店
       button.nav-item.nav-link.py-2.px-0.px-sm-1.py-md-3(title="登出"
@@ -62,16 +62,16 @@ export default {
     changePageTitle() {
       switch (this.$route.name) {
         case 'Products':
-          this.pageTitle = '產品';
+          document.title = '產品';
           break;
         case 'Orders':
-          this.pageTitle = '訂單';
+          document.title = '訂單';
           break;
         case 'Coupons':
-          this.pageTitle = '優惠卷';
+          document.title = '優惠卷';
           break;
         default:
-          this.pageTitle = '';
+          document.title = 'Space Coffee';
           break;
       }
     },

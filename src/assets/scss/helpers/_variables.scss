@@ -91,6 +91,7 @@ $theme-colors: (
   "gray-100":   $gray-100,
   "gray-200":   $gray-200,
   "gray-300":   $gray-300,
+  "gray-500":   $gray-500,
   "gray-600":   $gray-600,
   "cyan-600":   shade-color($cyan, 20%),
 ) !default;
@@ -1144,7 +1145,7 @@ $navbar-light-color:                rgba($black, .55) !default;
 $navbar-light-hover-color:          rgba($black, .7) !default;
 $navbar-light-active-color:         rgba($black, .9) !default;
 $navbar-light-disabled-color:       rgba($black, .3) !default;
-$navbar-light-toggler-icon-bg:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
+$navbar-light-toggler-icon-bg:      url("data:image/svg+xml,<svg viewBox='0 0 64 64' xml:space='preserve' xmlns='http://www.w3.org/2000/svg'><path d='M48.4 27.3 44 24v-9.667c0-.079-.008-.157-.01-.236.002-.033.01-.064.01-.097 0-.079-.014-.153-.023-.23A12.077 12.077 0 0 0 41.6 7.134L40 5c-1.878-2.504-4.87-4-8-4s-6.122 1.496-8 4l-1.6 2.133a12.077 12.077 0 0 0-2.4 7.2V24l-4.4 3.3a9.045 9.045 0 0 0-3.6 7.2V41a2 2 0 0 0 2 2h8.614l2.513 6.702A2 2 0 0 0 27 51h10a2 2 0 0 0 1.873-1.298L41.386 43H50a2 2 0 0 0 2-2v-6.5a9.046 9.046 0 0 0-3.6-7.2zM24 14.333a8.05 8.05 0 0 1 1.6-4.8L27.2 7.4C28.327 5.897 30.122 5 32 5s3.673.897 4.8 2.4l1.6 2.134A8.003 8.003 0 0 1 39.635 12H29a2 2 0 0 0 0 4h11v23H24V14.333zM16 34.5c0-1.565.748-3.06 2-4l2-1.5v10h-4v-4.5zM35.614 47h-7.228l-1.5-4h10.228l-1.5 4zM48 39h-4V29l2 1.5c1.252.94 2 2.435 2 4V39zM35.75 55.438l-3.75 3-3.75-3a1.999 1.999 0 1 0-2.5 3.124l5 4a1.999 1.999 0 0 0 2.5 0l5-4a2 2 0 1 0-2.5-3.124z' fill='#555555' class='fill-000000'></path><path d='M32 30a2 2 0 0 0 2-2v-3a2 2 0 0 0-4 0v3a2 2 0 0 0 2 2z' fill='#adb5bd' class='fill-000000'></path></svg>") !default; // url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
 $navbar-light-toggler-border-color: rgba($black, .1) !default;
 
 $navbar-light-brand-color:                $navbar-light-active-color !default;
@@ -1284,8 +1285,8 @@ $accordion-padding-x:                     1.25rem !default;
 $accordion-color:                         $body-color !default;
 $accordion-bg:                            $body-bg !default;
 $accordion-border-width:                  $border-width !default;
-$accordion-border-color:                  rgba($black, .125) !default;
-$accordion-border-radius:                 $border-radius !default;
+$accordion-border-color:                  none;// rgba($black, .125) !default;
+$accordion-border-radius:                 none; // $border-radius !default;
 $accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width) !default;
 
 $accordion-body-padding-y:                $accordion-padding-y !default;
@@ -1296,11 +1297,11 @@ $accordion-button-padding-x:              $accordion-padding-x !default;
 $accordion-button-color:                  $accordion-color !default;
 $accordion-button-bg:                     $accordion-bg !default;
 $accordion-transition:                    $btn-transition, border-radius .15s ease !default;
-$accordion-button-active-bg:              tint-color($component-active-bg, 90%) !default;
-$accordion-button-active-color:           shade-color($primary, 10%) !default;
+$accordion-button-active-bg:              none; // tint-color($component-active-bg, 90%) !default;
+$accordion-button-active-color:           none;// shade-color($primary, 10%) !default;
 
-$accordion-button-focus-border-color:     $input-focus-border-color !default;
-$accordion-button-focus-box-shadow:       $btn-focus-box-shadow !default;
+$accordion-button-focus-border-color:     none; // $input-focus-border-color !default;
+$accordion-button-focus-box-shadow:       none; // $btn-focus-box-shadow !default;
 
 $accordion-icon-width:                    1.25rem !default;
 $accordion-icon-color:                    $accordion-button-color !default;
@@ -1308,8 +1309,8 @@ $accordion-icon-active-color:             $accordion-button-active-color !defaul
 $accordion-icon-transition:               transform .2s ease-in-out !default;
 $accordion-icon-transform:                rotate(-180deg) !default;
 
-$accordion-button-icon:         url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
-$accordion-button-active-icon:  url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
+$accordion-button-icon:        url("data:image/svg+xml,<svg viewBox='0 0 32 32' xml:space='preserve' xmlns='http://www.w3.org/2000/svg' enable-background='new 0 0 32 32'><circle cx='16' cy='16' r='10' fill='none' stroke='#adb5bd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' class='stroke-000000'></circle><path d='M21.5 7.7c3.7-1.3 6.6-1.3 7.5.1 1.5 2.3-3 7.9-10.2 12.5s-14.1 6.3-15.6 4c-.9-1.4.3-3.8 2.8-6.5' fill='none' stroke='#adb5bd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' class='stroke-000000'></path></svg>"); // url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
+$accordion-button-active-icon:   url("data:image/svg+xml,<svg viewBox='0 0 32 32' xml:space='preserve' xmlns='http://www.w3.org/2000/svg' enable-background='new 0 0 32 32'><circle cx='16' cy='16' r='10' fill='none' stroke='#adb5bd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' class='stroke-000000'></circle><path d='M21.5 7.7c3.7-1.3 6.6-1.3 7.5.1 1.5 2.3-3 7.9-10.2 12.5s-14.1 6.3-15.6 4c-.9-1.4.3-3.8 2.8-6.5' fill='none' stroke='#adb5bd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' class='stroke-000000'></path></svg>"); // url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !default;
 // scss-docs-end accordion-variables
 
 // Tooltips
