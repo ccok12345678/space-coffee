@@ -72,3 +72,21 @@ table button {
 .buyer-input:focus {
   outline: 1px solid $cyan-600;
 }
+
+.scroll-down {
+  margin-top: -32px;
+  transition: all .3s ease-in-out;
+}
+.scroll-up {
+  margin-top: 0;
+  transition: all .3s ease-in-out;
+}
+
+.fixed-top-sm {
+  @include media-breakpoint-down(md) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+}

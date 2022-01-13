@@ -6,7 +6,7 @@ UserNavbar(:areas="categories")
 <style lang="scss" scoped>
 .box {
   width: 200px;
-  height: 300px;
+  height: 3000px;
 }
 </style>
 

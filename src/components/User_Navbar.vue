@@ -1,8 +1,7 @@
 <template lang="pug">
-header
-  .header-topbar
-    UserTopbar
-  nav.navbar.navbar-expand-md.navbar-light.sticky-top
+header.fixed-top-sm
+  UserTopbar
+  nav.navbar.navbar-expand-md.navbar-light
     .container.d-flex.flex-md-column.align-items-center
       a.navbar-brand.text-brand(href="/")
         h1 Space Coffee #[span.visually-hidden 宇宙咖啡]

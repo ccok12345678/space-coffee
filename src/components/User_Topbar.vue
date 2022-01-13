@@ -19,3 +19,13 @@
         a.nav-link.py-1.link-gray-300.bi.bi-cart3(href="#"
           title="購物車")
 </template>
+
+<script>
+import hideElement from '@/methods/hideElement';
+
+export default {
+  mounted() {
+    hideElement('.header-topbar');
+  },
+};
+</script>
