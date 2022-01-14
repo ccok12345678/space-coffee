@@ -1,6 +1,10 @@
 <template lang="pug">
 UserNavbar(:areas="categories")
-.box
+
+UserFrontPage(:products="products")
+
+router-view
+
 UserFooter
 </template>
 
@@ -9,17 +13,20 @@ UserFooter
   width: 200px;
   height: 600px;
 }
+
 </style>
 
 <script>
 import UserNavbar from '@/components/User_Navbar.vue';
 import UserFooter from '@/components/User_Footer.vue';
+import UserFrontPage from '@/components/User_FrontPage.vue';
 
 export default {
   name: 'Home',
   components: {
     UserNavbar,
     UserFooter,
+    UserFrontPage,
   },
   data() {
     return {

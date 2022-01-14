@@ -8,7 +8,7 @@ export default function hideElement(el) {
     let lastScrollTop = 0;
     window.addEventListener('scroll', () => {
       const scrollTop = window.scrollY;
-      if (scrollTop < lastScrollTop) {
+      if (scrollTop <= lastScrollTop) {
         elAutohide.classList.remove('scroll-down');
         elAutohide.classList.add('scroll-up');
       } else {

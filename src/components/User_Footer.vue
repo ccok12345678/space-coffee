@@ -2,16 +2,13 @@
 footer.bg-gray-200.font-monospace
   .container-lg
     .row
-      .col-md-4.d-flex
-        .display-3.text-brand.text-nowrap.py-5.m-auto.text-cyan-800
-          | Space Coffee
-      .col-md-4.d-flex.flex-column.px-5.px-md-4.py-3.py-md-5
+      .col-md-4.d-flex.flex-column.px-5.px-md-4.pt-5.pb-3.py-md-5
         h6.text-gray-600.ps-3.mb-4.text-cyan-800 訂閱宇宙電報
         form
           label.form-label.visually-hidden 請輸入信箱：
-          input.form-control.form-control-sm.ms-3.rounded-0(type="email"
+          input.form-control.form-control-sm.ms-3.mb-2.rounded-0(type="email"
             placeholder="Email Address" disabled)
-          button.btn.visually-hidden(type="submit") 送出
+          button.btn.btn-gray-300.btn-sm.ms-3(type="submit" disabled) Subscribe
       .devider.w-50.mx-auto.px-5.my-4.d-block.d-md-none
       .col-md-4.d-flex.flex-column.px-5.px-md-2.py-3.py-md-5
         h6.text-gray-600.ps-3.mb-3.text-cyan-800 尋找宇宙咖啡
@@ -31,6 +28,10 @@ footer.bg-gray-200.font-monospace
             small.text-muted Address: 火衛二中山路二段324號
           li.list-group-item.px-0
             small.text-muted Phone: +44556-7655555
+      .devider.w-50.mx-auto.px-5.mt-4.d-block.d-md-none.border-cyan-800
+      .col-md-4.d-flex
+        .display-3.text-brand.text-nowrap.py-5.m-auto.text-cyan-800
+          | Space Coffee
     .devider.w-100.mx-auto.my-3.border-gray-500
     .text-gray-500.text-center.w-75.mx-auto.d-flex.justify-content-between.flex-column.flex-md-row
       .pb-md-3 ©2022 Space Coffee,

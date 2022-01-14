@@ -1,7 +1,7 @@
 <template lang="pug">
 header.fixed-top-sm
   UserTopbar
-  nav.navbar.navbar-expand-md.navbar-light
+  nav.navbar.navbar-expand-md.navbar-light.bg-white
     .container.d-flex.flex-md-column.align-items-center
       a.navbar-brand.text-brand(href="/")
         h1 Space Coffee #[span.visually-hidden 宇宙咖啡]
@@ -47,6 +47,9 @@ header.fixed-top-sm
 }
 .sticky-top {
   position: sticky;
+}
+.btn {
+  // z-index: 1;
 }
 </style>
 
