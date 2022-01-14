@@ -75,7 +75,17 @@ export default {
   components: {
     UserTopbar,
   },
-  methods: {
+  mounted() {
+    // hide manu acccordion
+    document.body.addEventListener('click', (event) => {
+      if (event.target.id !== 'roast'
+        && event.target.id !== 'area'
+        && event.target.id !== 'navbarToggler') {
+        document.querySelector('#coffeeArea').classList.remove('show');
+        document.querySelector('#coffeeRoast').classList.remove('show');
+        document.querySelector('#navbarContent').classList.remove('show');
+      }
+    });
   },
 };
 </script>

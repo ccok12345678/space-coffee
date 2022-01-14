@@ -87,13 +87,17 @@ $theme-colors: (
   "danger":     $danger,
   "light":      $light,
   "dark":       $dark,
+  "white":      $white,
   "blue":       $blue,
   "gray-100":   $gray-100,
   "gray-200":   $gray-200,
   "gray-300":   $gray-300,
   "gray-500":   $gray-500,
   "gray-600":   $gray-600,
+  "cyan-400":   tint-color($cyan, 20%),
   "cyan-600":   shade-color($cyan, 20%),
+  "cyan-800":   shade-color($cyan, 60%),
+  "orange-600": shade-color($orange, 20%),
 ) !default;
 // scss-docs-end theme-colors-map
 
@@ -621,7 +625,8 @@ $font-sizes: (
   3: $h3-font-size,
   4: $h4-font-size,
   5: $h5-font-size,
-  6: $h6-font-size
+  6: $h6-font-size,
+  12: 0.75rem,
 ) !default;
 // scss-docs-end font-sizes
 
@@ -641,7 +646,7 @@ $display-font-sizes: (
   3: 4rem,
   4: 3.5rem,
   5: 3rem,
-  6: 2.5rem
+  6: 2.5rem,
 ) !default;
 
 $display-font-weight: 300 !default;
@@ -1484,7 +1489,7 @@ $progress-bar-transition:           width .6s ease !default;
 
 // scss-docs-start list-group-variables
 $list-group-color:                  $gray-900 !default;
-$list-group-bg:                     $white !default;
+$list-group-bg:                     transparent; // $white !default;
 $list-group-border-color:           rgba($black, .125) !default;
 $list-group-border-width:           $border-width !default;
 $list-group-border-radius:          $border-radius !default;

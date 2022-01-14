@@ -1,22 +1,25 @@
 <template lang="pug">
 UserNavbar(:areas="categories")
 .box
+UserFooter
 </template>
 
 <style lang="scss" scoped>
 .box {
   width: 200px;
-  height: 3000px;
+  height: 600px;
 }
 </style>
 
 <script>
 import UserNavbar from '@/components/User_Navbar.vue';
+import UserFooter from '@/components/User_Footer.vue';
 
 export default {
   name: 'Home',
   components: {
     UserNavbar,
+    UserFooter,
   },
   data() {
     return {
@@ -44,7 +47,6 @@ export default {
           this.categories.push(item.category);
         }
       });
-      console.log(this.categories);
     },
   },
   created() {
