@@ -91,11 +91,13 @@ table button {
   }
 }
 
-.devider {
-  border-bottom: .5px solid $cyan-600;
-}
 
-.bg-cover {
-  background-size: cover;
-  background-position: center center;
+@media (min-width: 576px) {
+  .devider {
+    border-bottom: .5px solid $cyan-600;
+  }
+  .bg-cover {
+    background-size: cover;
+    background-position: center center;
+  }
 }

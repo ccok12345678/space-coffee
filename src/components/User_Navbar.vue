@@ -1,5 +1,5 @@
 <template lang="pug">
-header.fixed-top-sm
+header
   UserTopbar
   nav.navbar.navbar-expand-md.navbar-light.bg-white
     .container.d-flex.flex-md-column.align-items-center
@@ -48,8 +48,8 @@ header.fixed-top-sm
 .sticky-top {
   position: sticky;
 }
-.btn {
-  // z-index: 1;
+.navbar {
+  z-index: 100;
 }
 </style>
 
