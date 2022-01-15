@@ -1,7 +1,8 @@
 <template lang="pug">
-UserNavbar(:areas="categories")
+UserNavbar(:areas="categories" :products="products")
 
-UserFrontPage(:products="products")
+UserFrontPage(:products="products"
+  v-if="$route.name === 'Home'")
 
 router-view
 
@@ -43,11 +44,11 @@ export default {
       const data = await http.json();
 
       this.isLoading = false;
-      return data;
+      return data.products;
     },
     async sortProducts() {
       const data = await this.getProducts();
-      this.products = data.products;
+      this.products = data;
 
       this.products.forEach((item) => {
         if (!this.categories.includes(item.category)) {

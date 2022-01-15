@@ -24,7 +24,7 @@ header
                 | 咖啡產區
               #coffeeArea.collapse.vstack(data-bs-parent="#navAccordion")
                 router-link.link-gray-500.text-decoration-none.ps-2.py-1.hover-text-gray(
-                  to="/" v-for="(area, key) in areas" :key="key")
+                  :to="`/shop/${area}`" v-for="(area, key) in areas" :key="key")
                   | {{ area }}
             hr.me-5.my-0.d-md-none
             .accordion-item.mx-2
@@ -33,7 +33,7 @@ header
                 | 咖啡焙度
               #coffeeRoast.collapse.vstack(data-bs-parent="#navAccordion")
                 router-link.link-gray-500.text-decoration-none.ps-2.py-1.hover-text-gray(
-                  to="/" v-for="(roast, key) in menu.roasts" :key="key")
+                  :to="`/shop/${roast}`" v-for="(roast, key) in menu.roasts" :key="key")
                   | {{ roast }}
           hr.me-5.my-0.d-md-none
           .nav-item.mx-2
@@ -61,22 +61,29 @@ export default {
     return {
       menu: {
         roasts: [
-          '單火箭',
-          '雙火箭',
-          '三火箭',
+          '單火箭烘焙',
+          '雙火箭烘焙',
+          '三火箭烘焙',
           '原子烘焙',
         ],
       },
-      products: {},
+      classifiedProducts: [],
     };
   },
   props: {
     areas: {
       type: Array,
+      default() { return []; },
+    },
+    products: {
+      type: Array,
+      default() { return []; },
     },
   },
   components: {
     UserTopbar,
+  },
+  methods: {
   },
   mounted() {
     // hide manu acccordion
