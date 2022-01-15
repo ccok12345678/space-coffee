@@ -1,11 +1,9 @@
 <template lang="pug">
-.row.w-100.gy-5.d-flex.justify-content-center
-  .col-md-4.col-sm-6.col-12(v-for="item in tempPicks" :key="item.id")
-    a.item-box.bg-cover.text-light.text-decoration-none(href="#"
-      :style="`background-image: url(${item.imageUrl}};`")
-      div.item-box-caption.py-2.w-100.pt-4.text-center
-        | {{ item.category }}： #[br]
-        | {{ item.title }}
+a.item-box.bg-cover.text-light.text-decoration-none.border(href="#"
+  :style="`background-image: url(${tempPick.imageUrl}};`")
+  span.item-box-caption.py-2.w-100.pt-4.text-center
+    | {{ tempPick.category }}： #[br]
+    | {{ tempPick.title }}
 </template>
 
 <style lang="scss" scoped>
@@ -39,9 +37,9 @@
 <script>
 export default {
   props: {
-    tempPicks: {
-      type: Array,
-      default() { return []; },
+    tempPick: {
+      type: Object,
+      default() { return {}; },
     },
   },
 };
