@@ -45,8 +45,9 @@
         .devider.w-25.mx-auto.my-4.border-gray-500
         .mx-auto.text-center
           .text-gray-300.text-decoration-line-through
-            | 原價：{{ $filters.currency(tempProduct.origin_price) }}元
-          .text-cyan-600.fs-5 特價：{{ $filters.currency(tempProduct.price) }}元
+            | 原價：{{ $filters.currency(tempProduct.origin_price) }}元 / {{ tempProduct.unit }}
+          .text-cyan-600.fs-5
+            | 特價：{{ $filters.currency(tempProduct.price) }}元 / {{ tempProduct.unit }}
           button.btn.btn-cyan-600.text-light.w-75.my-2 加入購物車
           button.btn.btn-outline-gray-600.w-75 加入收藏
         .devider.w-25.mx-auto.my-4.border-gray-500

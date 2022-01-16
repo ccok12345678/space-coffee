@@ -3,16 +3,16 @@ footer.bg-gray-200.font-monospace
   .container-lg
     .row
       .col-md-4.d-flex.flex-column.px-5.px-md-4.pt-5.pb-3.py-md-5
-        h6.text-gray-600.ps-3.mb-4.text-cyan-800 訂閱宇宙電報
-        form
+        h6.text-gray-600.mb-4.mx-auto.mx-md-0.text-cyan-800 訂閱宇宙電報
+        form.w-75.w-md-100.mx-auto.mx-md-0
           label.form-label.visually-hidden 請輸入信箱：
           input.form-control.form-control-sm.ms-3.mb-2.rounded-0(type="email"
             placeholder="Email Address" disabled)
           button.btn.btn-gray-300.btn-sm.ms-3(type="submit" disabled) Subscribe
       .devider.w-50.mx-auto.px-5.my-4.d-block.d-md-none
-      .col-md-4.d-flex.flex-column.px-5.px-md-2.py-3.py-md-5
-        h6.text-gray-600.ps-3.mb-3.text-cyan-800 尋找宇宙咖啡
-        ul.nav
+      .col-md-4.d-flex.flex-column.px-5.px-md-2.py-3.py-md-5.text-center.text-md-start
+        h6.text-gray-600.mb-3.text-cyan-800 尋找宇宙咖啡
+        ul.nav.mx-auto.mx-md-0
           li.nav-item
             a.nav-link.py-1.link-cyan-400.bi.bi-twitter(href="https://twitter.com/hexschool1"
               title="在 Twitter Follow 宇宙咖啡")

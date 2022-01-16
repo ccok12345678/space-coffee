@@ -1,13 +1,13 @@
 <template lang="pug">
-router-link.item-box.bg-cover.text-light.text-decoration-none.border(href="#"
+a.item-box.bg-cover.text-light.text-decoration-none.border(
   :style="`background-image: url(${tempPick.imageUrl}};`"
-  :to="`/product/${tempPick.id}`")
+  @click.prevent="toProduct" href="#")
   .item-box-caption.py-2.w-100.pt-4.text-center.vstack
     span {{ tempPick.category }}：
     span {{ tempPick.title }}
     span $ {{ $filters.currency(tempPick.price) }} / {{ tempPick.unit }}
-    button.btn.btn-outline-light.btn-sm.mt-1.mx-5(type="button")
-      i.bi.bi-cart
+    button.btn.btn-outline-light.w-25.mt-1.mx-auto(type="button")
+      | 購買
 </template>
 
 <style lang="scss" scoped>
@@ -44,6 +44,15 @@ export default {
     tempPick: {
       type: Object,
       default() { return {}; },
+    },
+  },
+  methods: {
+    toProduct() {
+      this.$router.push(`/product/${this.tempPick.id}`);
+      window.scroll({
+        top: 100,
+        behavior: 'smooth',
+      });
     },
   },
 };

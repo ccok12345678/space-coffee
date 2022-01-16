@@ -29,9 +29,6 @@ section.container-lg.d-flex.flex-column.align-items-center.py-5.mb-5
 <style lang="scss" scoped>
 img {
   min-height: 351px;
-  @media (max-width: 767.98px) {
-    margin-top: 100px;
-  }
 }
 </style>
 
