@@ -21,11 +21,7 @@
 </template>
 
 <script>
-import hideElement from '@/methods/hideElement';
 
 export default {
-  mounted() {
-    hideElement('.header-topbar');
-  },
 };
 </script>

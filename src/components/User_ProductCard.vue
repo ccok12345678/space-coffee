@@ -1,9 +1,13 @@
 <template lang="pug">
-a.item-box.bg-cover.text-light.text-decoration-none.border(href="#"
-  :style="`background-image: url(${tempPick.imageUrl}};`")
-  span.item-box-caption.py-2.w-100.pt-4.text-center
-    | {{ tempPick.category }}： #[br]
-    | {{ tempPick.title }}
+router-link.item-box.bg-cover.text-light.text-decoration-none.border(href="#"
+  :style="`background-image: url(${tempPick.imageUrl}};`"
+  :to="`/product/${tempPick.id}`")
+  .item-box-caption.py-2.w-100.pt-4.text-center.vstack
+    span {{ tempPick.category }}：
+    span {{ tempPick.title }}
+    span $ {{ $filters.currency(tempPick.price) }} / {{ tempPick.unit }}
+    button.btn.btn-outline-light.btn-sm.mt-1.mx-5(type="button")
+      i.bi.bi-cart
 </template>
 
 <style lang="scss" scoped>
@@ -16,7 +20,7 @@ a.item-box.bg-cover.text-light.text-decoration-none.border(href="#"
   &-caption {
     background: rgba(0, 0, 0, 0.5);
     transition: .3s ease;
-    transform: translateY(160px);
+    transform: translateY(100px);
 
     @media (min-width: 768px) {
       transform: translateY(250px);
@@ -28,7 +32,7 @@ a.item-box.bg-cover.text-light.text-decoration-none.border(href="#"
       backdrop-filter: blur(3px);
 
       @media (min-width: 576px) {
-        transform: translateY(160px);
+        transform: translateY(100px);
       }
     }
   }
