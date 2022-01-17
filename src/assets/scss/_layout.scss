@@ -36,6 +36,12 @@
     background: #6c757d ;
     }
   }
+  &-half-transparent-cyan {
+    background: #0dcaf077;
+    &:hover {
+    background: $cyan-500;
+    }
+  }
 }
 
 .link-dark:hover {
