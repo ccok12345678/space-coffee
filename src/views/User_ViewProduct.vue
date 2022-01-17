@@ -134,7 +134,6 @@ export default {
       document.title = `${this.tempProduct.title}`;
     },
     async addCart(id) {
-      console.log(id);
       this.status = id;
 
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
@@ -147,8 +146,6 @@ export default {
       const data = await http.json();
 
       this.pushToast(data, this.tempProduct.title);
-      console.log(data);
-
       this.qty = 1;
       this.status = '';
     },

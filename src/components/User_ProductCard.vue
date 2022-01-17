@@ -66,7 +66,6 @@ export default {
       });
     },
     async addCart(id) {
-      console.log('button');
       this.status = id;
 
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
@@ -79,8 +78,6 @@ export default {
       const data = await http.json();
 
       this.pushToast(data, this.tempPick.title);
-      console.log(data);
-
       this.status = '';
     },
   },
