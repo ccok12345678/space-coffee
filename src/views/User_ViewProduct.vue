@@ -12,7 +12,16 @@
             | 原價：{{ $filters.currency(tempProduct.origin_price) }}元 / {{ tempProduct.unit }}
           .text-cyan-600.fs-5
             | 特價：{{ $filters.currency(tempProduct.price) }}元 / {{ tempProduct.unit }}
-          button.btn.btn-cyan-600.text-light.w-75.my-3 加入購物車
+          .input-group.input-group-sm.w-50.mt-2.mx-auto
+            span.input-group-text.text-gray-600.bg-white.border-0 數量：
+            input.form-control.rounded(type="number" min="1" step="1" name="qty"
+            v-model="qty")
+          button.btn.btn-cyan-600.text-light.w-75.my-2(type="button"
+            @click.prevent.stop="addCart(tempProduct.id)"
+            :disabled="status === tempProduct.id")
+            .spinner-border.spinner-border-sm.mx-4(v-if="status === tempProduct.id")
+              .visually-hidden Loading...
+            span(v-else) 加入購物車
           button.btn.btn-outline-gray-600.w-75 加入收藏
         .card-body.px-3.px-md-5
           .d-block.d-lg-none.d-flex.flex-column
@@ -43,12 +52,21 @@
           img.mx-auto(src="../assets/images/portafilter_tamper_icon.svg" width="50"
             title="good for espresso" alt="espresso")
         .devider.w-25.mx-auto.my-4.border-gray-500
-        .mx-auto.text-center
+        .mx-auto.d-flex.flex-column.align-items-center
           .text-gray-300.text-decoration-line-through
             | 原價：{{ $filters.currency(tempProduct.origin_price) }}元 / {{ tempProduct.unit }}
           .text-cyan-600.fs-5
             | 特價：{{ $filters.currency(tempProduct.price) }}元 / {{ tempProduct.unit }}
-          button.btn.btn-cyan-600.text-light.w-75.my-2 加入購物車
+          .input-group.input-group-sm.w-50.mt-2
+            span.input-group-text.text-gray-600.bg-white.border-0 數量：
+            input.form-control.rounded(type="number" min="1" step="1" name="qty"
+            v-model="qty")
+          button.btn.btn-cyan-600.text-light.w-75.my-2(type="button"
+            @click.prevent.stop="addCart(tempProduct.id)"
+            :disabled="status === tempProduct.id")
+            .spinner-border.spinner-border-sm.mx-4(v-if="status === tempProduct.id")
+              .visually-hidden Loading...
+            span(v-else) 加入購物車
           button.btn.btn-outline-gray-600.w-75 加入收藏
         .devider.w-25.mx-auto.my-4.border-gray-500
         p.mb-1.mx-auto 風味描述
@@ -100,8 +118,11 @@ export default {
   data() {
     return {
       tempProduct: {},
+      qty: 1,
+      status: '',
     };
   },
+  inject: ['pushToast'],
   methods: {
     async getProduct() {
       const { id } = this.$route.params;
@@ -111,6 +132,25 @@ export default {
       this.tempProduct = await data.product;
       // console.log(this.tempProduct);
       document.title = `${this.tempProduct.title}`;
+    },
+    async addCart(id) {
+      console.log(id);
+      this.status = id;
+
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
+      const product = { data: { product_id: id, qty: this.qty } };
+      const http = await fetch(api, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(product),
+      });
+      const data = await http.json();
+
+      this.pushToast(data, this.tempProduct.title);
+      console.log(data);
+
+      this.qty = 1;
+      this.status = '';
     },
   },
   created() {

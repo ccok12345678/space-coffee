@@ -8,6 +8,7 @@ router-view
 
 UserFixedBtn
 UserFooter
+ToastMessages
 </template>
 
 <style lang="scss" scoped>
@@ -23,6 +24,8 @@ import UserNavbar from '@/components/User_Navbar.vue';
 import UserFooter from '@/components/User_Footer.vue';
 import UserFrontPage from '@/components/User_FrontPage.vue';
 import UserFixedBtn from '@/components/User_FixedBtn.vue';
+import pushToast from '@/methods/pushToast';
+import ToastMessages from '@/components/ToastMessages.vue';
 
 export default {
   name: 'Home',
@@ -31,6 +34,12 @@ export default {
     UserFooter,
     UserFrontPage,
     UserFixedBtn,
+    ToastMessages,
+  },
+  provide() {
+    return {
+      pushToast,
+    };
   },
   data() {
     return {

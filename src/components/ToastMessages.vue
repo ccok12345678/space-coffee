@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import emitter from '@/methods/emitter';
 import Toast from './Toast.vue';
 
 export default {
@@ -16,9 +17,8 @@ export default {
   components: {
     Toast,
   },
-  inject: ['emitter'],
   mounted() {
-    this.emitter.on('push-toast', (msg) => {
+    emitter.on('push-toast', (msg) => {
       const { style = 'success', title, message } = msg;
       this.messages.push({ style, title, message });
     });
