@@ -58,7 +58,11 @@ export default {
     $route() {
       this.classing = this.$route.params.classing;
       this.classifyProducts();
+      document.title = `${this.classing} | 宇宙咖啡`;
     },
+  },
+  mounted() {
+    document.title = `${this.classing} | 宇宙咖啡`;
   },
 };
 </script>

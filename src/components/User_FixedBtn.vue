@@ -3,6 +3,7 @@
   button.btn.btn-secondary.text-light.border-0.p-2.px-3.mb-1(
     title="購物車" class="hover-half-transparent-cyan"
     @click.prevent="goCart" type="button"
+    v-if="$route.name !== 'Cart'"
   )
     span.badge.position-absolute.top-1.start-100.translate-middle.rounded-pill.bg-warning(
       v-if="goodsNum > 0")
@@ -42,7 +43,8 @@ export default {
       });
     },
     goCart() {
-      console.log('GO CART!!');
+      this.scrollTop();
+      this.$router.push({ name: 'Cart' });
     },
     async getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
