@@ -1,6 +1,6 @@
 <template lang="pug">
 header
-  UserTopbar
+  //- UserTopbar
   nav.navbar.navbar-expand-md.navbar-light.bg-white
     .container.d-flex.flex-md-column.align-items-center
       a.navbar-brand.text-brand(href="/")
@@ -37,6 +37,10 @@ header
                   | {{ roast }}
           hr.me-5.my-0.d-md-none
           .nav-item.mx-2
+            router-link(to="/").nav-button.nav-link.d-flex.link-gray-500.hover-text-gray
+              | 收藏清單
+          hr.me-5.my-0.d-md-none
+          .nav-item.mx-2
             router-link(to="/about").nav-link.link-gray-500.hover-text-gray
               | 關於我們
 </template>
@@ -45,11 +49,18 @@ header
 .navbar-toggler:focus {
   box-shadow: none;
 }
-.sticky-top {
-  position: sticky;
-}
 .navbar {
   z-index: 100;
+}
+.nav-button::after {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: auto;
+  content: "";
+  background-image: url("../assets/images/telescope_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 1.25rem;
 }
 </style>
 
