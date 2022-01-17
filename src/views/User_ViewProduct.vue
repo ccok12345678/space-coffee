@@ -122,7 +122,7 @@ export default {
       status: '',
     };
   },
-  inject: ['pushToast'],
+  inject: ['pushToast', 'emitter'],
   methods: {
     async getProduct() {
       const { id } = this.$route.params;
@@ -146,6 +146,7 @@ export default {
       const data = await http.json();
 
       this.pushToast(data, this.tempProduct.title);
+      this.emitter.emit('add-cart', this.qty);
       this.qty = 1;
       this.status = '';
     },

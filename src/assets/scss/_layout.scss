@@ -41,6 +41,10 @@
     &:hover {
     background: $cyan-500;
     }
+    &:focus, &:active {
+    background: #0dcaf0;
+    box-shadow: none;
+    }
   }
 }
 

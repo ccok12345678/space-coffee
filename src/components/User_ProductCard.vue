@@ -56,7 +56,7 @@ export default {
       default() { return {}; },
     },
   },
-  inject: ['pushToast'],
+  inject: ['pushToast', 'emitter'],
   methods: {
     goProduct() {
       this.$router.push(`/product/${this.tempPick.id}`);
@@ -67,9 +67,9 @@ export default {
     },
     async addCart(id) {
       this.status = id;
-
+      const qty = 1;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
-      const product = { data: { product_id: id, qty: 1 } };
+      const product = { data: { product_id: id, qty } };
       const http = await fetch(api, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -78,6 +78,7 @@ export default {
       const data = await http.json();
 
       this.pushToast(data, this.tempPick.title);
+      this.emitter.emit('add-cart', qty);
       this.status = '';
     },
   },
