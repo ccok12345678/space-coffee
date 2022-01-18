@@ -52,10 +52,14 @@ export default {
       const data = await http.json();
       const nums = [];
 
-      data.data.carts.forEach((item) => {
-        nums.push(item.qty);
-      });
-      this.goodsNum = nums.reduce((x, i) => x + i);
+      if (data.data.carts.length === 0) {
+        this.goodsNum = 0;
+      } else {
+        data.data.carts.forEach((item) => {
+          nums.push(item.qty);
+        });
+        this.goodsNum = nums.reduce((x, i) => x + i);
+      }
     },
   },
   created() {
