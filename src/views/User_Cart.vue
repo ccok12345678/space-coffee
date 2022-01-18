@@ -1,9 +1,10 @@
 <template lang="pug">
 .container-lg.my-4.text-nowrap
-  .w-100.text-center.text-gray-600(v-if="!carts.carts")
+  .w-100.text-center.text-gray-600(
+      v-if="carts.total === 0")
     img.cart-img.w-25(src="../assets/images/alien_ship.svg")
     h5 購物車是空的，快去選購吧！
-  .row.justify-content-center(v-if="!!carts.carts")
+  .row.justify-content-center(v-if="carts.total !== 0")
     .col-md-10
       .row.gx-2.gy-2
         .col-12.d-flex
@@ -56,7 +57,11 @@
           form.hstack.ms-auto.my-auto(@submit.prevent="addCoupon")
               input.form-control.form-control-sm.w-75.me-2(type="text"
                 placeholder="E-Coupon" v-model="coupon")
-              button.btn.btn-sm.btn-outline-dark.w-25(type="submit") 套用
+              button.btn.btn-sm.btn-outline-dark.w-25(type="submit"
+                :disabled="isUpdating")
+                .spinner-border.spinner-border-sm(v-if="isUpdating")
+                  .visually-hidden Loading...
+                span(v-else) 套用
         .devider.w-75.my-3.border-secondary
       .text-center.text-md-end
         button.btn.btn-cyan-600.text-light.w-30(type="button"
@@ -100,6 +105,7 @@ export default {
       carts: {},
       coupon: '',
       status: '',
+      isUpdating: false,
     };
   },
   inject: ['pushToast'],
@@ -127,6 +133,7 @@ export default {
       this.getCart();
     },
     async addCoupon() {
+      this.isUpdating = true;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/coupon`;
       const couponData = { data: { code: this.coupon } };
 
@@ -137,10 +144,10 @@ export default {
       });
       const data = await http.json();
 
-      this.coupon = '';
       this.pushToast(data, '優惠卷');
       this.getCart();
-      console.log('coupon', data);
+      this.coupon = '';
+      this.isUpdating = false;
     },
     async updateCart(id, qty) {
       this.status = id;

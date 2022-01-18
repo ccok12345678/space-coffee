@@ -1,5 +1,5 @@
 <template lang="pug">
-button.item-box.bg-cover.text-light.text-decoration-none.border.p-0(
+button.item-box.bg-cover.text-light.text-decoration-none.text-nowrap.border.p-0(
   :style="`background-image: url(${tempPick.imageUrl}};`"
   @click.prevent="goProduct" :disabled="status === tempPick.id"
   )
@@ -7,7 +7,7 @@ button.item-box.bg-cover.text-light.text-decoration-none.border.p-0(
     span {{ tempPick.category }}：
     span {{ tempPick.title }}
     span $ {{ $filters.currency(tempPick.price) }} / {{ tempPick.unit }}
-    button.btn.btn-outline-light.w-25.mt-1.mx-auto(type="button"
+    button.btn.btn-outline-light.px-3.mt-1.mx-auto(type="button"
       @click.prevent.stop="addCart(tempPick.id)"
       :disabled="status === tempPick.id")
       .spinner-border.spinner-border-sm(v-if="status === tempPick.id")

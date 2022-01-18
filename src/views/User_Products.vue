@@ -3,7 +3,7 @@
   h3.fs-5.text-gray-600 {{ classing }}
   .devider.w-50.border-gray-500.mb-5
   .row.d-flex.justify-content-center.w-100
-    .col-md-10
+    .col-md-11
       .row.gy-4.d-flex.justify-content-center
         .col-md-4.col-sm-6(v-for="item of tempProducts" :key="item.id")
           UserProductCard(:tempPick="item")
