@@ -3,7 +3,7 @@
   button.btn.btn-secondary.text-light.border-0.p-2.px-3.mb-1(
     title="購物車" class="hover-half-transparent-cyan"
     @click.prevent="goCart" type="button"
-    v-if="$route.name !== 'Cart'"
+    v-if="$route.name !== 'Cart' && $route.name !== 'Order'"
   )
     span.badge.position-absolute.top-1.start-100.translate-middle.rounded-pill.bg-warning(
       v-if="goodsNum > 0")

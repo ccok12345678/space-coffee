@@ -61,7 +61,7 @@
       .text-center.text-md-end
         button.btn.btn-cyan-600.text-light.w-30(type="button"
           @click.prevent="$router.push('/order')")
-          | 前往付款
+          | 填寫資料
           i.bi.bi-box-arrow-right.ms-2
 </template>
 
