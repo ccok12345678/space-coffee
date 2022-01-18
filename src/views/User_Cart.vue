@@ -5,33 +5,34 @@
     h5 購物車是空的，快去選購吧！
   .row.justify-content-center(v-if="!!carts.carts")
     .col-md-10
-      .row.gx-1.gy-2
+      .row.gx-2.gy-2
         .col-12.d-flex
-          h4.text-gray-700.mx-auto 溝物車清單
+          h4.text-gray-700.mx-auto 購物車清單
           button.btn.hover-red.px-3.mx-2(
               type="button" title="清空購物車"
               @click.prevent="deleteCart")
             i.bi.bi-trash-fill
         template(v-for="(item, key) in carts.carts" :key="item.id")
           .col-1.text-start.fs-5.d-flex.align-items-center
-            | {{ key + 1 }} /
-          .col-4.text-start.d-flex.align-items-center
+            | {{key + 1 }} /
+          .col-11.col-md-4.text-start.d-flex.align-items-center
             | {{ item.product.title }}
-          .col-2.d-flex.align-items-center
+          .col-5.col-md-2.d-flex.flex-md-column.align-items-center.align-items-md-start
             small 數量：
-            input.form-control.form-control-sm(type="number" min="1" step="1"
-              v-model="item.qty" @change="updateCart(item.id, item.qty)"
-              :disabled="status === item.id")
-          .col-1.d-flex.align-items-center.justify-content-center
-            | {{ item.product.unit }}
-          .col-1.d-flex.align-items-center.flex-column
+            .input-group.input-group-sm
+              input.form-control.form-control-sm(type="number" min="1" step="1"
+                v-model="item.qty" @change="updateCart(item.id, item.qty)"
+                :disabled="status === item.id")
+              .input-group-text.border-0.bg-transparent
+                | x{{ item.product.unit }}
+          .col-2.col-md-2.d-flex.align-items-end.flex-column
             small 單價：
             div NT$ {{ $filters.currency(item.product.price) }}
-          .col-2.d-flex.align-items-center.justify-content-end.flex-column(
+          .col-3.col-md-2.d-flex.align-items-end.flex-column(
             :class="{ 'text-success': 'coupon' in item }")
             small 優惠價：
             | NT$ {{ $filters.currency(item.final_total) }}
-          .col-1.d-flex.align-items-center
+          .col-2.col-md-1.d-flex.align-items-center
             button.btn.hover-red.px-1.d-block.w-100(
               type="button" title="刪除"
               @click.prevent="deleteCart(false, item.id)")
