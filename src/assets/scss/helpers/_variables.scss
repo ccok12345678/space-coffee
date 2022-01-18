@@ -81,7 +81,7 @@ $dark:          $gray-900 !default;
 $theme-colors: (
   "primary":    $primary,
   "secondary":  $secondary,
-  "success":    $success,
+  "success":    $teal, // $success,
   "info":       $info,
   "warning":    $warning,
   "danger":     $danger,
@@ -94,6 +94,7 @@ $theme-colors: (
   "gray-300":   $gray-300,
   "gray-500":   $gray-500,
   "gray-600":   $gray-600,
+  "gray-700":   $gray-700,
   "cyan-400":   tint-color($cyan, 20%),
   "cyan-600":   shade-color($cyan, 20%),
   "cyan-800":   shade-color($cyan, 60%),

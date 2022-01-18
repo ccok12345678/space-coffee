@@ -1,54 +1,66 @@
 <template lang="pug">
-.container-lg.my-4
-  .row.justify-content-center
-    .col-md-10.overflow-auto
-      main.w-100.text-nowrap.d-flex.flex-column
-        img.cart-img.w-25.align-self-center(src="../assets/images/alien_ship.svg"
-          v-if="!carts.carts")
-        .banner
-          img.img-fluid(src="https://images.unsplash.com/photo-1601892782633-675465fa7f3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80")
-        table.table.table-striped.table-hover.align-middle.mt-4
-          thead
-            legend.text-center.border.mx-auto 購物車
-            tr.text-end
-              th.text-center 商品名稱
-              th.textcenter(width="70") 數量
-              th 單位
-              th 單價
-              th 小計
-              th.text-center
-                | 刪除
-                button.border-0.hover-red.px-2(type="button" title="清空購物車"
-                  @click.prevent="deleteCart")
-                  i.bi.bi-trash-fill
-          tbody
-            tr.text-end(v-for="item in carts.carts" :key="item.id")
-              td.text-start {{ item.product.title }}
-              td
-                input.form-control.form-control-sm(type="number" min="1" step="1"
-                  v-model="item.qty")
-              td {{ item.product.unit }}
-              td NT$ {{ $filters.currency(item.product.price) }}
-              td NT$ {{ $filters.currency(item.final_total) }}
-              td
-                button.border-0.hover-red.py-2.px-2.d-block.mx-auto.w-50(type="button" title="刪除"
-                  @click.prevent="deleteCart(false, item.id)")
+.container-lg.my-4.text-nowrap
+  .w-100.text-center.text-gray-600(v-if="!carts.carts")
+    img.cart-img.w-25(src="../assets/images/alien_ship.svg")
+    h5 購物車是空的，快去選購吧！
+  .row.justify-content-center(v-if="!!carts.carts")
+    .col-md-10
+      .row.gx-1.gy-2
+        .col-12.d-flex
+          h4.text-gray-700.mx-auto 溝物車清單
+          button.btn.hover-red.px-3.mx-2(
+              type="button" title="清空購物車"
+              @click.prevent="deleteCart")
+            i.bi.bi-trash-fill
+        template(v-for="(item, key) in carts.carts" :key="item.id")
+          .col-1.text-start.fs-5.d-flex.align-items-center
+            | {{ key + 1 }} /
+          .col-4.text-start.d-flex.align-items-center
+            | {{ item.product.title }}
+          .col-2.d-flex.align-items-center
+            small 數量：
+            input.form-control.form-control-sm(type="number" min="1" step="1"
+              v-model="item.qty" @change="updateCart(item.id, item.qty)"
+              :disabled="status === item.id")
+          .col-1.d-flex.align-items-center.justify-content-center
+            | {{ item.product.unit }}
+          .col-1.d-flex.align-items-center.flex-column
+            small 單價：
+            div NT$ {{ $filters.currency(item.product.price) }}
+          .col-2.d-flex.align-items-center.justify-content-end.flex-column(
+            :class="{ 'text-success': 'coupon' in item }")
+            small 優惠價：
+            | NT$ {{ $filters.currency(item.final_total) }}
+          .col-1.d-flex.align-items-center
+            button.btn.hover-red.px-1.d-block.w-100(
+              type="button" title="刪除"
+              @click.prevent="deleteCart(false, item.id)")
                   i.bi.bi-trash
-          tfoot.text-end
-            tr
-              td(colspan="4") 總計：
-              td.fw-bold(colspan="2") NT$ {{ $filters.currency(carts.final_total) }}
-            tr
-              td(colspan="3") 使用優惠卷:
-              td(colspan="3")
-                form.hstack(@submit.prevent="addCoupon")
-                  input.form-control.form-control-sm.me-2(type="text"
-                    placeholder="E-Coupon" v-model="coupon")
-                  button.btn.btn-sm.btn-outline-dark(type="submit") 套用
-        .text-end
-          button.btn.btn-cyan-600.text-light
-            | 結帳去
-            i.bi.bi-box-arrow-right.ms-2
+          .devider.w-100.border-secondary
+      .row.justify-content-md-end.justify-content-center
+        .col-4.d-flex.mt-3
+          .my-auto.ms-auto 總計：
+        .col-8.col-md-5.d-flex.mt-3
+          .my-auto.ms-auto.text-end
+            .text-muted.text-decoration-line-through(
+              v-if="carts.total > carts.final_total")
+              | NT$ {{ $filters.currency(carts.total) }}#[br]
+            .fw-bold
+              | NT$ {{ $filters.currency(carts.final_total) }}#[br]
+              small.text-success.fw-normal(v-if="carts.total > carts.final_total") 已使用優惠卷
+        .devider.w-75.my-3.border-secondary
+        .col-4.d-flex
+          .my-auto.ms-auto 使用優惠卷：
+        .col-8.col-md-5.d-flex
+          form.hstack.ms-auto.my-auto(@submit.prevent="addCoupon")
+              input.form-control.form-control-sm.w-75.me-2(type="text"
+                placeholder="E-Coupon" v-model="coupon")
+              button.btn.btn-sm.btn-outline-dark.w-25(type="submit") 套用
+        .devider.w-75.my-3.border-secondary
+      .text-center.text-md-end
+        button.btn.btn-cyan-600.text-light.w-30
+          | 送出訂單
+          i.bi.bi-box-arrow-right.ms-2
 </template>
 
 <style lang="scss" scoped>
@@ -85,6 +97,7 @@ export default {
     return {
       carts: {},
       coupon: '',
+      status: '',
     };
   },
   inject: ['pushToast'],
@@ -117,14 +130,36 @@ export default {
 
       const http = await fetch(api, {
         method: 'post',
-        header: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(couponData),
       });
       const data = await http.json();
 
       this.coupon = '';
       this.pushToast(data, '優惠卷');
-      console.log('coupon', this.carts);
+      this.getCart();
+      console.log('coupon', data);
+    },
+    async updateCart(id, qty) {
+      this.status = id;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}`;
+      const cartData = {
+        data: {
+          product_id: id,
+          qty,
+        },
+      };
+
+      const http = await fetch(api, {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cartData),
+      });
+      const data = await http.json();
+
+      this.pushToast(data, '購物車');
+      this.getCart();
+      this.status = '';
     },
   },
   created() {
