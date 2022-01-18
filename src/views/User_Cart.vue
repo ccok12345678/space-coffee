@@ -59,8 +59,9 @@
               button.btn.btn-sm.btn-outline-dark.w-25(type="submit") 套用
         .devider.w-75.my-3.border-secondary
       .text-center.text-md-end
-        button.btn.btn-cyan-600.text-light.w-30
-          | 送出訂單
+        button.btn.btn-cyan-600.text-light.w-30(type="button"
+          @click.prevent="$router.push('/order')")
+          | 前往付款
           i.bi.bi-box-arrow-right.ms-2
 </template>
 
