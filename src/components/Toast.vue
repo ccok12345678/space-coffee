@@ -1,6 +1,6 @@
 <template lang="pug">
 .toast(role='alert' aria-live='assertive' aria-atomic='true' ref='toast')
-  .toast-header(:class="`bg-${message.style}`")
+  .toast-header(:class="`bg-${message.style}`, { 'text-light': message.style === 'danger' }")
     strong.me-auto {{ message.title }}
     button.btn-close(type='button' data-bs-dismiss='toast' aria-label='Close')
   .toast-body(v-if="message.message")

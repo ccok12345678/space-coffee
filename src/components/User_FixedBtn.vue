@@ -3,7 +3,7 @@
   button.btn.btn-secondary.text-light.border-0.p-2.px-3.mb-1(
     title="購物車" class="hover-half-transparent-cyan"
     @click.prevent="goCart" type="button"
-    v-if="$route.name !== 'Cart' && $route.name !== 'Order'"
+    v-if="isCart"
   )
     span.badge.position-absolute.top-1.start-100.translate-middle.rounded-pill.bg-warning(
       v-if="goodsNum > 0")
@@ -32,6 +32,7 @@ export default {
     return {
       cart: [],
       goodsNum: 0,
+      isCart: true,
     };
   },
   inject: ['emitter'],
@@ -64,6 +65,20 @@ export default {
   },
   created() {
     this.getCart();
+    switch (this.$route.name) {
+      case 'Cart':
+        this.isCart = false;
+        break;
+      case 'Order':
+        this.isCart = false;
+        break;
+      case 'Check':
+        this.isCart = false;
+        break;
+      default:
+        this.isCart = true;
+        break;
+    }
   },
   mounted() {
     // update goods number

@@ -1,7 +1,7 @@
 <template lang="pug">
 .container-lg.my-4
   .row.justify-content-center
-    Form.col-md-10(@submit="sendOrder"
+    Form.col-md-10(@submit="submitOrder"
       v-slot="{ errors }")
       .row.justify-content-center
         .col-12.text-center
@@ -74,14 +74,15 @@ export default {
     return {
       carts: {},
       user: {
-        name: '',
-        email: '',
-        tel: '',
-        address: '',
+        name: 'Karl',
+        email: 'ccok@mail.com',
+        tel: '0911111111',
+        address: '六角鄉',
       },
       message: '',
     };
   },
+  inject: ['pushToast'],
   methods: {
     async getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
@@ -90,8 +91,25 @@ export default {
 
       return data.data;
     },
-    async sendOrder(value) {
-      console.log(value);
+    async submitOrder() {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order`;
+      const order = {
+        data: {
+          user: { ...this.user },
+          message: this.message,
+        },
+      };
+      console.log(order);
+      const http = await fetch(api, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(order),
+      });
+      const data = await http.json();
+
+      console.log('order', data);
+      this.pushToast(data, '訂單');
+      this.$router.push({ name: 'Check', params: { orderId: data.orderId } });
     },
     isPhone(value) {
       const phoneNumber = /^(09)[0-9]{8}$/;
@@ -104,6 +122,9 @@ export default {
   },
   async created() {
     this.carts = await this.getCart();
+  },
+  mounted() {
+    document.title = '訂購人資料｜宇宙咖啡';
   },
 };
 </script>
