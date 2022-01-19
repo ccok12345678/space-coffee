@@ -1,34 +1,52 @@
 <template lang="pug">
 .container-lg.my-4
   .row.justify-content-center
-    form.col-md-10(@submit.prevent="sendOrder")
+    Form.col-md-10(@submit="sendOrder"
+      v-slot="{ errors }")
       .row.justify-content-center
         .col-12.text-center
           h5.mb-3 訂購人資料
-        .col-4.d-flex
-          label.my-auto.ms-auto(for="userName") *姓名：
+        .col-4.d-flex.flex-column
+          label.my-auto.ms-auto(for="name") *姓名：
+          ErrorMessage.fs-12.ms-auto.text-danger(name="姓名")
         .col-8
-          input#userName.form-control.my-2.w-85(type="text" name="userName"
-          placeholder="Name")
-        .col-4.d-flex
-          label.my-auto.ms-auto(for="userPhone") *聯絡電話：
+          Field#name.form-control.my-2.w-85.shadow-none(type="text" name="姓名"
+          placeholder="Name"
+          v-model.trim="user.name"
+          rules="required"
+          :class="{ 'is-invalid': errors['姓名'], 'is-valid:': !errors['姓名'] }")
+        .col-4.d-flex.flex-column
+          label.my-auto.ms-auto(for="tel") *聯絡電話：
+          ErrorMessage.text-danger.ms-auto.fs-12(name="tel")
         .col-8
-          input#userPhone.form-control.my-2.w-85(type="tel" name="userPhone"
-          placeholder="Phone number")
-        .col-4.d-flex
-          label.my-auto.ms-auto(for="userEmail") *E-Mail：
+          Field#tel.form-control.my-2.w-85.shadow-none(type="tel" name="tel"
+          placeholder="Phone number"
+          v-model.trim="user.tel"
+          :rules="isPhone" rules="reauired"
+          :class="{ 'is-invalid': errors['tel'] }")
+        .col-4.d-flex.flex-column
+          label.my-auto.ms-auto(for="email") *E-Mail：
+          ErrorMessage.fs-12.ms-auto.text-danger(name="email")
         .col-8
-          input#userEmail.form-control.my-2.w-85(type="email" name="userEmail"
-          placeholder="example@mail.com")
-        .col-4.d-flex
-          label.my-auto.ms-auto(for="userAddress") *收件地址：
+          Field#email.form-control.my-2.w-85.shadow-none(type="email" name="email"
+          placeholder="example@mail.com"
+          v-model.trim="user.email"
+          rules="email|required"
+          :class="{ 'is-invalid': errors['email'] }")
+        .col-4.d-flex.flex-column
+          label.my-auto.ms-auto(for="address") *收件地址：
+          ErrorMessage.fs-12.ms-auto.text-danger(name="地址")
         .col-8
-          input#userAddress.form-control.my-2.w-85(type="text" name="userAddress"
-          placeholder="Address")
+          Field#address.form-control.my-2.w-85.shadow-none(type="text" name="地址"
+          placeholder="Address"
+          v-model.trim="user.address"
+          rules="required"
+          :class="{ 'is-invalid': errors['地址'] }")
         .col-4
         .col-8.m-auto
           .form-floating.my-2.w-85
-            textarea#userMessage.form-control.textarea(name="userMessage")
+            textarea#userMessage.form-control.textarea(name="userMessage"
+            v-model="message")
             label(for="userMessage") 附加說明（非必填）：
         .devider.w-75.my-3.border-secondary
         .col-7.text-end
@@ -55,6 +73,13 @@ export default {
   data() {
     return {
       carts: {},
+      user: {
+        name: '',
+        email: '',
+        tel: '',
+        address: '',
+      },
+      message: '',
     };
   },
   methods: {
@@ -65,13 +90,20 @@ export default {
 
       return data.data;
     },
-    async sendOrder() {
-      console.log('send order!');
+    async sendOrder(value) {
+      console.log(value);
+    },
+    isPhone(value) {
+      const phoneNumber = /^(09)[0-9]{8}$/;
+
+      if (!value) {
+        return '電話為必填';
+      }
+      return phoneNumber.test(value) ? true : '號碼不正確';
     },
   },
   async created() {
     this.carts = await this.getCart();
-    console.log('carts', this.carts);
   },
 };
 </script>
