@@ -82,7 +82,7 @@ export default {
       message: '',
     };
   },
-  inject: ['pushToast'],
+  inject: ['pushToast', 'scrollTop'],
   methods: {
     async getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
@@ -121,10 +121,9 @@ export default {
     },
   },
   async created() {
-    this.carts = await this.getCart();
-  },
-  mounted() {
     document.title = '訂購人資料｜宇宙咖啡';
+    this.scrollTop();
+    this.carts = await this.getCart();
   },
 };
 </script>

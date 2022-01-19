@@ -22,8 +22,8 @@
                   span.text-info(v-if="order.is_paid") 已付款
                   span.text-danger(v-else) 未付款
               .devider.w-100.border-gray-300.my-3
-              router-link.btn.btn-outline-gray-600.w-100(:to="`/order/${order.id}`"
-                @click="scrollUp") 檢視
+              router-link.btn.btn-outline-gray-600.w-100(:to="`/order/${order.id}`")
+                | 檢視
 </template>
 
 <script>
@@ -34,6 +34,7 @@ export default {
       pagination: {},
     };
   },
+  inject: ['scrollTop'],
   methods: {
     async getOrders(page = 1) {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/orders?pages=${page}`;
@@ -46,15 +47,10 @@ export default {
         console.log('user orders', data);
       }
     },
-    scrollUp() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    },
   },
   created() {
     document.title = '檢視訂單｜宇宙咖啡';
+    this.scrollTop();
     this.getOrders();
   },
 };

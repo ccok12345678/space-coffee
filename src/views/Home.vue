@@ -24,6 +24,7 @@ import UserNavbar from '@/components/User_Navbar.vue';
 import UserFooter from '@/components/User_Footer.vue';
 import UserFrontPage from '@/components/User_FrontPage.vue';
 import emitter from '@/methods/emitter';
+import scrollTop from '@/methods/scrollTop';
 import UserFixedBtn from '@/components/User_FixedBtn.vue';
 import pushToast from '@/methods/pushToast';
 import ToastMessages from '@/components/ToastMessages.vue';
@@ -41,6 +42,7 @@ export default {
     return {
       pushToast,
       emitter,
+      scrollTop,
     };
   },
   data() {

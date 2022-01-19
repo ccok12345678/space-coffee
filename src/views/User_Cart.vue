@@ -7,12 +7,14 @@
   .row.justify-content-center(v-if="carts.total !== 0")
     .col-md-10
       .row.gx-2.gy-2
-        .col-12.d-flex
-          h4.text-gray-700.mx-auto 購物車清單
-          button.btn.hover-red.px-3.mx-2(
-              type="button" title="清空購物車"
-              @click.prevent="deleteCart")
-            i.bi.bi-trash-fill
+        .col-12.d-flex.flex-column
+          .mx-auto.hstack
+            h4.text-gray-700 購物車清單
+            button.btn.hover-red.px-3.mx-2(
+                type="button" title="清空購物車"
+                @click.prevent="deleteCart")
+              i.bi.bi-trash-fill
+          .devider.w-25.boder-dark.my-2.mx-auto
         template(v-for="(item, key) in carts.carts" :key="item.id")
           .col-1.text-start.fs-5.d-flex.align-items-center
             | {{key + 1 }} /
@@ -65,7 +67,7 @@
         .devider.w-75.my-3.border-secondary
       .text-center.text-md-end
         button.btn.btn-cyan-600.text-light.w-30(type="button"
-          @click.prevent="$router.push('/order')")
+          @click.prevent="goOrder")
           | 填寫資料
           i.bi.bi-box-arrow-right.ms-2
 </template>
@@ -108,7 +110,7 @@ export default {
       isUpdating: false,
     };
   },
-  inject: ['pushToast'],
+  inject: ['pushToast', 'scrollTop'],
   methods: {
     async getCart() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
@@ -170,8 +172,12 @@ export default {
       this.getCart();
       this.status = '';
     },
+    goOrder() {
+      this.$router.push('/order');
+    },
   },
   created() {
+    this.scrollTop();
     this.getCart();
     document.title = '購物車 | 宇宙咖啡';
   },

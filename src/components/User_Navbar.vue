@@ -41,6 +41,10 @@ header
               | 收藏清單
           hr.me-5.my-0.d-md-none
           .nav-item.mx-2
+            router-link.nav-button.nav-link.d-flex.link-gray-500.hover-text-gray(
+              :to="{ name: 'UserOrders' }") 檢視訂單
+          hr.me-5.my-0.d-md-none
+          .nav-item.mx-2
             router-link(to="/about").nav-link.link-gray-500.hover-text-gray
               | 關於我們
 </template>

@@ -47,6 +47,7 @@ export default {
     },
   },
   created() {
+    document.title = `${this.classing} | 宇宙咖啡`;
     this.classing = this.$route.params.classing;
     this.getProducts()
       .then((data) => {
@@ -60,9 +61,6 @@ export default {
       this.classifyProducts();
       document.title = `${this.classing} | 宇宙咖啡`;
     },
-  },
-  mounted() {
-    document.title = `${this.classing} | 宇宙咖啡`;
   },
 };
 </script>

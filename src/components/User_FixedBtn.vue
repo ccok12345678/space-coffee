@@ -35,13 +35,10 @@ export default {
       isCart: true,
     };
   },
-  inject: ['emitter'],
+  inject: ['emitter', 'scrollTop'],
   methods: {
-    scrollTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
+    scrollUp() {
+      this.scrollTop();
     },
     goCart() {
       this.scrollTop();
@@ -62,23 +59,34 @@ export default {
         this.goodsNum = nums.reduce((x, i) => x + i);
       }
     },
+    showBtn() {
+      switch (this.$route.name) {
+        case 'Cart':
+          this.isCart = false;
+          break;
+        case 'Order':
+          this.isCart = false;
+          break;
+        case 'Check':
+          this.isCart = false;
+          break;
+        default:
+          this.isCart = true;
+          break;
+      }
+    },
+  },
+  watch: {
+    $route() {
+      this.showBtn();
+    },
+  },
+  updated() {
+    this.getCart();
   },
   created() {
     this.getCart();
-    switch (this.$route.name) {
-      case 'Cart':
-        this.isCart = false;
-        break;
-      case 'Order':
-        this.isCart = false;
-        break;
-      case 'Check':
-        this.isCart = false;
-        break;
-      default:
-        this.isCart = true;
-        break;
-    }
+    this.showBtn();
   },
   mounted() {
     // update goods number
