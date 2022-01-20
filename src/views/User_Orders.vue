@@ -28,20 +28,29 @@
               .devider.w-100.border-gray-300.my-3
               router-link.btn.btn-outline-gray-600.w-100(:to="`/order/${order.id}`")
                 | 檢視
+    .col-12.d-flex
+      Pagination.mx-auto(:pages="pagination" @emit-page="getOrders")
 </template>
 
 <script>
+import Pagination from '@/components/Pagination.vue';
+
 export default {
   data() {
     return {
       orders: [],
       pagination: {},
+      currentPage: 1,
     };
+  },
+  components: {
+    Pagination,
   },
   inject: ['scrollTop'],
   methods: {
     async getOrders(page = 1) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/orders?pages=${page}`;
+      this.currentPage = page;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/orders?page=${this.currentPage}`;
       const http = await fetch(api);
       const data = await http.json();
 

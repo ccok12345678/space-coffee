@@ -17,13 +17,14 @@ nav.mt-3(v-if="pages.total_pages > 1")
 </template>
 
 <script>
+import scrollTop from '@/methods/scrollTop';
+
 export default {
   props: ['pages'],
   methods: {
     changePage(page) {
       this.$emit('emit-page', page);
-      document.querySelector('#table-container')
-        .scrollTop = 10;
+      scrollTop();
     },
   },
 };
