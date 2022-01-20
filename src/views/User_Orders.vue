@@ -1,10 +1,14 @@
 <template lang="pug">
 .container-lg.my-4
   .row.justify-content-center
-    .col-md-10.d-flex.flex-column.align-items-center
+    .col-md-10.d-flex.flex-column.align-items-center(v-if="orders.length === 0")
+      .mb-2.text-center.w-30
+        img.spinner-slow.mb-4(src="../assets/images/galaxy_icon.svg")
+        h4.fs-4.text-gray-700 尚未建立訂單!
+    .col-md-10.d-flex.flex-column.align-items-center(v-if="orders.length > 0")
       h4.text-gray-700 所有訂單
       .devider.w-25.boder-dark.my-3
-      main.row.w-100.gy-3(v-if="orders.length > 0")
+      main.row.w-100.gy-3
         .col-sm-6.col-md-4(v-for="(order, i) in orders" :key="order.id")
           .card
             .card-header
