@@ -5,7 +5,8 @@
     img.cart-img.w-25(src="../assets/images/alien_ship.svg")
     h5 購物車是空的，快去選購吧！
   .row.justify-content-center(v-if="carts.total !== 0")
-    .col-md-10
+    .col-md-10.d-flex.flex-column
+      ProgressBar(:step="$route.name")
       .row.gx-2.gy-2
         .col-12.d-flex.flex-column
           .mx-auto.hstack
@@ -101,6 +102,8 @@
 </style>
 
 <script>
+import ProgressBar from '@/components/User_ProgressBar.vue';
+
 export default {
   data() {
     return {
@@ -109,6 +112,9 @@ export default {
       status: '',
       isUpdating: false,
     };
+  },
+  components: {
+    ProgressBar,
   },
   inject: ['pushToast', 'scrollTop'],
   methods: {

@@ -2,6 +2,7 @@
 .container-lg.my-4
   .row.justify-content-center(v-if="order.user")
     .col-md-10.d-flex.flex-column.align-items-center
+      ProgressBar(:step="$route.name" :isPaid="order.is_paid")
       h4.text-gray-700 已建立訂單
       .devider.w-25.boder-dark.my-3
       main.row.w-100
@@ -48,6 +49,8 @@
 </template>
 
 <script>
+import ProgressBar from '@/components/User_ProgressBar.vue';
+
 export default {
   data() {
     return {
@@ -55,6 +58,9 @@ export default {
       order: {},
       isPaying: false,
     };
+  },
+  components: {
+    ProgressBar,
   },
   inject: ['pushToast', 'scrollTop'],
   methods: {

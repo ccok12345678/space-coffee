@@ -1,8 +1,9 @@
 <template lang="pug">
 .container-lg.my-4
   .row.justify-content-center
-    Form.col-md-10(@submit="submitOrder"
+    Form.col-md-10.d-flex.flex-column(@submit="submitOrder"
       v-slot="{ errors }")
+      ProgressBar(:step="$route.name")
       .row.justify-content-center
         .col-12.text-center
           h5.mb-3 訂購人資料
@@ -69,6 +70,8 @@
 </style>
 
 <script>
+import ProgressBar from '@/components/User_ProgressBar.vue';
+
 export default {
   data() {
     return {
@@ -81,6 +84,9 @@ export default {
       },
       message: '',
     };
+  },
+  components: {
+    ProgressBar,
   },
   inject: ['pushToast', 'scrollTop'],
   methods: {

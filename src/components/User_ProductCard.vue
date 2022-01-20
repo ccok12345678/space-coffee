@@ -6,7 +6,7 @@ button.item-box.bg-cover.text-light.text-decoration-none.text-nowrap.border.p-0(
   .item-box-caption.py-2.w-100.pt-4.text-center.vstack
     span {{ tempPick.category }}：
     span {{ tempPick.title }}
-    span $ {{ $filters.currency(tempPick.price) }} / {{ tempPick.unit }}
+    span NT$ {{ $filters.currency(tempPick.price) }} / {{ tempPick.unit }}
     button.btn.btn-outline-light.px-3.mt-1.mx-auto(type="button"
       @click.prevent.stop="addCart(tempPick.id)"
       :disabled="status === tempPick.id")
