@@ -22,7 +22,11 @@
             .spinner-border.spinner-border-sm.mx-4(v-if="status === tempProduct.id")
               .visually-hidden Loading...
             span(v-else) 加入購物車
-          button.btn.btn-outline-gray-600.w-75 加入收藏
+          button.btn.btn-outline-gray-600.w-75(type="button"
+            @click.prevent="setFavorite(tempProduct.id)")
+            span(v-if="isFavorite") 取消收藏
+            span(v-else) 加入收藏
+          .fs-12.text-gray-400.mt-1(v-if="isFavorite") （已加入收藏）
         .card-body.px-3.px-md-5
           .d-block.d-lg-none.d-flex.flex-column
             .devider.w-50.mx-auto.mb-4.border-gray-500
@@ -67,7 +71,11 @@
             .spinner-border.spinner-border-sm.mx-4(v-if="status === tempProduct.id")
               .visually-hidden Loading...
             span(v-else) 加入購物車
-          button.btn.btn-outline-gray-600.w-75 加入收藏
+          button.btn.btn-outline-gray-600.w-75(type="button"
+            @click.prevent="setFavorite(tempProduct.id)")
+            span(v-if="isFavorite") 取消收藏
+            span(v-else) 加入收藏
+          .fs-12.text-gray-400.mt-1(v-if="isFavorite") （已加入收藏）
         .devider.w-25.mx-auto.my-4.border-gray-500
         p.mb-1.mx-auto 風味描述
         p.mb-0.w-75.mx-auto {{ tempProduct.description }}
@@ -120,6 +128,8 @@ export default {
       tempProduct: {},
       qty: 1,
       status: '',
+      favorites: [],
+      isFavorite: false,
     };
   },
   inject: ['pushToast', 'emitter'],
@@ -150,9 +160,42 @@ export default {
       this.qty = 1;
       this.status = '';
     },
+    getFavorites() {
+      const key = 'space-coffee-favorites';
+      const favorites = localStorage.getItem(key);
+      if (favorites) {
+        this.favorites = JSON.parse(favorites);
+      }
+    },
+    isInFavorites() {
+      const favorites = this.favorites.map((item) => item.id);
+      return favorites.includes(this.tempProduct.id);
+    },
+    setFavorite(id) {
+      const key = 'space-coffee-favorites';
+
+      if (this.isFavorite) {
+        // remove from favorites
+        this.favorites = this.favorites.filter((item) => item.id !== id);
+        localStorage.setItem(key, JSON.stringify(this.favorites));
+        console.log('after', this.favorites);
+      } else {
+        // add to favorites
+        const favorite = { id };
+        this.favorites.push(favorite);
+        localStorage.setItem(key, JSON.stringify(this.favorites));
+        console.log('after', this.favorites);
+      }
+
+      this.getFavorites();
+      this.isFavorite = this.isInFavorites();
+    },
   },
-  created() {
-    this.getProduct();
+  async created() {
+    await this.getProduct();
+    this.getFavorites();
+    console.log('before', this.favorites);
+    this.isFavorite = this.isInFavorites();
   },
 };
 </script>

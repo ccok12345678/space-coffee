@@ -37,7 +37,7 @@ header
                   | {{ roast }}
           hr.me-5.my-0.d-md-none
           .nav-item.mx-2
-            router-link(to="/").nav-button.nav-link.d-flex.link-gray-500.hover-text-gray
+            router-link(to="/favorites").nav-button.nav-link.d-flex.link-gray-500.hover-text-gray
               | 收藏清單
           hr.me-5.my-0.d-md-none
           .nav-item.mx-2

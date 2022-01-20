@@ -37,6 +37,11 @@ const routes = [
         name: 'UserOrders',
         component: () => import('../views/User_Orders.vue'),
       },
+      {
+        path: 'favorites',
+        name: 'Favorites',
+        component: () => import('../views/User_Favorites.vue'),
+      },
     ],
   },
   {
