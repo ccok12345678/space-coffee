@@ -8,7 +8,7 @@
     .text-gray-700.fs-12.mt-2.mx-1 購物車
 
   .d-flex.mb-4
-    .bar.m-auto.border-secondary
+    .bar.m-auto.border-secondary(:class="{ 'border-info': status.isOrder }")
 
   //- step 2
   .d-flex.flex-column.align-items-center
@@ -18,7 +18,7 @@
     .text-gray-700.fs-12.mt-2 填寫資料
 
   .d-flex.mb-4
-    .bar.m-auto.border-secondary
+    .bar.m-auto.border-secondary(:class="{ 'border-info': status.isCheck }")
 
   //- step 3
   .d-flex.flex-column.align-items-center
@@ -28,12 +28,12 @@
     .text-gray-700.fs-12.mt-2 建立訂單
 
   .d-flex.mb-4
-      .bar.m-auto.border-secondary
+      .bar.m-auto.border-secondary(:class="{ 'border-info': isPaid }")
 
   //- step 4
   .d-flex.flex-column.align-items-center
     .rounded-circle.text-light.circle.bg-secondary.d-flex(
-      :class="{ 'bg-info': isPay }")
+      :class="{ 'bg-info': isPaid }")
       .m-auto 4
     .text-gray-700.fs-12.mt-2 付款完成
 
@@ -95,11 +95,6 @@ export default {
       default() { return false; },
     },
   },
-  watch: {
-    isPaid() {
-      this.isPay = this.isPaid;
-    },
-  },
   created() {
     console.log('step', this.step);
     switch (this.step) {
@@ -119,9 +114,11 @@ export default {
         this.status.isCheck = true;
         break;
       default:
+        this.status.isCart = false;
+        this.status.isOrder = false;
+        this.status.isCheck = false;
         break;
     }
-    this.isPay = this.isPaid;
   },
 };
 </script>
