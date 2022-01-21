@@ -6,7 +6,24 @@
         h5.modal-title 編輯文章
         button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
       .modal-body
-        .row.gy-2
+
+        //- Placeholder
+        .row.gy-4.placeholder-wave(v-if="isLoading")
+          .col-6.placeholder.bg-gray-300
+          .col-6
+          .col-5.placeholder.bg-gray-300
+          .col-7
+          .col-8.placeholder.bg-gray-300
+          .col-4
+          .col-5.placeholder.bg-gray-300
+          .col-7
+          .col-10.placeholder.bg-gray-300
+          .col-2
+          .col-10.placeholder.bg-gray-300
+          .col-2
+          .col-8.placeholder.bg-gray-300
+          .col-4
+        .row.gy-2(v-if="!isLoading")
 
           .col-3.d-flex
             .my-auto.ms-auto 標題*：
@@ -39,20 +56,33 @@
               )
                 i.fs-5.bi.bi-file-earmark-plus
             //- 標籤顯示在此、刪除功能
-          .col-3(v-if="!!tags.length")
-          .col-9(v-if="!!tags.length")
+          .col-3
+          .col-9
             .d-flex.flex-wrap
               .rounded.bg-gray-300.hstack.me-1.mt-1(v-for="(word, key) in tags" :key="key")
                 span.py-1.px-2 {{ word }}
                 button.btn.btn-sm(type="button"
                   @click.prevent="delTag(word)")
                   | X
-          .col-3.d-flex
+
+          //- Image
+          .col-4.col-md-3.d-flex
             .my-auto.ms-auto 圖片連結：
-          .col-9
+          .col-8.col-md-9
             input.form-control(type="url"
-            v-model="tempArticle.images")
-            //- 預覽功能
+            v-model="tempArticle.image")
+          .col-4.col-md-3.d-flex
+            .my-auto.ms-auto 上傳圖檔：
+          .col-8.col-md-9
+            input.form-control(type="file"
+              @change.prevent="uploadImg"
+              ref="imgInput")
+            .text-center.p-3(v-if="isUploading")
+              .spinner-grow
+                .visually-hidden 載入中……
+          //- 預覽功能
+          .col-12.d-flex.justify-content-center(v-if="'image' in tempArticle")
+            img.w-50(:src="tempArticle.image" title="圖片預覽")
 
           .col-3.d-flex
             .my-auto.ms-auto 公開*：
@@ -82,7 +112,7 @@
               label(for="articleContent") 文章內容*
 
       .modal-footer.p-0.pt-2.mt-3
-        button.btn.btn-cyan-600.text-white.w-30(type="submit")
+        button.btn.btn-cyan-600.text-white.w-30(type="submit" :disabled="isLoading")
           i.bi.bi-check-lg.me-2
           | 送出
         button.btn.btn-outline-gray-600.w-20(type="button" data-bs-dismiss="modal") 取消
@@ -109,10 +139,12 @@ export default {
   data() {
     return {
       tempArticle: {},
-      isPublic: false,
       create_at: '',
       tags: [],
       tag: '',
+      isPublic: false,
+      isLoading: false,
+      isUploading: false,
     };
   },
   props: {
@@ -123,27 +155,48 @@ export default {
   },
   watch: {
     article() {
-      this.tempArticle = this.article;
+      this.tempArticle = {};
 
-      if (this.tempArticle.create_at) {
-        // 轉換時間格式
-        const date = new Date(this.tempArticle.create_at * 1000)
+      if ('id' in this.article) {
+        this.getArticle();
+      } else {
+        this.isPublic = false;
+        this.tags = [];
+
+        const date = new Date(Date.now())
           .toISOString().split('T');
         [this.create_at] = date;
-
-        this.isPublic = this.tempArticle.isPublic;
-        this.tags = this.tempArticle.tag;
       }
     },
-    create_at() {
-      this.tempArticle.create_at = Math.floor(new Date(this.create_at) / 1000);
-    },
   },
+  inject: ['tokenValue'],
+  mixins: [modalmixin],
   methods: {
     submitArticle() {
       this.tempArticle.isPublic = this.isPublic;
       this.tempArticle.tag = this.tags;
+      this.tempArticle.create_at = Math.floor(new Date(this.create_at) / 1000);
       this.$emit('emit-article', this.tempArticle);
+    },
+    async getArticle() {
+      this.isLoading = true;
+
+      const { id } = this.article;
+      const api = `
+        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${id}`;
+
+      const http = await fetch(api, {
+        headers: { Authorization: this.tokenValue },
+      });
+      const fetchData = await http.json();
+      this.tempArticle = await fetchData.article;
+
+      const date = new Date(this.tempArticle.create_at * 1000)
+        .toISOString().split('T');
+      [this.create_at] = date;
+      this.isPublic = this.tempArticle.isPublic;
+      this.tags = this.tempArticle.tag ?? [];
+      this.isLoading = false;
     },
     addTag() {
       if (this.tag) {
@@ -154,7 +207,30 @@ export default {
     delTag(word) {
       this.tags = this.tags.filter((tag) => tag !== word);
     },
+    async uploadImg() {
+      this.isUploading = true;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`;
+
+      const uploadImg = this.$refs.imgInput.files[0];
+      const formData = new FormData();
+      formData.append('file-to-upload', uploadImg);
+
+      const http = await fetch(api, {
+        method: 'post',
+        headers: { Authorization: this.tokenValue },
+        body: formData,
+      });
+
+      try {
+        const fetchData = await http.json();
+        if (fetchData.success) {
+          this.tempArticle.image = fetchData.imageUrl;
+          this.isUploading = false;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
-  mixins: [modalmixin],
 };
 </script>
