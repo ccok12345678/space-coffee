@@ -1,11 +1,20 @@
 <template lang="pug">
 nav.nav.navbar-dark.bg-dark
-  .container.d-flex.flex-column
-    a.d-block.navbar-brand.text-brand.p-2.p-sm-3.p-md-4.text-center.m-0.mb-md-4(
+  .container.d-flex.flex-md-column
+
+    //- offcanvas button
+    a.link-light.fs-1.btn.d-md-none.my-auto(data-bs-toggle="offcanvas"
+      href="#sideBarOffcanvas"
+      title="開啟選單列")
+      i.bi-.bi-list
+
+    //- brand logo
+    a.d-block.navbar-brand.text-brand.p-2.p-sm-3.p-md-4.text-center.m-auto.m-md-0.mb-md-4(
       href="#/dashboard" title="後台")
       h1.m-0.fs-2 Space Coffee
       small.d-none.d-sm-inline-block Dashboard
-    .nav-tabs.fs-5.text-center.border-0.d-flex.flex-row.flex-md-column.justify-content-center
+
+    .nav-tabs.fs-5.text-center.border-0.d-none.d-md-flex.flex-column.justify-content-center
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理商品"
         to="/dashboard/products"
         :class="{ 'nav-link-active': $route.name === 'Products' }")
@@ -21,6 +30,11 @@ nav.nav.navbar-dark.bg-dark
         :class="{ 'nav-link-active': $route.name === 'Coupons' }")
         i.d-none.d-sm-inline-block.me-2.bi.bi-ticket
         | 優惠卷
+      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理文章"
+        to="/dashboard/articles"
+        :class="{ 'nav-link-active': $route.name === 'Articles' }")
+        i.d-none.d-sm-inline-block.me-2.bi.bi-chat-right-text
+        | 部落格
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(to="/" title="前往商店")
         i.d-none.d-sm-inline-block.me-2.bi.bi-shop
         | 商店
@@ -28,8 +42,51 @@ nav.nav.navbar-dark.bg-dark
         @click.prevent="logOut")
         i.bi.bi-box-arrow-left.me-2
         span.d-none.d-md-inline-block 登出
+
     footer.text-center.p-3.mt-auto.d-none.d-md-block
-      small.text-muted.border-top.pt-2 © 2022, made by ccok
+      small.text-muted.border-top.pt-2 © 2022 Space coffee, made by ccok
+
+//- offcanvas nav content
+aside#sideBarOffcanvas.offcanvas.offcanvas-end.bg-dark(tabindex="-1"
+ref="sidebarOffcanvas")
+  .offcanvas-header.text-light.d-flex
+    .fs-4.text-brand.m-auto Dashboard
+    button.btn.text-light.fs-4(data-bs-dismiss="offcanvas" aria-label="Close" title="關閉選單")
+      i.bi.bi-x-square
+  .offcanvas-body
+    .nav-tabs.fs-5.text-center.border-0.d-flex.flex-column.justify-content-center(
+      data-bs-dismiss="offcanvas" aria-label="Close"
+    )
+      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理商品"
+        to="/dashboard/products"
+        :class="{ 'nav-link-active': $route.name === 'Products' }")
+        i.me-2.bi.bi-basket
+        | 產品
+      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理訂單"
+        to="/dashboard/orders"
+        :class="{ 'nav-link-active': $route.name === 'Orders' }")
+        i.me-2.bi.bi-card-checklist
+        | 訂單
+      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理優惠卷"
+        to="/dashboard/coupons"
+        :class="{ 'nav-link-active': $route.name === 'Coupons' }")
+        i.me-2.bi.bi-ticket
+        | 優惠卷
+      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理文章"
+        to="/dashboard/articles"
+        :class="{ 'nav-link-active': $route.name === 'Articles' }")
+        i.me-2.bi.bi-chat-right-text
+        | 部落格
+      a.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(
+        href="/" title="前往商店")
+        i.me-2.bi.bi-shop
+        | 商店
+      button.nav-item.nav-link.py-2.px-0.px-sm-1.py-md-3(title="登出"
+        @click.prevent="logOut")
+        i.bi.bi-box-arrow-left.me-2
+        span 登出
+  footer.text-center.p-3.mt-auto
+    small.text-muted.border-top.pt-2 © 2022 Space coffee, made by ccok
 PageTitle  {{ pageTitle }} · Space Coffee 後台管理
 </template>
 
@@ -56,7 +113,7 @@ export default {
       const data = await http.json();
       console.log(data);
       if (data.success) {
-        this.$router.push('/');
+        this.$router.push('/login');
       }
     },
     changePageTitle() {
@@ -70,10 +127,16 @@ export default {
         case 'Coupons':
           document.title = '優惠卷';
           break;
+        case 'Articles':
+          document.title = '部落格';
+          break;
         default:
           document.title = 'Space Coffee';
           break;
       }
+    },
+    hideOffcanvas() {
+      this.offcanvas.hide();
     },
   },
   created() {
