@@ -1,5 +1,6 @@
 <template lang="pug">
 .btn-group-vertical.btn-fixed
+
   button.btn.btn-secondary.text-light.border-0.p-2.px-3.mb-1(
     title="購物車" class="hover-half-transparent-cyan"
     @click.prevent="goCart" type="button"
@@ -9,8 +10,10 @@
       v-if="goodsNum > 0")
       | {{ goodsNum }}
     i.bi.bi-cart3
+
   button.btn.btn-secondary.hover-half-transparent-cyan.text-light.border-0.p-2.px-3(
     title="回到頂端" @click.prevent="scrollTop" type="button"
+    v-if="isShowScrollBtn"
   )
     i.bi.bi-arrow-up-circle
 </template>
@@ -33,6 +36,7 @@ export default {
       cart: [],
       goodsNum: 0,
       isCart: true,
+      isShowScrollBtn: false,
     };
   },
   inject: ['emitter', 'scrollTop'],
@@ -59,7 +63,7 @@ export default {
         this.goodsNum = nums.reduce((x, i) => x + i);
       }
     },
-    showBtn() {
+    showCartBtn() {
       switch (this.$route.name) {
         case 'Cart':
           this.isCart = false;
@@ -75,10 +79,19 @@ export default {
           break;
       }
     },
+    showScrollBtn() {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 150) {
+          this.isShowScrollBtn = true;
+        } else {
+          this.isShowScrollBtn = false;
+        }
+      });
+    },
   },
   watch: {
     $route() {
-      this.showBtn();
+      this.showCartBtn();
     },
   },
   updated() {
@@ -86,7 +99,7 @@ export default {
   },
   created() {
     this.getCart();
-    this.showBtn();
+    this.showCartBtn();
   },
   mounted() {
     // update goods number
@@ -94,6 +107,9 @@ export default {
       const num = this.goodsNum;
       this.goodsNum = num + qty;
     });
+
+    // scroll btn
+    this.showScrollBtn();
   },
 };
 </script>
