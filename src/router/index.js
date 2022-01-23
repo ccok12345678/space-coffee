@@ -42,12 +42,17 @@ const routes = [
         name: 'Favorites',
         component: () => import('../views/User_Favorites.vue'),
       },
+      {
+        path: 'blog',
+        name: 'Blog',
+        component: () => import('../views/User_Blog.vue'),
+      },
+      {
+        path: 'blog/:articleId',
+        name: 'Article',
+        component: () => import('../views/User_Article.vue'),
+      },
     ],
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue'),
   },
   {
     path: '/login',
