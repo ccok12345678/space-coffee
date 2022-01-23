@@ -81,9 +81,9 @@
               .spinner-grow
                 .visually-hidden 載入中……
           //- 預覽功能
-          .col-12.d-flex.justify-content-center(v-if="'image' in tempArticle")
-            img.w-50(:src="tempArticle.image" title="圖片預覽")
-
+          .col-12.col-sm-8.mx-auto(v-if="'image' in tempArticle")
+            img.img-fluid(:src="tempArticle.image" title="圖片預覽")
+          .w-100
           .col-3.d-flex
             .my-auto.ms-auto 公開*：
           .col-9
