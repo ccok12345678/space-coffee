@@ -2,8 +2,12 @@
 a.btn.btn-secondary.btn-fixed.fs-3.hover-half-transparent.text-light.border-0(
   title="新增文章" @click.prevent="openModal(true)")
   i.bi.bi-file-earmark-plus
-section.w-100.overflow-auto.text-nowrap.text-center(v-if="true")
-  table.table.table-sm.table-light.table-striped.table-hover.align-middle
+
+.alert.alert-info(v-if="!articles.length")
+  | 還未新增文章
+
+section.w-100.overflow-auto.text-nowrap.text-center(v-if="!!articles.length")
+  table.table.table-sm.table-light.table-striped.table-hover.align-middle(v-if="true")
     thead
       tr
         th 日期

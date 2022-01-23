@@ -1,4 +1,6 @@
 <template lang="pug">
+.alert.alert-info(v-if="!orders.length")
+  | 還未收到訂單！
 section.w-100.overflow-auto.text-nowrap(v-if="!!orders.length")
   table.table.table-sm.table-light.table-striped.table-hover.align-middle
     thead
