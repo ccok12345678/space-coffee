@@ -86,7 +86,6 @@ export default {
 
       if (fetchData.success) {
         this.order = fetchData.order;
-        console.log('check', this.order);
       }
     },
 

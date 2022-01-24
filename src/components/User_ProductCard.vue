@@ -1,18 +1,23 @@
 <template lang="pug">
-button.item-box.bg-cover.text-light.text-decoration-none.text-nowrap.border.p-0(
+a.item-box.bg-cover.text-light.text-decoration-none.text-nowrap.border.p-0(
+  href="#"
   :style="`background-image: url(${tempPick.imageUrl}};`"
   @click.prevent="goProduct" :disabled="status === tempPick.id"
   )
+
   .item-box-caption.py-2.w-100.pt-4.text-center.vstack
     span {{ tempPick.category }}：
     span {{ tempPick.title }}
     span NT$ {{ $filters.currency(tempPick.price) }} / {{ tempPick.unit }}
+
     button.btn.btn-outline-light.px-3.mt-1.mx-auto(type="button"
       @click.prevent.stop="addCart(tempPick.id)"
       :disabled="status === tempPick.id")
+
       .spinner-border.spinner-border-sm(v-if="status === tempPick.id")
         .visually-hidden Loading...
       span(v-else) 購買
+
 </template>
 
 <style lang="scss" scoped>
@@ -65,11 +70,14 @@ export default {
         behavior: 'smooth',
       });
     },
+
     async addCart(id) {
       this.status = id;
+
       const qty = 1;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
       const product = { data: { product_id: id, qty } };
+
       const http = await fetch(api, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },

@@ -1,29 +1,39 @@
 <template lang="pug">
 #modal_product.modal.fade(tabindex="-1" ref="modal")
   .modal-dialog.modal-dialog-centered
+
     form.modal-content.p-3(@submit.prevent="update")
+
       .modal-header.p-2.mb-3
         h5.modal-title 編輯優惠卷
         button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+
       .modal-body
+
         .row
+
           label.col-3.col-form-label.py-1(for="couponName")
             | 優惠卷：
           .col-9.mb-2
             input#couponName.form-control.ps-2(type="text" required
               v-model="tempCoupon.title")
+
           label.col-3.col-form-label.py-1(for="couponCode")
             | 優惠碼：
           .col-9.mb-2
             input#couponCode.form-control.ps-2(type="text" required
               v-model="tempCoupon.code")
+
           .w-100
+
           label.col-3.col-form-label.py-1(for="couponDueDate")
             | 到期日：
           .col.mb-2
             input#couponDueDate.form-control.ps-2(type="date" required
               v-model="due_date")
+
           .w-100
+
           label.col-3.col-form-label.py-1(for="couponPercent")
             | 折數：
           .col-6.mb-2
@@ -31,7 +41,9 @@
               input#couponPercent.form-control.ps-2(type="number" min="0.1" max="9.9" step="0.1"
                 v-model="discount" required)
               span.input-group-text 折
+
           .w-100
+
           .col-3.py-1
             | 啟用：
           .col-6.text-center
@@ -44,12 +56,16 @@
               label.form-label(for="couponIsEnabled")
                 span.text-success(v-if="is_enabled") 啟用
                 span.text-danger(v-else) 未啟用
+
           .w-100
+
       .modal-footer.p-0.pt-2.mt-3
         button.btn.btn-cyan-600.text-white.w-30(type="submit")
           i.bi.bi-check-lg.me-2
           | 送出
-        button.btn.btn-outline-gray-600.w-20(type="button" data-bs-dismiss="modal") 取消
+        button.btn.btn-outline-gray-600.w-20(type="button" data-bs-dismiss="modal")
+          | 取消
+
 </template>
 
 <script>

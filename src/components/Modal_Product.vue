@@ -178,7 +178,7 @@ export default {
       }
 
       if (this.imageUrl !== '') {
-        this.tempProduct.imagesUrl.push(this.imageUrl);
+        this.tempProduct.imagesUrl.unshift(this.imageUrl);
       }
 
       this.imageUrl = '';

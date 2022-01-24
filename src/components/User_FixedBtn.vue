@@ -44,25 +44,27 @@ export default {
     scrollUp() {
       this.scrollTop();
     },
+
     goCart() {
       this.scrollTop();
       this.$router.push({ name: 'Cart' });
     },
+
     async getCart() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
+      const api = `
+        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart
+      `;
       const http = await fetch(api);
       const data = await http.json();
-      const nums = [];
 
       if (data.data.carts.length === 0) {
         this.goodsNum = 0;
       } else {
-        data.data.carts.forEach((item) => {
-          nums.push(item.qty);
-        });
+        const nums = data.data.carts.map((item) => item.qty);
         this.goodsNum = nums.reduce((x, i) => x + i);
       }
     },
+
     showCartBtn() {
       switch (this.$route.name) {
         case 'Cart':
@@ -79,6 +81,7 @@ export default {
           break;
       }
     },
+
     showScrollBtn() {
       window.addEventListener('scroll', () => {
         if (window.scrollY > 150) {

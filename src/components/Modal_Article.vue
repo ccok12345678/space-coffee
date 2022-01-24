@@ -1,10 +1,13 @@
 <template lang="pug">
 #modal_articles.modal.fade(tabindex="-1" ref="modal")
   .modal-dialog.modal-lg.modal-dialog-centered
+
     form.modal-content.p-3(@submit.prevent="submitArticle")
+
       .modal-header.p-2.mb-3
         h5.modal-title 編輯文章
         button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+
       .modal-body
 
         //- Placeholder
@@ -41,7 +44,7 @@
               button.btn.p-1.text-info(type="submit" title="新增標籤"
               )
                 i.fs-5.bi.bi-file-earmark-plus
-            //- 標籤顯示在此、刪除功能
+
           .col-3
           .col-9
             .d-flex.flex-wrap
@@ -57,6 +60,7 @@
           .col-8.col-md-9
             input.form-control(type="url"
             v-model="tempArticle.image")
+
           .col-4.col-md-3.d-flex
             .my-auto.ms-auto 上傳圖檔：
           .col-8.col-md-9
@@ -66,10 +70,12 @@
             .text-center.p-3(v-if="isUploading")
               .spinner-grow
                 .visually-hidden 載入中……
+
           //- 預覽功能
           .col-12.col-sm-8.mx-auto(v-if="'image' in tempArticle")
             img.img-fluid(:src="tempArticle.image" title="圖片預覽")
           .w-100
+
           .col-3.d-flex
             .my-auto.ms-auto 公開*：
           .col-9
@@ -98,10 +104,12 @@
               label(for="articleContent") 文章內容*
 
       .modal-footer.p-0.pt-2.mt-3
+
         button.btn.btn-cyan-600.text-white.w-30(type="submit" :disabled="isLoading")
           i.bi.bi-check-lg.me-2
           | 送出
         button.btn.btn-outline-gray-600.w-20(type="button" data-bs-dismiss="modal") 取消
+
 </template>
 
 <style lang="scss" scoped>
@@ -166,14 +174,17 @@ export default {
       this.tempArticle.isPublic = this.isPublic;
       this.tempArticle.tag = this.tags;
       this.tempArticle.create_at = Math.floor(new Date(this.create_at) / 1000);
+
       this.$emit('emit-article', this.tempArticle);
     },
+
     async getArticle() {
       this.isLoading = true;
 
       const { id } = this.article;
       const api = `
-        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${id}`;
+        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${id}
+      `;
 
       const http = await fetch(api, {
         headers: { Authorization: this.tokenValue },
@@ -184,35 +195,43 @@ export default {
       const date = new Date(this.tempArticle.create_at * 1000)
         .toISOString().split('T');
       [this.create_at] = date;
+
       this.isPublic = this.tempArticle.isPublic;
       this.tags = this.tempArticle.tag ?? [];
+
       this.isLoading = false;
     },
+
     addTag() {
       if (this.tag) {
         this.tags.push(this.tag);
         this.tag = '';
       }
     },
+
     delTag(word) {
       this.tags = this.tags.filter((tag) => tag !== word);
     },
+
     async uploadImg() {
       this.isUploading = true;
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`;
 
+      const api = `
+        {process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload
+      `;
       const uploadImg = this.$refs.imgInput.files[0];
       const formData = new FormData();
       formData.append('file-to-upload', uploadImg);
 
-      const http = await fetch(api, {
-        method: 'post',
-        headers: { Authorization: this.tokenValue },
-        body: formData,
-      });
-
       try {
+        const http = await fetch(api, {
+          method: 'post',
+          headers: { Authorization: this.tokenValue },
+          body: formData,
+        });
+
         const fetchData = await http.json();
+
         if (fetchData.success) {
           this.tempArticle.image = fetchData.imageUrl;
           this.isUploading = false;

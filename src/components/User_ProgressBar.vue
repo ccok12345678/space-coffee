@@ -1,5 +1,6 @@
 <template lang="pug">
 .progress-bar.flex-nowarp.mx-auto.mb-4.text-nowrap
+
   //- step 1
   .d-flex.flex-column.align-items-center
     .rounded-circle.text-light.circle.bg-secondary.d-flex(
@@ -96,7 +97,6 @@ export default {
     },
   },
   created() {
-    console.log('step', this.step);
     switch (this.step) {
       case 'Cart':
         this.status.isCart = true;
