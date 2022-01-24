@@ -5,8 +5,8 @@
   h3.fs-4.text-gray-600.mt-3 部落格沒有文章！
 
 .container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!!articles.length")
-  .d-flex
-    h3.fs-4.text-gray-600 宇宙咖啡部落格
+
+  h3.fs-4.text-gray-600 宇宙咖啡部落格
 
   .devider.w-50.border-gray-500.mb-3
 

@@ -1,10 +1,14 @@
 <template lang="pug">
 .bg-gray-100
+
   .row.gx-0
+
     .col-md-3
       SideBar
+
     #table-container.col-md-9.p-1.p-sm-2.p-md-4.vh-100.overflow-auto
       router-view
+
       .bg-dashboard(v-if="$route.name === 'Dashboard'")
 ToastMessages
 </template>
@@ -49,7 +53,9 @@ export default {
 
       try {
         const data = await http.json();
+
         pushToast(data, '已登入');
+
         if (!data.success) {
           this.$router.push('/login');
         }

@@ -7,17 +7,12 @@ UserFrontPage(:products="products"
 router-view
 
 UserFixedBtn
+
 UserFooter
+
 ToastMessages
+
 </template>
-
-<style lang="scss" scoped>
-.box {
-  width: 200px;
-  height: 600px;
-}
-
-</style>
 
 <script>
 import UserNavbar from '@/components/User_Navbar.vue';
@@ -55,15 +50,22 @@ export default {
   methods: {
     async getProducts() {
       this.isLoading = true;
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
+
+      const api = `
+        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all
+      `;
+
       const http = await fetch(api);
       const data = await http.json();
 
       this.isLoading = false;
+
       return data.products;
     },
+
     async sortProducts() {
       const data = await this.getProducts();
+
       this.products = data;
 
       this.products.forEach((item) => {

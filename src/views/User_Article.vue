@@ -55,12 +55,15 @@ export default {
 
       const { articleId } = this.$route.params;
 
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/article/${articleId}`;
+      const api = `
+        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/article/${articleId}
+      `;
 
       const http = await fetch(api);
       const fetchData = await http.json();
 
       this.article = fetchData.article;
+
       this.isLoading = false;
     },
   },

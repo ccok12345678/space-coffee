@@ -35,6 +35,7 @@ footer.bg-gray-200.font-monospace
     .devider.w-100.mx-auto.my-3.border-gray-500
     .text-gray-500.text-center.w-75.mx-auto.d-flex.justify-content-between.flex-column.flex-md-row
       .pb-md-3 ©2022
-        router-link.link-gray-600.text-decoration-none.ms-2(to="/login" title="管理者登入") Space Coffee,
+        a.link-gray-600.text-decoration-none.ms-2(href="#/login"
+        target="_blank" title="管理者登入") Space Coffee,
       .pb-3 made by ccok.
 </template>
