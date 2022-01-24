@@ -86,8 +86,6 @@ header
 </style>
 
 <script>
-import UserTopbar from './User_Topbar.vue';
-
 export default {
   data() {
     return {
@@ -111,9 +109,6 @@ export default {
       type: Array,
       default() { return []; },
     },
-  },
-  components: {
-    UserTopbar,
   },
   methods: {
   },
