@@ -8,21 +8,7 @@
       .modal-body
 
         //- Placeholder
-        .row.gy-4.placeholder-wave(v-if="isLoading")
-          .col-6.placeholder.bg-gray-300
-          .col-6
-          .col-5.placeholder.bg-gray-300
-          .col-7
-          .col-8.placeholder.bg-gray-300
-          .col-4
-          .col-5.placeholder.bg-gray-300
-          .col-7
-          .col-10.placeholder.bg-gray-300
-          .col-2
-          .col-10.placeholder.bg-gray-300
-          .col-2
-          .col-8.placeholder.bg-gray-300
-          .col-4
+        Placeholder(:bgColor="'gray-300'" v-if="isLoading")
         .row.gy-2(v-if="!isLoading")
 
           .col-3.d-flex
@@ -134,6 +120,7 @@
 
 <script>
 import modalmixin from '@/mixins/modalMixin';
+import Placeholder from '@/components/Placeholder.vue';
 
 export default {
   data() {
@@ -146,6 +133,9 @@ export default {
       isLoading: false,
       isUploading: false,
     };
+  },
+  components: {
+    Placeholder,
   },
   props: {
     article: {
