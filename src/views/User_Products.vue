@@ -1,10 +1,19 @@
 <template lang="pug">
 .container-lg.d-flex.flex-column.align-items-center.my-5
-  h3.fs-5.text-gray-600 {{ classing }}
+
+  h3.fs-4.text-gray-600 {{ classing }}
+
   .devider.w-50.border-gray-500.mb-5
+
   .row.d-flex.justify-content-center.w-100
     .col-md-11
+
       .row.gy-4.d-flex.justify-content-center
+
+        .col-md-3.text-center(v-if="isLoading")
+          img.img-fluid(src="../assets/images/ufo-svgrepo.svg")
+          p.fs-5.text-gray-600.mt-3 就快到了！
+
         .col-md-4.col-sm-6(v-for="item of tempProducts" :key="item.id")
           UserProductCard(:tempPick="item")
 </template>
@@ -18,6 +27,7 @@ export default {
       classing: '',
       products: [],
       tempProducts: [],
+      isLoading: false,
     };
   },
   components: {
