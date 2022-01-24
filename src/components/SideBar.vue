@@ -15,79 +15,99 @@ nav.nav.navbar-dark.bg-dark
       small.d-none.d-sm-inline-block Dashboard
 
     .nav-tabs.fs-5.text-center.border-0.d-none.d-md-flex.flex-column.justify-content-center
+
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理商品"
         to="/dashboard/products"
         :class="{ 'nav-link-active': $route.name === 'Products' }")
         i.d-none.d-sm-inline-block.me-2.bi.bi-basket
         | 產品
+
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理訂單"
         to="/dashboard/orders"
         :class="{ 'nav-link-active': $route.name === 'Orders' }")
         i.d-none.d-sm-inline-block.me-2.bi.bi-card-checklist
         | 訂單
+
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理優惠卷"
         to="/dashboard/coupons"
         :class="{ 'nav-link-active': $route.name === 'Coupons' }")
         i.d-none.d-sm-inline-block.me-2.bi.bi-ticket
         | 優惠卷
+
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理文章"
         to="/dashboard/articles"
         :class="{ 'nav-link-active': $route.name === 'Articles' }")
         i.d-none.d-sm-inline-block.me-2.bi.bi-chat-right-text
         | 部落格
-      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(to="/" title="前往商店")
+
+      a.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(
+        href="/" target="_blank" title="前往商店")
         i.d-none.d-sm-inline-block.me-2.bi.bi-shop
         | 商店
+
       button.nav-item.nav-link.py-2.px-0.px-sm-1.py-md-3(title="登出"
-        @click.prevent="logOut")
+        @click="logOut")
         i.bi.bi-box-arrow-left.me-2
         span.d-none.d-md-inline-block 登出
 
-    footer.text-center.p-3.mt-auto.d-none.d-md-block
-      small.text-muted.border-top.pt-2 © 2022 Space coffee, made by ccok
+    footer.d-flex.flex-column.p-3.mt-auto.d-none.d-md-block
+      .devider.w-75.border-secondary.mx-auto
+      small.text-muted.pt-2.mx-auto © 2022 Space coffee, made by ccok
 
 //- offcanvas nav content
 aside#sideBarOffcanvas.offcanvas.offcanvas-end.bg-dark(tabindex="-1"
 ref="sidebarOffcanvas")
+
   .offcanvas-header.text-light.d-flex
     .fs-4.text-brand.m-auto Dashboard
     button.btn.text-light.fs-4(data-bs-dismiss="offcanvas" aria-label="Close" title="關閉選單")
       i.bi.bi-x-square
+
   .offcanvas-body
+
     .nav-tabs.fs-5.text-center.border-0.d-flex.flex-column.justify-content-center(
       data-bs-dismiss="offcanvas" aria-label="Close"
     )
+
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理商品"
         to="/dashboard/products"
         :class="{ 'nav-link-active': $route.name === 'Products' }")
         i.me-2.bi.bi-basket
         | 產品
+
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理訂單"
         to="/dashboard/orders"
         :class="{ 'nav-link-active': $route.name === 'Orders' }")
         i.me-2.bi.bi-card-checklist
         | 訂單
+
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理優惠卷"
         to="/dashboard/coupons"
         :class="{ 'nav-link-active': $route.name === 'Coupons' }")
         i.me-2.bi.bi-ticket
         | 優惠卷
+
       router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(title="管理文章"
         to="/dashboard/articles"
         :class="{ 'nav-link-active': $route.name === 'Articles' }")
         i.me-2.bi.bi-chat-right-text
         | 部落格
+
       a.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(
-        href="/" title="前往商店")
+        href="/" target="_blank" title="前往商店")
         i.me-2.bi.bi-shop
         | 商店
+
       button.nav-item.nav-link.py-2.px-0.px-sm-1.py-md-3(title="登出"
         @click.prevent="logOut")
         i.bi.bi-box-arrow-left.me-2
         span 登出
+
   footer.text-center.p-3.mt-auto
     small.text-muted.border-top.pt-2 © 2022 Space coffee, made by ccok
+
 PageTitle  {{ pageTitle }} · Space Coffee 後台管理
+
 </template>
 
 <script>
@@ -111,9 +131,11 @@ export default {
         headers: { Authorization: this.tokenValue },
       });
       const data = await http.json();
+
       console.log(data);
+
       if (data.success) {
-        this.$router.push('/login');
+        window.self.location.assign('/#/login');
       }
     },
     changePageTitle() {

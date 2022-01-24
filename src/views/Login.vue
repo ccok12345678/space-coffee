@@ -1,31 +1,37 @@
 <template lang="pug">
 .container-fluid.d-flex.flex-column.align-items-center.vh-100
+
   .text-brand.text-light.text-center.mt-auto
     h1.m-0 Space Coffee
     p.fs-5 Admin Login
-  main.card.mb-auto.border-0.overflow-hidden
+
+  .card.mb-auto.border-0.overflow-hidden
+
     .card-body.d-flex.flex-column
+
       img.mx-auto(src="@/assets/images/ufo-catch-cow.svg" width="100")
+
       form.d-flex.flex-column(
-        @submit="logIn"
-      )
+        @submit.prevent="logIn")
+
         .my-3
           label.form-label.fw-bold(for="login_email") 登入信箱：
           input#login_email.form-control(type="email" placeholder="✉" required
             v-model="email")
+
         .mb-3
           label.form-label.fw-bold(for="login_password") 密碼：
           input#login_password.form-control(type="password" placeholder="🔒︎"
             autocomplete="current-password" required
             v-model="password")
+
         button.btn.btn-outline-blue.d-block(type="submit")
           i.bi.bi-door-open.me-1
           span 登入
-PageTitle 管理員登入 ‧ Space Coffee
+
 </template>
 
 <script>
-import PageTitle from '@/components/PageTitle.vue';
 
 export default {
   data() {
@@ -33,9 +39,6 @@ export default {
       email: `${process.env.VUE_APP_ADMIN_EMAIL}`,
       password: `${process.env.VUE_APP_ADMIN_PASSWORD}`,
     };
-  },
-  components: {
-    PageTitle,
   },
   methods: {
     async logIn() {
@@ -52,6 +55,7 @@ export default {
           body: JSON.stringify(admin),
         });
         const data = await http.json();
+
         console.log('Log in:', data);
         if (data.success) {
           const { token, expired } = data;
@@ -62,6 +66,9 @@ export default {
         console.log('Log in error:', error);
       }
     },
+  },
+  mounted() {
+    document.title = '管理員登入｜Space Coffee';
   },
 };
 </script>
