@@ -94,7 +94,7 @@ ref="sidebarOffcanvas")
         | 部落格
 
       a.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(
-        href="/" target="_blank" title="前往商店")
+        href="/space-coffee/dist/" target="_blank" title="前往商店")
         i.me-2.bi.bi-shop
         | 商店
 
@@ -135,7 +135,7 @@ export default {
       console.log(data);
 
       if (data.success) {
-        window.self.location.assign('/#/login');
+        window.self.location.assign('/space-coffee/dist/#/login');
       }
     },
     changePageTitle() {
