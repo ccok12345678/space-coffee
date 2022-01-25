@@ -764,7 +764,7 @@ $input-btn-focus-width:         .25rem !default;
 $input-btn-focus-color-opacity: .25 !default;
 $input-btn-focus-color:         rgba($component-active-bg, $input-btn-focus-color-opacity) !default;
 $input-btn-focus-blur:          0 !default;
-$input-btn-focus-box-shadow:    none; // 0 0 $input-btn-focus-blur $input-btn-focus-width $input-btn-focus-color !default;
+$input-btn-focus-box-shadow:    0; // 0 0 $input-btn-focus-blur $input-btn-focus-width $input-btn-focus-color !default;
 
 $input-btn-padding-y-sm:      .25rem !default;
 $input-btn-padding-x-sm:      .5rem !default;
@@ -801,11 +801,11 @@ $btn-font-size-lg:            $input-btn-font-size-lg !default;
 $btn-border-width:            $input-btn-border-width !default;
 
 $btn-font-weight:             $font-weight-normal !default;
-$btn-box-shadow:              none;// inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
+$btn-box-shadow:              0;// inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075) !default;
 $btn-focus-width:             $input-btn-focus-width !default;
 $btn-focus-box-shadow:        $input-btn-focus-box-shadow !default;
 $btn-disabled-opacity:        .65 !default;
-$btn-active-box-shadow:       none;// inset 0 3px 5px rgba($black, .125) !default;
+$btn-active-box-shadow:       0;// inset 0 3px 5px rgba($black, .125) !default;
 
 $btn-link-color:              $link-color !default;
 $btn-link-hover-color:        $link-hover-color !default;
@@ -915,8 +915,8 @@ $form-check-input-bg:                     $input-bg !default;
 $form-check-input-border:                 1px solid rgba($black, .25) !default;
 $form-check-input-border-radius:          .25em !default;
 $form-check-radio-border-radius:          50% !default;
-$form-check-input-focus-border:           none; // $input-focus-border-color !default;
-$form-check-input-focus-box-shadow:       none; // $input-btn-focus-box-shadow !default;
+$form-check-input-focus-border:           0; // $input-focus-border-color !default;
+$form-check-input-focus-box-shadow:       0; // $input-btn-focus-box-shadow !default;
 
 $form-check-input-checked-color:          $component-active-color !default;
 $form-check-input-checked-bg-color:       $cyan-600; // $component-active-bg !default;
@@ -1104,8 +1104,8 @@ $nav-link-disabled-color:           $gray-600 !default;
 
 $nav-tabs-border-color:             $gray-300 !default;
 $nav-tabs-border-width:             $border-width !default;
-$nav-tabs-border-radius:            none; // $border-radius !default;
-$nav-tabs-link-hover-border-color:  none; // $gray-200 $gray-200 $nav-tabs-border-color !default;
+$nav-tabs-border-radius:            0; // $border-radius !default;
+$nav-tabs-link-hover-border-color:  0; // $gray-200 $gray-200 $nav-tabs-border-color !default;
 $nav-tabs-link-active-color:        $gray-700 !default;
 $nav-tabs-link-active-bg:           $body-bg !default;
 $nav-tabs-link-active-border-color: $gray-300 $gray-300 $nav-tabs-link-active-bg !default;
@@ -1232,7 +1232,7 @@ $pagination-border-color:           $white; // $gray-300 !default;
 
 $pagination-focus-color:            $link-hover-color !default;
 $pagination-focus-bg:               $gray-200 !default;
-$pagination-focus-box-shadow:    none; //  $input-btn-focus-box-shadow !default;
+$pagination-focus-box-shadow:    0; //  $input-btn-focus-box-shadow !default;
 $pagination-focus-outline:          0 !default;
 
 $pagination-hover-color:        $blue-700;    //$link-hover-color !default;
@@ -1291,8 +1291,8 @@ $accordion-padding-x:                     1.25rem !default;
 $accordion-color:                         $body-color !default;
 $accordion-bg:                            $body-bg !default;
 $accordion-border-width:                  $border-width !default;
-$accordion-border-color:                  none;// rgba($black, .125) !default;
-$accordion-border-radius:                 none; // $border-radius !default;
+$accordion-border-color:                  0;// rgba($black, .125) !default;
+$accordion-border-radius:                 0; // $border-radius !default;
 $accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width) !default;
 
 $accordion-body-padding-y:                $accordion-padding-y !default;
@@ -1303,11 +1303,11 @@ $accordion-button-padding-x:              $accordion-padding-x !default;
 $accordion-button-color:                  $accordion-color !default;
 $accordion-button-bg:                     $accordion-bg !default;
 $accordion-transition:                    $btn-transition, border-radius .15s ease !default;
-$accordion-button-active-bg:              none; // tint-color($component-active-bg, 90%) !default;
-$accordion-button-active-color:           none;// shade-color($primary, 10%) !default;
+$accordion-button-active-bg:              0; // tint-color($component-active-bg, 90%) !default;
+$accordion-button-active-color:           0;// shade-color($primary, 10%) !default;
 
-$accordion-button-focus-border-color:     none; // $input-focus-border-color !default;
-$accordion-button-focus-box-shadow:       none; // $btn-focus-box-shadow !default;
+$accordion-button-focus-border-color:     0; // $input-focus-border-color !default;
+$accordion-button-focus-box-shadow:       0; // $btn-focus-box-shadow !default;
 
 $accordion-icon-width:                    1.25rem !default;
 $accordion-icon-color:                    $accordion-button-color !default;
