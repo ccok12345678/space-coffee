@@ -70,5 +70,8 @@ export default {
   created() {
     this.getArticle();
   },
+  updated() {
+    document.title = `${this.article.title}｜宇宙咖啡`;
+  },
 };
 </script>

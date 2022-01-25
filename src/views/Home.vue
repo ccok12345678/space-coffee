@@ -78,8 +78,5 @@ export default {
   created() {
     this.sortProducts();
   },
-  mounted() {
-    document.title = '宇宙咖啡 Space Coffee | 瀰漫星際的咖啡香';
-  },
 };
 </script>

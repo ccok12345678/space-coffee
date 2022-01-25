@@ -40,8 +40,8 @@ nav.nav.navbar-dark.bg-dark
         i.d-none.d-sm-inline-block.me-2.bi.bi-chat-right-text
         | 部落格
 
-      a.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(
-        href="/space-coffee/dist/" target="_blank" title="前往商店")
+      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(
+        :to="{name: 'Home' }" target="_blank" title="前往商店")
         i.d-none.d-sm-inline-block.me-2.bi.bi-shop
         | 商店
 
@@ -106,21 +106,14 @@ ref="sidebarOffcanvas")
   footer.text-center.p-3.mt-auto
     small.text-muted.border-top.pt-2 © 2022 Space coffee, made by ccok
 
-PageTitle  {{ pageTitle }} · Space Coffee 後台管理
-
 </template>
 
 <script>
-import PageTitle from '@/components/PageTitle.vue';
-
 export default {
   data() {
     return {
       pageTitle: '',
     };
-  },
-  components: {
-    PageTitle,
   },
   inject: ['tokenValue'],
   methods: {
@@ -141,19 +134,19 @@ export default {
     changePageTitle() {
       switch (this.$route.name) {
         case 'Products':
-          document.title = '產品';
+          document.title = '產品 · Space Coffee 後台管理';
           break;
         case 'Orders':
-          document.title = '訂單';
+          document.title = '訂單 · Space Coffee 後台管理';
           break;
         case 'Coupons':
-          document.title = '優惠卷';
+          document.title = '優惠卷 · Space Coffee 後台管理';
           break;
         case 'Articles':
-          document.title = '部落格';
+          document.title = '部落格 · Space Coffee 後台管理';
           break;
         default:
-          document.title = 'Space Coffee';
+          document.title = 'Space Coffee · Space Coffee 後台管理';
           break;
       }
     },

@@ -61,6 +61,8 @@ export default {
     },
   },
   created() {
+    document.title = '宇宙咖啡部落格 | 宇宙咖啡';
+
     this.getArticles();
   },
 };
