@@ -40,8 +40,8 @@ nav.nav.navbar-dark.bg-dark
         i.d-none.d-sm-inline-block.me-2.bi.bi-chat-right-text
         | 部落格
 
-      a.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(
-        href="/" target="_blank" title="前往商店")
+      router-link.nav-item.nav-link.py-2.py-md-3.hover-bg-gray(
+        to="/" target="_blank" title="前往商店")
         i.d-none.d-sm-inline-block.me-2.bi.bi-shop
         | 商店
 
