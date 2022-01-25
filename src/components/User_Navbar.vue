@@ -5,7 +5,7 @@ header
   nav.navbar.navbar-expand-md.navbar-light.bg-white
     .container.d-flex.flex-md-column.align-items-center
 
-      a.navbar-brand.text-brand(href="/")
+      a.navbar-brand.text-brand(href="#")
         h1 Space Coffee #[span.visually-hidden 宇宙咖啡]
 
       button#navbarToggler.navbar-toggler.border-0.d-flex.d-md-none(
@@ -18,7 +18,7 @@ header
       #navbarContent.navbar-collapse.collapse
         .navbar-nav.px-4.border-top
           .nav-item.mx-2
-            a(href="/").nav-link.link-gray-500.hover-text-gray
+            a(href="#").nav-link.link-gray-500.hover-text-gray
               | 首頁
 
           hr.me-5.my-0.d-md-none
