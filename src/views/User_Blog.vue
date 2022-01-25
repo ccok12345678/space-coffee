@@ -29,6 +29,10 @@
 
         .col-12.devider.my-2.m-auto.border-gray-300
 
+    .w-100.my-3
+    .col-4.col-sm-2
+      img.img-fluid(src="../assets/images/coffee-svgrepo-com.svg")
+
 Pagination(:pages="pagination" @emit-page="getArticles")
 </template>
 
