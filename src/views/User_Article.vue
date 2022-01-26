@@ -2,7 +2,7 @@
 //- placeholder
 Placeholder(:bgColor="'gray-500'" v-if="isLoading")
 
-.container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!isLoading")
+article.container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!isLoading")
 
   h3.fs-4.text-gray-600 {{ article.title }}
 
