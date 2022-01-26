@@ -69,9 +69,12 @@
             .spinner-grow
               .visually-hidden 載入中……
           //- image preview
-          img.img-fluid.img-thumbnail(
-            :src="tempProduct.imageUrl" v-if="tempProduct.imageUrl"
-            alt="圖片連結無效")
+          .vstack.mt-(v-if="tempProduct.imageUrl")
+            button.btn.me-auto.hover-red(type="button"
+              @click.prevent="tempProduct.imageUrl = ''" title="移除") X
+            img.img-fluid.img-thumbnail(
+              :src="tempProduct.imageUrl"
+              alt="圖片連結無效")
 
           input.form-control.form-control-sm.my-2(type="url" placeholder="圖片網址🔗"
             v-model.trim="tempProduct.imageUrl")
@@ -93,7 +96,7 @@
                 | 新增圖片
             //- preview
             .mt-2.vstack(v-for="(imgUrl, key) in tempProduct.imagesUrl" :key="key")
-              button.btn.me-auto(title="移除該圖"
+              button.btn.me-auto.hover-red(title="移除"
                 @click.prevent="removeImg(imgUrl)") X
               img.img-fluid.img-thumbnail(:src="imgUrl" title="圖片預覽" alt="圖片連結無效")
 
