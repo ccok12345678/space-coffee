@@ -49,10 +49,10 @@
         .col-3.d-flex.justify-content-center.align-items-center.fw-bold.border.p-0
           | 聯絡資訊
         .col-9.border.py-2
-          p.mb-1 姓名：{{ order.user.name }}
-          p.mb-1 電話：{{ order.user.tel }}
-          p.mb-1 E-Mail：{{ order.user.email }}
-          p.mb-1 收件地址：{{ order.user.address }}
+          p.mb-1 姓名：{{ $filters.userName(order.user.name) }}
+          p.mb-1 電話：{{ $filters.userPhone(order.user.tel) }}
+          p.mb-1 E-Mail：{{ $filters.userEmail(order.user.email) }}
+          p.mb-1 收件地址：{{ $filters.userAddress(order.user.address) }}
 
         .col-3.d-flex.justify-content-center.align-items-center.fw-bold.border.p-0
           | 其他

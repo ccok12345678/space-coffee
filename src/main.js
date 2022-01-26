@@ -22,7 +22,9 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 // filters
-import { currency, date } from './methods/filters';
+import {
+  currency, date, userPhone, userEmail, userName, userAddress,
+} from './methods/filters';
 
 // VeeValidate
 defineRule('required', required);
@@ -46,6 +48,10 @@ app.component('VueLoading', VueLoading);
 app.config.globalProperties.$filters = {
   currency,
   date,
+  userEmail,
+  userPhone,
+  userName,
+  userAddress,
 };
 
 app.mount('#app');
