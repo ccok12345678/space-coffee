@@ -1,6 +1,8 @@
 <template lang="pug">
 a.btn.btn-secondary.btn-fixed.fs-3.hover-half-transparent.text-light.border-0(
-  title="新增品項" @click.prevent="openModal(true)")
+  href="#"
+  title="新增品項"
+  @click.prevent="openModal(true)")
   i.bi.bi-clipboard-plus
 
 section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")

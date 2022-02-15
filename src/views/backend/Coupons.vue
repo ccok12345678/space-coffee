@@ -1,6 +1,8 @@
 <template lang="pug">
 a.btn.btn-secondary.btn-fixed.fs-3.hover-half-transparent.text-light.border-0(
-  title="新增優惠卷" @click.prevent="openModal(true)")
+  href="#"
+  title="新增優惠卷"
+  @click.prevent="openModal(true)")
   i.bi.bi-file-earmark-plus
 
 section.w-100.overflow-auto.text-nowrap.text-center(v-if="!!coupons.length")
