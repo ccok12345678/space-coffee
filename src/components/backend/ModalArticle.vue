@@ -51,7 +51,7 @@
               .rounded.bg-gray-300.hstack.me-1.mt-1(v-for="(word, key) in tags" :key="key")
                 span.py-1.px-2 {{ word }}
                 button.btn.btn-sm(type="button"
-                  @click.prevent="delTag(word)")
+                  @click="delTag(word)")
                   | X
 
           //- Image

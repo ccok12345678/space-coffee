@@ -98,8 +98,10 @@ ref="sidebarOffcanvas")
         i.me-2.bi.bi-shop
         | 商店
 
-      button.nav-item.nav-link.py-2.px-0.px-sm-1.py-md-3(title="登出"
-        @click.prevent="logOut")
+      button.nav-item.nav-link.py-2.px-0.px-sm-1.py-md-3(
+        type="button"
+        title="登出"
+        @click="logOut")
         i.bi.bi-box-arrow-left.me-2
         span 登出
 

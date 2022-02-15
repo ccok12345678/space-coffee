@@ -24,7 +24,7 @@
 
             button.btn.hover-red.px-3.mx-2(
                 type="button" title="清空購物車"
-                @click.prevent="deleteCart")
+                @click="deleteCart")
               i.bi.bi-trash-fill
 
           .devider.w-25.boder-dark.my-2.mx-auto
@@ -58,7 +58,7 @@
           .col-2.col-md-1.d-flex.align-items-center
             button.btn.hover-red.px-1.d-block.w-100(
               type="button" title="刪除"
-              @click.prevent="deleteCart(false, item.id)")
+              @click="deleteCart(false, item.id)")
                   i.bi.bi-trash
 
           .devider.w-100.border-secondary
@@ -99,7 +99,7 @@
 
       .text-center.text-md-end
         button.btn.btn-cyan-600.text-light.w-30(type="button"
-          @click.prevent="goOrder")
+          @click="goOrder")
           | 填寫資料
           i.bi.bi-box-arrow-right.ms-2
 

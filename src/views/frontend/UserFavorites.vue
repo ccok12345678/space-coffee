@@ -12,7 +12,7 @@
     //- delete button
     button.btn.btn-sm.hover-red.px-2.mb-2.ms-2(
     type="button" title="清空收藏清單"
-    @click.prevent="deleteFavors")
+    @click="deleteFavors")
       i.bi.bi-trash-fill
 
   .devider.w-50.border-gray-500.mb-5

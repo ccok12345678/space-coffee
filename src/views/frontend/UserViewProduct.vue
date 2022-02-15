@@ -26,14 +26,14 @@
             v-model="qty")
 
           button.btn.btn-cyan-600.text-light.w-75.my-2(type="button"
-            @click.prevent.stop="addCart(tempProduct.id)"
+            @click.stop="addCart(tempProduct.id)"
             :disabled="status === tempProduct.id")
             .spinner-border.spinner-border-sm.mx-4(v-if="status === tempProduct.id")
               .visually-hidden Loading...
             span(v-else) 加入購物車
 
           button.btn.btn-outline-gray-600.w-75(type="button"
-            @click.prevent="updateFavorite(tempProduct.id)")
+            @click="updateFavorite(tempProduct.id)")
             span(v-if="isFavorite") 取消收藏
             span(v-else) 加入收藏
           .fs-12.text-gray-400.mt-1(v-if="isFavorite") （已加入收藏）
@@ -92,14 +92,14 @@
             v-model="qty")
 
           button.btn.btn-cyan-600.text-light.w-75.my-2(type="button"
-            @click.prevent.stop="addCart(tempProduct.id)"
+            @click.stop="addCart(tempProduct.id)"
             :disabled="status === tempProduct.id")
             .spinner-border.spinner-border-sm.mx-4(v-if="status === tempProduct.id")
               .visually-hidden Loading...
             span(v-else) 加入購物車
 
           button.btn.btn-outline-gray-600.w-75(type="button"
-            @click.prevent="updateFavorite(tempProduct.id)")
+            @click="updateFavorite(tempProduct.id)")
             span(v-if="isFavorite") 取消收藏
             span(v-else) 加入收藏
           .fs-12.text-gray-400.mt-1(v-if="isFavorite") （已加入收藏）

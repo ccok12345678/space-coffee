@@ -46,11 +46,11 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
         td
           button.border-0.hover-gray.py-2.px-2.d-block.w-100(
             type="button" title="編輯"
-            @click.prevent="openModal(false, item)")
+            @click="openModal(false, item)")
             i.bi.bi-pencil-square
           button.border-0.hover-red.py-2.px-2.d-block.w-100(
             type="button" title="刪除"
-            @click.prevent="checkDelete(item)")
+            @click="checkDelete(item)")
             i.bi.bi-trash
 
 Pagination(:pages="pagination" @emit-page="getProducts")

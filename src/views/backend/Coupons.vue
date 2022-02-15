@@ -35,11 +35,11 @@ section.w-100.overflow-auto.text-nowrap.text-center(v-if="!!coupons.length")
 
         td
           button.border-0.hover-gray.py-2.d-block.w-100(type="button" title="編輯"
-            @click.prevent="openModal(false, coupon)")
+            @click="openModal(false, coupon)")
             i.bi.bi-pencil-square
 
           button.border-0.hover-red.py-2.d-block.w-100(type="button" title="刪除"
-            @click.prevent="checkDelete(coupon)")
+            @click="checkDelete(coupon)")
             i.bi.bi-trash
 
 Pagination(:pages="pagination" @emit-page="getCoupons")

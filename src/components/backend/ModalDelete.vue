@@ -14,7 +14,7 @@
           span(v-else) {{ tempItem.id }}？
 
       .p-3.text-center
-        button.btn.btn-danger.w-70.mb-2(type='button' @click.prevent="check")
+        button.btn.btn-danger.w-70.mb-2(type='button' @click="check")
           i.bi.bi-trash.me-2
           | 確認刪除
         button.btn.btn-outline-gray-600.w-70(type='button' data-bs-dismiss='modal')

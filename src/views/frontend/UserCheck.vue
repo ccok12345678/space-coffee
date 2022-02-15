@@ -40,7 +40,7 @@
           div(v-else)
             span.text-danger.me-2 未付款
             button.btn.btn-cyan-600.text-light(type="button"
-              @click.prevent="payOrder"
+              @click="payOrder"
               :disabled="isPaying")
               | 進行付款
               .spinner-border.spinner-border-sm(v-if="isPaying")

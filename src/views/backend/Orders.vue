@@ -45,11 +45,11 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!orders.length")
         td
 
           button.border-0.hover-gray.p-2.d-block.w-100(type="button" title="檢視編輯"
-            @click.prevent="openModal(order, true)")
+            @click="openModal(order, true)")
             i.bi.bi-pencil-square
 
           button.border-0.hover-red.p-2.d-block.w-100(type="button" title="刪除"
-            @click.prevent="checkDelete(order)")
+            @click="checkDelete(order)")
             i.bi.bi-trash
 
 Pagination(:pages="pagination" @emit-page="getOrders")
