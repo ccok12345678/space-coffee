@@ -30,12 +30,6 @@ article.container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!isLoading
 
 </template>
 
-<style lang="scss" scoped>
-p {
-  white-space: pre-wrap;
-}
-</style>
-
 <script>
 import Placeholder from '@/components/Placeholder.vue';
 
@@ -75,3 +69,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+p {
+  white-space: pre-wrap;
+}
+</style>

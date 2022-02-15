@@ -11,13 +11,8 @@
 
 </template>
 
-<style lang="scss">
-.toast {
-  z-index: 10;
-}
-</style>
-
 <script>
+
 import Toast from 'bootstrap/js/dist/toast';
 
 export default {
@@ -35,3 +30,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.toast {
+  z-index: 10;
+}
+</style>

@@ -112,20 +112,6 @@
 
 </template>
 
-<style lang="scss" scoped>
-.article {
-
-  &-content {
-  height: 150px;
-  }
-
-  &-description {
-    height: 70px;
-  }
-}
-
-</style>
-
 <script>
 import modalmixin from '@/mixins/modalMixin';
 import Placeholder from '@/components/Placeholder.vue';
@@ -243,3 +229,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.article {
+
+  &-content {
+  height: 150px;
+  }
+
+  &-description {
+    height: 70px;
+  }
+}
+
+</style>
