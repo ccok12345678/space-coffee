@@ -9,7 +9,10 @@
 
     .card-body.d-flex.flex-column
 
-      img.mx-auto(src="@/assets/images/ufo-catch-cow.svg" width="100")
+      img.mx-auto(
+        src="@/assets/images/ufo-catch-cow.svg"
+        width="100"
+        alt="Login")
 
       form.d-flex.flex-column(
         @submit.prevent="logIn")

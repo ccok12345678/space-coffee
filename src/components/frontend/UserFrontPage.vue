@@ -2,10 +2,12 @@
 section.container-lg.pb-4.mb-3.mb-sm-5.overflow-hidden.d-flex.flex-column.align-items-center
 
   //- for bigger width
-  img.img-fluid.d-none.d-md-block(src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1280&q=80")
+  img.img-fluid.d-none.d-md-block(src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1280&q=80"
+  alt="Space Coffee")
 
   //- for small ones
-  img.d-block.d-md-none(src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&q=80")
+  img.d-block.d-md-none(src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&q=80"
+  alt="Space Coffee")
 
   .devider.w-75.border-gray-500.my-4
 
@@ -23,7 +25,8 @@ section.container-lg.d-flex.flex-column.align-items-center.py-5.mb-5
   .row.gy-2.w-100.d-flex.justify-content-center
 
     .col-md-4.d-none.d-md-flex.align-items-center
-      img.img-fluid(src="https://images.unsplash.com/photo-1458819714733-e5ab3d536722?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80")
+      img.img-fluid(src="https://images.unsplash.com/photo-1458819714733-e5ab3d536722?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+      alt="Good Coffee makes a day")
 
     .col-md-8.col-12
       UserProductCard(:tempPick="randomPicks[2]")

@@ -26,7 +26,7 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
       tr(v-for="item in products" :key="item.id")
         td
           .img.overflow-hidden
-            img.img-fluid(:src="item.imageUrl")
+            img.img-fluid(:src="item.imageUrl" :alt="item.title")
 
         td
           a.link-dark.text-decoration-none(href="#"

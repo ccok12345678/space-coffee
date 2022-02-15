@@ -1,7 +1,9 @@
 <template lang="pug">
 //- show if empty
 .container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!favorites.length")
-  img.favor-img.w-25(src="@/assets/images/ufo-svgrepo-com.svg")
+  img.favor-img.w-25(
+    src="@/assets/images/ufo-svgrepo-com.svg"
+    alt="Nothing here!")
   h3.fs-4.text-gray-600.mt-3 還沒有收藏，先去逛逛吧！
 
 .container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!!favorites.length")

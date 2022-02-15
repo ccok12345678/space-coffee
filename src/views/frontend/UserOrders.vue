@@ -6,7 +6,9 @@
     //- show if no order
     .col-md-10.d-flex.flex-column.align-items-center(v-if="orders.length === 0")
       .mb-2.text-center.w-30
-        img.spinner-slow.mb-4(src="@/assets/images/galaxy_icon.svg")
+        img.spinner-slow.mb-4(
+          src="@/assets/images/galaxy_icon.svg"
+          alt="Loading...")
         h4.fs-4.text-gray-700 尚未建立訂單!
 
     .col-md-10.d-flex.flex-column.align-items-center(v-if="orders.length > 0")

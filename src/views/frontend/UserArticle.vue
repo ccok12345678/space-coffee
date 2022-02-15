@@ -14,7 +14,10 @@ article.container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!isLoading
       | {{ article.description }}
 
     .col-sm-8.mb-3(v-if="!!article.image")
-      img.img-fluid(:src="article.image" :title="article.title")
+      img.img-fluid(
+        :src="article.image"
+        :title="article.title"
+        :alt="article.title")
 
     p.col-md-8
       | {{ article.content }}

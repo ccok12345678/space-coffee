@@ -5,7 +5,9 @@
   .w-100.text-center.text-gray-600(
     v-if="carts.total === 0")
 
-    img.cart-img.w-25(src="@/assets/images/alien_ship.svg")
+    img.cart-img.w-25(
+      src="@/assets/images/alien_ship.svg"
+      alt="Empty Here!")
     h5 購物車是空的，快去選購吧！
 
   //- cart content

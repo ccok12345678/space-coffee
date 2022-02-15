@@ -73,7 +73,10 @@
 
           //- 預覽功能
           .col-12.col-sm-8.mx-auto(v-if="'image' in tempArticle")
-            img.img-fluid(:src="tempArticle.image" title="圖片預覽")
+            img.img-fluid(
+              :src="tempArticle.image"
+              title="圖片預覽"
+              alt="圖片連結無效!")
           .w-100
 
           .col-3.d-flex
