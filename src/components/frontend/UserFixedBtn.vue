@@ -1,9 +1,10 @@
 <template lang="pug">
 .btn-group-vertical.btn-fixed
 
-  button.btn.btn-secondary.text-light.border-0.p-2.px-3.mb-1(
-    title="購物車" class="hover-half-transparent-cyan"
-    @click.prevent="goCart" type="button"
+  button.btn.btn-secondary.text-light.border-0.p-2.px-3.mb-1.hover-half-transparent-cyan(
+    type="button"
+    title="購物車"
+    @click="goCart"
     v-if="isCart"
   )
     span.badge.position-absolute.top-1.start-100.translate-middle.rounded-pill.bg-warning(
@@ -12,7 +13,9 @@
     i.bi.bi-cart3
 
   button.btn.btn-secondary.hover-half-transparent-cyan.text-light.border-0.p-2.px-3(
-    title="回到頂端" @click.prevent="scrollTop" type="button"
+    type="button"
+    title="回到頂端"
+    @click="scrollTop"
     v-if="isShowScrollBtn"
   )
     i.bi.bi-arrow-up-circle
