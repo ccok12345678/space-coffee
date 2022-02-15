@@ -110,12 +110,6 @@
           | 取消
 </template>
 
-<style lang="scss" scoped>
-.textarea {
-  height: 100px;
-}
-</style>
-
 <script>
 import modalMixin from '@/mixins/modalMixin';
 
@@ -194,3 +188,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.textarea {
+  height: 100px;
+}
+</style>

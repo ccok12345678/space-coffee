@@ -5,7 +5,7 @@
   .w-100.text-center.text-gray-600(
     v-if="carts.total === 0")
 
-    img.cart-img.w-25(src="../assets/images/alien_ship.svg")
+    img.cart-img.w-25(src="@/assets/images/alien_ship.svg")
     h5 購物車是空的，快去選購吧！
 
   //- cart content
@@ -105,36 +105,8 @@
 
 </template>
 
-<style lang="scss" scoped>
-.cart-img {
-  animation: updown 1.5s infinite alternate ease-in-out;
-}
-@keyframes updown {
-  0% {
-    margin-bottom: 0px;
-    margin-top: 40px;
-  }
-  100% {
-    margin-bottom: 40px;
-    margin-top: 0;
-  }
-}
-.banner {
-  height: 130px;
-  overflow: hidden;
-  position: relative;
-
-  img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-40%);
-  }
-}
-</style>
-
 <script>
-import ProgressBar from '@/components/User_ProgressBar.vue';
+import ProgressBar from '@/components/frontend/UserProgressBar.vue';
 
 export default {
   data() {
@@ -237,3 +209,31 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.cart-img {
+  animation: updown 1.5s infinite alternate ease-in-out;
+}
+@keyframes updown {
+  0% {
+    margin-bottom: 0px;
+    margin-top: 40px;
+  }
+  100% {
+    margin-bottom: 40px;
+    margin-top: 0;
+  }
+}
+.banner {
+  height: 130px;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-40%);
+  }
+}
+</style>

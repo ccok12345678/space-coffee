@@ -65,9 +65,9 @@ VueLoading(:active="isLoading")
 </template>
 
 <script>
+import OrderModal from '@/components/backend/ModalOrder.vue';
+import DeleteModal from '@/components/backend/ModalDelete.vue';
 import Pagination from '@/components/Pagination.vue';
-import OrderModal from '@/components/Modal_Order.vue';
-import DeleteModal from '@/components/Modal_Delete.vue';
 
 export default {
   data() {

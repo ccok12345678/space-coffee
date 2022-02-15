@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import Home from '../views/Home.vue';
+import Home from '../views/frontend/Home.vue';
 
 const routes = [
   {
@@ -10,79 +10,79 @@ const routes = [
       {
         path: 'shop/:classing',
         name: 'Shop',
-        component: () => import('../views/User_Products.vue'),
+        component: () => import('../views/frontend/UserProducts.vue'),
       },
       {
         path: 'product/:id',
         name: 'ViewProduct',
-        component: () => import('../views/User_ViewProduct.vue'),
+        component: () => import('../views/frontend/UserViewProduct.vue'),
       },
       {
         path: 'cart',
         name: 'Cart',
-        component: () => import('../views/User_Cart.vue'),
+        component: () => import('../views/frontend/UserCart.vue'),
       },
       {
         path: 'order',
         name: 'Order',
-        component: () => import('../views/User_Order.vue'),
+        component: () => import('../views/frontend/UserOrder.vue'),
       },
       {
         path: '/order/:orderId',
         name: 'Check',
-        component: () => import('../views/User_Check.vue'),
+        component: () => import('../views/frontend/UserCheck.vue'),
       },
       {
         path: 'orders',
         name: 'UserOrders',
-        component: () => import('../views/User_Orders.vue'),
+        component: () => import('../views/frontend/UserOrders.vue'),
       },
       {
         path: 'favorites',
         name: 'Favorites',
-        component: () => import('../views/User_Favorites.vue'),
+        component: () => import('../views/frontend/UserFavorites.vue'),
       },
       {
         path: 'blog',
         name: 'Blog',
-        component: () => import('../views/User_Blog.vue'),
+        component: () => import('../views/frontend/UserBlog.vue'),
       },
       {
         path: 'blog/:articleId',
         name: 'Article',
-        component: () => import('../views/User_Article.vue'),
+        component: () => import('../views/frontend/UserArticle.vue'),
       },
     ],
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue'),
+    component: () => import('../views/backend/Login.vue'),
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: () => import('../views/Dashboard.vue'),
+    component: () => import('../views/backend/Dashboard.vue'),
     children: [
       {
         path: 'products',
         name: 'Products',
-        component: () => import('../views/Products.vue'),
+        component: () => import('../views/backend/Products.vue'),
       },
       {
         path: 'orders',
         name: 'Orders',
-        component: () => import('../views/Orders.vue'),
+        component: () => import('../views/backend/Orders.vue'),
       },
       {
         path: 'coupons',
         name: 'Coupons',
-        component: () => import('../views/Coupons.vue'),
+        component: () => import('../views/backend/Coupons.vue'),
       },
       {
         path: 'articles',
         name: 'Articles',
-        component: () => import('../views/Articles.vue'),
+        component: () => import('../views/backend/Articles.vue'),
       },
     ],
   },

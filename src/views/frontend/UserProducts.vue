@@ -11,7 +11,7 @@
       .row.gy-4.d-flex.justify-content-center
 
         .col-md-3.text-center(v-if="isLoading")
-          img.img-fluid(src="../assets/images/ufo-svgrepo.svg")
+          img.img-fluid(src="@/assets/images/ufo-svgrepo.svg" alt="almost there!")
           p.fs-5.text-gray-600.mt-3 就快到了！
 
         .col-md-4.col-sm-6(v-for="item of tempProducts" :key="item.id")
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import UserProductCard from '@/components/User_ProductCard.vue';
+import UserProductCard from '@/components/frontend/UserProductCard.vue';
 
 export default {
   data() {

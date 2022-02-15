@@ -66,25 +66,6 @@ header
               | 部落格
 </template>
 
-<style lang="scss" scoped>
-.navbar-toggler:focus {
-  box-shadow: none;
-}
-.navbar {
-  z-index: 100;
-}
-.nav-button::after {
-  content: "";
-  flex-shrink: 0;
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-left: auto;
-  background-image: url("../assets/images/telescope_icon.svg");
-  background-repeat: no-repeat;
-  background-size: 1.25rem;
-}
-</style>
-
 <script>
 export default {
   data() {
@@ -126,3 +107,22 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+.navbar {
+  z-index: 100;
+}
+.nav-button::after {
+  content: "";
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: auto;
+  background-image: url("../../assets/images/telescope_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 1.25rem;
+}
+</style>

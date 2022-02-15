@@ -78,14 +78,8 @@
 
 </template>
 
-<style lang="scss" scoped>
-.textarea {
-  height: 75px;
-}
-</style>
-
 <script>
-import ProgressBar from '@/components/User_ProgressBar.vue';
+import ProgressBar from '@/components/frontend/UserProgressBar.vue';
 
 export default {
   data() {
@@ -154,3 +148,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.textarea {
+  height: 75px;
+}
+</style>

@@ -51,7 +51,7 @@ img {
 
 <script>
 import { sampleSize } from 'lodash';
-import UserProductCard from '@/components/User_ProductCard.vue';
+import UserProductCard from '@/components/frontend/UserProductCard.vue';
 
 export default {
   data() {

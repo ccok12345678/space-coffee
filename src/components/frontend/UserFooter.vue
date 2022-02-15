@@ -29,7 +29,7 @@ footer.bg-gray-200.font-monospace
           li.nav-item
             a.nav-link.py-1(href="teleport:+886-1111111"
               title="聯絡宇宙咖啡 📡")
-              img(src="../assets/images/broadcast.svg" height="25")
+              img(src="@/assets/images/broadcast.svg" height="25")
 
         ul.list-group.list-group-flush.ps-3.mt-2.fs-12
           li.list-group-item.px-0.border-0

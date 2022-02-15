@@ -57,8 +57,8 @@ VueLoading(:active="isLoading")
 
 <script>
 import Pagination from '@/components/Pagination.vue';
-import CouponModal from '@/components/Modal_Coupon.vue';
-import DeleteModal from '@/components/Modal_Delete.vue';
+import CouponModal from '@/components/backend/ModalCoupon.vue';
+import DeleteModal from '@/components/backend/ModalDelete.vue';
 
 export default {
   data() {

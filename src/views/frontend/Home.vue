@@ -15,14 +15,15 @@ ToastMessages
 </template>
 
 <script>
-import UserNavbar from '@/components/User_Navbar.vue';
-import UserFooter from '@/components/User_Footer.vue';
-import UserFrontPage from '@/components/User_FrontPage.vue';
+import UserNavbar from '@/components/frontend/UserNavbar.vue';
+import UserFooter from '@/components/frontend/UserFooter.vue';
+import UserFrontPage from '@/components/frontend/UserFrontPage.vue';
+import UserFixedBtn from '@/components/frontend/UserFixedBtn.vue';
+import ToastMessages from '@/components/ToastMessages.vue';
+
 import emitter from '@/methods/emitter';
 import scrollTop from '@/methods/scrollTop';
-import UserFixedBtn from '@/components/User_FixedBtn.vue';
 import pushToast from '@/methods/pushToast';
-import ToastMessages from '@/components/ToastMessages.vue';
 
 export default {
   name: 'Home',

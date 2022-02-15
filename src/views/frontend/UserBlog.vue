@@ -1,7 +1,7 @@
 <template lang="pug">
 .container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!articles.length")
 
-  img.favor-img.w-25(src="../assets/images/ufo_space_icon.svg")
+  img.favor-img.w-25(src="@/assets/images/ufo_space_icon.svg")
   h3.fs-4.text-gray-600.mt-3 部落格沒有文章！
 
 .container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!!articles.length")
@@ -31,7 +31,7 @@
 
     .w-100.my-3
     .col-4.col-sm-2
-      img.img-fluid(src="../assets/images/coffee-svgrepo-com.svg")
+      img.img-fluid(src="@/assets/images/coffee-svgrepo-com.svg")
 
 Pagination(:pages="pagination" @emit-page="getArticles")
 </template>

@@ -53,11 +53,11 @@
             .devider.w-50.mx-auto.my-4.border-gray-500
 
             .d-flex.justify-content-around.mt-2.d-block.d-lg-none
-              img.mx-auto(src="../assets/images/aeropress_coffee.svg" width="50"
+              img.mx-auto(src="@/assets/images/aeropress_coffee.svg" width="50"
                 title="good for aeropress" alt="aeropress")
-              img.mx-auto(src="../assets/images/french_press.svg" width="50"
+              img.mx-auto(src="@/assets/images/french_press.svg" width="50"
                 title="good for french press" alt="french press")
-              img.mx-auto(src="../assets/images/portafilter_tamper_icon.svg" width="50"
+              img.mx-auto(src="@/assets/images/portafilter_tamper_icon.svg" width="50"
                 title="good for espresso" alt="espresso")
 
     //- show in bigger browser width
@@ -70,11 +70,11 @@
         .devider.w-25.mx-auto.my-4.border-gray-500
 
         .d-flex.justify-content-around.mt-2
-          img.mx-auto(src="../assets/images/aeropress_coffee.svg" width="50"
+          img.mx-auto(src="@/assets/images/aeropress_coffee.svg" width="50"
             title="good for aeropress" alt="aeropress")
-          img.mx-auto(src="../assets/images/french_press.svg" width="50"
+          img.mx-auto(src="@/assets/images/french_press.svg" width="50"
             title="good for french press" alt="french press")
-          img.mx-auto(src="../assets/images/portafilter_tamper_icon.svg" width="50"
+          img.mx-auto(src="@/assets/images/portafilter_tamper_icon.svg" width="50"
             title="good for espresso" alt="espresso")
 
         .devider.w-25.mx-auto.my-4.border-gray-500
@@ -110,45 +110,6 @@
         p.mb-0.w-75.mx-auto {{ tempProduct.description }}
 
 </template>
-
-<style lang="scss" scoped>
-.card {
-  max-width: 500px;
-}
-
-.card-text {
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -28px;
-    padding-top: 40px;
-    background: url('../assets/images/barista_coffee.svg') no-repeat center;
-  }
-}
-
-.card-img {
-  overflow: hidden;
-  width: 100%;
-  height: 400px;
-  position: relative;
-
-  @media (max-width: 576px) {
-    height: 300px;
-  }
-
-  &-top {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  }
-}
-
-</style>
 
 <script>
 export default {
@@ -234,3 +195,41 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.card {
+  max-width: 500px;
+}
+
+.card-text {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -28px;
+    padding-top: 40px;
+    background: url('../../assets/images/barista_coffee.svg') no-repeat center;
+  }
+}
+
+.card-img {
+  overflow: hidden;
+  width: 100%;
+  height: 400px;
+  position: relative;
+
+  @media (max-width: 576px) {
+    height: 300px;
+  }
+
+  &-top {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+</style>

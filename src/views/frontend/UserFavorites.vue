@@ -1,7 +1,7 @@
 <template lang="pug">
 //- show if empty
 .container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!favorites.length")
-  img.favor-img.w-25(src="../assets/images/ufo-svgrepo-com.svg")
+  img.favor-img.w-25(src="@/assets/images/ufo-svgrepo-com.svg")
   h3.fs-4.text-gray-600.mt-3 還沒有收藏，先去逛逛吧！
 
 .container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!!favorites.length")
@@ -27,28 +27,8 @@
 
 </template>
 
-<style lang="scss" scoped>
-.favor-img {
-  animation: swing 5s ease-in infinite;
-}
-@keyframes swing {
-  0% {
-    transform: translateX(0);
-  }
-  40% {
-    transform: translateX(100px) rotate(30deg);
-  }
-  80% {
-    transform: translateX(-100px) rotate(-20deg);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-</style>
-
 <script>
-import UserProductCard from '@/components/User_ProductCard.vue';
+import UserProductCard from '@/components/frontend/UserProductCard.vue';
 
 export default {
   data() {
@@ -102,3 +82,23 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.favor-img {
+  animation: swing 5s ease-in infinite;
+}
+@keyframes swing {
+  0% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(100px) rotate(30deg);
+  }
+  80% {
+    transform: translateX(-100px) rotate(-20deg);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+</style>
