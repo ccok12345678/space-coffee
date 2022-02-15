@@ -55,25 +55,31 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all
       `;
+      let data;
 
-      const http = await fetch(api);
-      const data = await http.json();
+      try {
+        const http = await fetch(api);
+        data = await http.json();
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isLoading = false;
-
       return data.products;
     },
 
     async sortProducts() {
-      const data = await this.getProducts();
-
-      this.products = data;
-
-      this.products.forEach((item) => {
-        if (!this.categories.includes(item.category)) {
-          this.categories.push(item.category);
-        }
-      });
+      try {
+        const data = await this.getProducts();
+        this.products = data;
+        this.products.forEach((item) => {
+          if (!this.categories.includes(item.category)) {
+            this.categories.push(item.category);
+          }
+        });
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
   created() {

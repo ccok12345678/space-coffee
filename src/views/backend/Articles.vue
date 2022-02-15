@@ -72,20 +72,23 @@ export default {
   methods: {
     async getArticles(page = 1) {
       this.isLoading = true;
-
       this.currentPage = page;
 
       const api = `
           ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/articles?page=${page}
         `;
 
-      const http = await fetch(api, {
-        headers: { Authorization: this.tokenValue },
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          headers: { Authorization: this.tokenValue },
+        });
+        const fetchData = await http.json();
 
-      this.articles = fetchData.articles;
-      this.pagination = fetchData.pagination;
+        this.articles = fetchData.articles;
+        this.pagination = fetchData.pagination;
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isLoading = false;
     },

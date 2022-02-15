@@ -130,11 +130,15 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${id}
       `;
-      const http = await fetch(api);
-      const fetchData = await http.json();
 
-      this.tempProduct = await fetchData.product;
-      document.title = `${this.tempProduct.title}`;
+      try {
+        const http = await fetch(api);
+        const fetchData = await http.json();
+        this.tempProduct = await fetchData.product;
+        document.title = `${this.tempProduct.title}`;
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     async addCart(id) {
@@ -144,18 +148,21 @@ export default {
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart
       `;
       const product = { data: { product_id: id, qty: this.qty } };
-      const http = await fetch(api, {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product),
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(product),
+        });
+        const fetchData = await http.json();
 
-      this.pushToast(fetchData, this.tempProduct.title);
-      this.emitter.emit('add-cart', this.qty);
-
-      this.qty = 1;
-      this.status = '';
+        this.pushToast(fetchData, this.tempProduct.title);
+        this.emitter.emit('add-cart', this.qty);
+        this.qty = 1;
+        this.status = '';
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     getFavorites() {
@@ -188,7 +195,11 @@ export default {
     },
   },
   async created() {
-    await this.getProduct();
+    try {
+      await this.getProduct();
+    } catch (error) {
+      console.error(error);
+    }
 
     this.getFavorites();
     this.isFavorite = this.isInFavorites();

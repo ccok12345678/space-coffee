@@ -55,14 +55,13 @@ export default {
         });
         const data = await http.json();
 
-        console.log('Log in:', data);
         if (data.success) {
           const { token, expired } = data;
           document.cookie = `SpaceCoffeeToken=${token}; expired=${new Date(expired)}`;
           this.$router.push('/dashboard/products');
         }
       } catch (error) {
-        console.log('Log in error:', error);
+        console.error('Log in error:', error);
       }
     },
   },

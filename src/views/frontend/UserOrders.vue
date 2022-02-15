@@ -72,12 +72,15 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/orders?page=${this.currentPage}
       `;
-      const http = await fetch(api);
-      const fetchData = await http.json();
-
-      if (fetchData.success) {
-        this.orders = fetchData.orders;
-        this.pagination = fetchData.pagination;
+      try {
+        const http = await fetch(api);
+        const fetchData = await http.json();
+        if (fetchData.success) {
+          this.orders = fetchData.orders;
+          this.pagination = fetchData.pagination;
+        }
+      } catch (error) {
+        console.error(error);
       }
     },
   },

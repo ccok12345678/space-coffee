@@ -126,10 +126,14 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart
       `;
-      const http = await fetch(api);
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api);
+        const fetchData = await http.json();
 
-      this.carts = fetchData.data;
+        this.carts = fetchData.data;
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     async deleteCart(isAll = true, id) {
@@ -143,11 +147,15 @@ export default {
         `;
       }
 
-      const http = await fetch(api, { method: 'delete' });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, { method: 'delete' });
+        const fetchData = await http.json();
 
-      this.pushToast(fetchData, '購物車');
-      this.getCart();
+        this.pushToast(fetchData, '購物車');
+        this.getCart();
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     async addCoupon() {
@@ -157,17 +165,21 @@ export default {
       `;
       const couponData = { data: { code: this.coupon } };
 
-      const http = await fetch(api, {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(couponData),
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(couponData),
+        });
+        const fetchData = await http.json();
 
-      this.pushToast(fetchData, '優惠卷');
-      this.getCart();
+        this.pushToast(fetchData, '優惠卷');
+        this.getCart();
+        this.coupon = '';
+      } catch (error) {
+        console.error(error);
+      }
 
-      this.coupon = '';
       this.isUpdating = false;
     },
 
@@ -184,17 +196,20 @@ export default {
         },
       };
 
-      const http = await fetch(api, {
-        method: 'put',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cartData),
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          method: 'put',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(cartData),
+        });
+        const fetchData = await http.json();
 
-      this.pushToast(fetchData, '購物車');
-      this.getCart();
-
-      this.status = '';
+        this.pushToast(fetchData, '購物車');
+        this.getCart();
+        this.status = '';
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     goOrder() {

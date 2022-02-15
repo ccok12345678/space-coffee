@@ -81,11 +81,15 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order/${this.orderId}
       `;
-      const http = await fetch(api);
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api);
+        const fetchData = await http.json();
 
-      if (fetchData.success) {
-        this.order = fetchData.order;
+        if (fetchData.success) {
+          this.order = fetchData.order;
+        }
+      } catch (error) {
+        console.error(error);
       }
     },
 
@@ -95,12 +99,15 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/pay/${this.orderId}
       `;
-      const http = await fetch(api, { method: 'post' });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, { method: 'post' });
+        const fetchData = await http.json();
 
-      this.pushToast(fetchData, '訂單');
-      this.getOrder();
-
+        this.pushToast(fetchData, '訂單');
+        this.getOrder();
+      } catch (error) {
+        console.error(error);
+      }
       this.isPaying = false;
     },
   },

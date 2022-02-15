@@ -103,9 +103,14 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart
       `;
-      const http = await fetch(api);
-      const fetchData = await http.json();
+      let fetchData;
 
+      try {
+        const http = await fetch(api);
+        fetchData = await http.json();
+      } catch (error) {
+        console.error(error);
+      }
       return fetchData.data;
     },
 
@@ -119,15 +124,19 @@ export default {
           message: this.message,
         },
       };
-      const http = await fetch(api, {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(order),
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(order),
+        });
+        const fetchData = await http.json();
 
-      this.pushToast(fetchData, '訂單');
-      this.$router.push({ name: 'Check', params: { orderId: fetchData.orderId } });
+        this.pushToast(fetchData, '訂單');
+        this.$router.push({ name: 'Check', params: { orderId: fetchData.orderId } });
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     isPhone(value) {
@@ -141,10 +150,13 @@ export default {
   },
   async created() {
     document.title = '訂購人資料｜宇宙咖啡';
-
     this.scrollTop();
 
-    this.carts = await this.getCart();
+    try {
+      this.carts = await this.getCart();
+    } catch (error) {
+      console.error(error);
+    }
   },
 };
 </script>

@@ -47,8 +47,14 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all
       `;
-      const http = await fetch(api);
-      const fetchData = await http.json();
+      let fetchData;
+
+      try {
+        const http = await fetch(api);
+        fetchData = await http.json();
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isLoading = false;
       return fetchData.products;
@@ -77,8 +83,13 @@ export default {
   },
   async created() {
     document.title = '收藏清單 | 宇宙咖啡';
-    this.products = await this.getProducts();
-    this.collectFavorites();
+
+    try {
+      this.products = await this.getProducts();
+      this.collectFavorites();
+    } catch (error) {
+      console.error(error);
+    }
   },
 };
 </script>

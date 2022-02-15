@@ -94,13 +94,17 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/orders?page=${this.currentPage}
       `;
-      const http = await fetch(api, {
-        headers: { Authorization: this.tokenValue },
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          headers: { Authorization: this.tokenValue },
+        });
+        const fetchData = await http.json();
 
-      this.orders = fetchData.orders;
-      this.pagination = fetchData.pagination;
+        this.orders = fetchData.orders;
+        this.pagination = fetchData.pagination;
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isLoading = false;
     },
@@ -150,15 +154,18 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${order.id}
       `;
-      const http = await fetch(api, {
-        method: 'delete',
-        headers: { Authorization: this.tokenValue },
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          method: 'delete',
+          headers: { Authorization: this.tokenValue },
+        });
+        const fetchData = await http.json();
 
-      this.pushToast(fetchData, '訂單');
-
-      this.getOrders(this.currentPage);
+        this.pushToast(fetchData, '訂單');
+        this.getOrders(this.currentPage);
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
   created() {

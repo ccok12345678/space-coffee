@@ -80,19 +80,22 @@ export default {
   methods: {
     async getCoupons(page = 1) {
       this.isLoading = true;
-
       this.currentPage = page;
 
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}
       `;
-      const http = await fetch(api, {
-        headers: { Authorization: this.tokenValue },
-      });
-      const data = await http.json();
 
-      this.coupons = data.coupons;
-      this.pagination = data.pagination;
+      try {
+        const http = await fetch(api, {
+          headers: { Authorization: this.tokenValue },
+        });
+        const data = await http.json();
+        this.coupons = data.coupons;
+        this.pagination = data.pagination;
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isLoading = false;
     },
@@ -162,16 +165,19 @@ export default {
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon/${coupon.id}
       `;
 
-      const http = await fetch(api, {
-        method: 'delete',
-        headers: { Authorization: this.tokenValue },
-      });
-      const data = await http.json();
+      try {
+        const http = await fetch(api, {
+          method: 'delete',
+          headers: { Authorization: this.tokenValue },
+        });
+        const data = await http.json();
 
-      this.pushToast(data, '優惠卷');
-
-      if (data.success) {
-        this.getCoupons(this.currentPage);
+        this.pushToast(data, '優惠卷');
+        if (data.success) {
+          this.getCoupons(this.currentPage);
+        }
+      } catch (error) {
+        console.error(error);
       }
     },
   },

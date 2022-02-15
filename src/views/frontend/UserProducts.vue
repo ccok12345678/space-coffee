@@ -40,8 +40,14 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all
       `;
-      const http = await fetch(api);
-      const fetchData = await http.json();
+      let fetchData;
+
+      try {
+        const http = await fetch(api);
+        fetchData = await http.json();
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isLoading = false;
 
@@ -58,16 +64,17 @@ export default {
           || roast.test(product.title));
     },
   },
-  created() {
+  async created() {
     document.title = `${this.classing} | 宇宙咖啡`;
 
     this.classing = this.$route.params.classing;
 
-    this.getProducts()
-      .then((data) => {
-        this.products = data;
-        this.classifyProducts();
-      });
+    try {
+      this.products = await this.getProducts();
+      this.classifyProducts();
+    } catch (error) {
+      console.error(error);
+    }
   },
   watch: {
     $route() {

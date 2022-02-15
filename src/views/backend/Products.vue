@@ -139,18 +139,22 @@ export default {
         method = 'put'; page = this.currentPage;
       }
 
-      const http = await fetch(api, {
-        method,
-        headers: {
-          Authorization: this.tokenValue,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ data: { ...product } }),
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          method,
+          headers: {
+            Authorization: this.tokenValue,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ data: { ...product } }),
+        });
+        const fetchData = await http.json();
 
-      this.getProducts(page);
-      this.pushToast(fetchData, '產品');
+        this.getProducts(page);
+        this.pushToast(fetchData, '產品');
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isNew = false;
     },

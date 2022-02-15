@@ -119,16 +119,18 @@ export default {
   methods: {
     async logOut() {
       const api = `${process.env.VUE_APP_API}/logout`;
-      const http = await fetch(api, {
-        method: 'post',
-        headers: { Authorization: this.tokenValue },
-      });
-      const data = await http.json();
 
-      console.log(data);
-
-      if (data.success) {
-        window.self.location.assign('/space-coffee/dist/#/login');
+      try {
+        const http = await fetch(api, {
+          method: 'post',
+          headers: { Authorization: this.tokenValue },
+        });
+        const data = await http.json();
+        if (data.success) {
+          window.self.location.assign('/space-coffee/dist/#/login');
+        }
+      } catch (error) {
+        console.error(error);
       }
     },
     changePageTitle() {
