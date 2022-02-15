@@ -113,7 +113,7 @@
 </template>
 
 <script>
-import modalmixin from '@/mixins/modalMixin';
+import modalMixin from '@/mixins/modalMixin';
 import Placeholder from '@/components/Placeholder.vue';
 
 export default {
@@ -154,7 +154,7 @@ export default {
     },
   },
   inject: ['tokenValue'],
-  mixins: [modalmixin],
+  mixins: [modalMixin],
   methods: {
     submitArticle() {
       this.tempArticle.isPublic = this.isPublic;
