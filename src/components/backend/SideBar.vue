@@ -135,34 +135,9 @@ export default {
         console.error(error);
       }
     },
-    changePageTitle() {
-      switch (this.$route.name) {
-        case 'Products':
-          document.title = '產品 · Space Coffee 後台管理';
-          break;
-        case 'Orders':
-          document.title = '訂單 · Space Coffee 後台管理';
-          break;
-        case 'Coupons':
-          document.title = '優惠卷 · Space Coffee 後台管理';
-          break;
-        case 'Articles':
-          document.title = '部落格 · Space Coffee 後台管理';
-          break;
-        default:
-          document.title = 'Space Coffee · Space Coffee 後台管理';
-          break;
-      }
-    },
     hideOffcanvas() {
       this.offcanvas.hide();
     },
-  },
-  created() {
-    // this.changePageTitle();
-  },
-  updated() {
-    // this.changePageTitle();
   },
 };
 </script>
