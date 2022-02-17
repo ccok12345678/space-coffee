@@ -51,7 +51,7 @@
               .rounded.bg-gray-300.hstack.me-1.mt-1(v-for="(word, key) in tags" :key="key")
                 span.py-1.px-2 {{ word }}
                 button.btn.btn-sm(type="button"
-                  @click.prevent="delTag(word)")
+                  @click="delTag(word)")
                   | X
 
           //- Image
@@ -73,7 +73,10 @@
 
           //- 預覽功能
           .col-12.col-sm-8.mx-auto(v-if="'image' in tempArticle")
-            img.img-fluid(:src="tempArticle.image" title="圖片預覽")
+            img.img-fluid(
+              :src="tempArticle.image"
+              title="圖片預覽"
+              alt="圖片連結無效!")
           .w-100
 
           .col-3.d-flex
@@ -112,22 +115,8 @@
 
 </template>
 
-<style lang="scss" scoped>
-.article {
-
-  &-content {
-  height: 150px;
-  }
-
-  &-description {
-    height: 70px;
-  }
-}
-
-</style>
-
 <script>
-import modalmixin from '@/mixins/modalMixin';
+import modalMixin from '@/mixins/modalMixin';
 import Placeholder from '@/components/Placeholder.vue';
 
 export default {
@@ -168,7 +157,7 @@ export default {
     },
   },
   inject: ['tokenValue'],
-  mixins: [modalmixin],
+  mixins: [modalMixin],
   methods: {
     submitArticle() {
       this.tempArticle.isPublic = this.isPublic;
@@ -243,3 +232,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.article {
+
+  &-content {
+  height: 150px;
+  }
+
+  &-description {
+    height: 70px;
+  }
+}
+
+</style>

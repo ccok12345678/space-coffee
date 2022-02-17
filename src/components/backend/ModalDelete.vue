@@ -5,7 +5,10 @@
 
       .modal-body.text-center
 
-        img.spinner-slow.mb-3(src="../assets/images/black_hole.svg" width="165")
+        img.spinner-slow.mb-3(
+          src="@/assets/images/black_hole.svg"
+          width="165"
+          alt="Loading...")
 
         p.fs-5.text-danger 警告 #[i.bi.bi-exclamation-diamond]：刪除後無法復原，確認刪除
 
@@ -14,7 +17,7 @@
           span(v-else) {{ tempItem.id }}？
 
       .p-3.text-center
-        button.btn.btn-danger.w-70.mb-2(type='button' @click.prevent="check")
+        button.btn.btn-danger.w-70.mb-2(type='button' @click="check")
           i.bi.bi-trash.me-2
           | 確認刪除
         button.btn.btn-outline-gray-600.w-70(type='button' data-bs-dismiss='modal')

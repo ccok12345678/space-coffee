@@ -26,14 +26,14 @@
             v-model="qty")
 
           button.btn.btn-cyan-600.text-light.w-75.my-2(type="button"
-            @click.prevent.stop="addCart(tempProduct.id)"
+            @click.stop="addCart(tempProduct.id)"
             :disabled="status === tempProduct.id")
             .spinner-border.spinner-border-sm.mx-4(v-if="status === tempProduct.id")
               .visually-hidden Loading...
             span(v-else) 加入購物車
 
           button.btn.btn-outline-gray-600.w-75(type="button"
-            @click.prevent="updateFavorite(tempProduct.id)")
+            @click="updateFavorite(tempProduct.id)")
             span(v-if="isFavorite") 取消收藏
             span(v-else) 加入收藏
           .fs-12.text-gray-400.mt-1(v-if="isFavorite") （已加入收藏）
@@ -53,11 +53,11 @@
             .devider.w-50.mx-auto.my-4.border-gray-500
 
             .d-flex.justify-content-around.mt-2.d-block.d-lg-none
-              img.mx-auto(src="../assets/images/aeropress_coffee.svg" width="50"
+              img.mx-auto(src="@/assets/images/aeropress_coffee.svg" width="50"
                 title="good for aeropress" alt="aeropress")
-              img.mx-auto(src="../assets/images/french_press.svg" width="50"
+              img.mx-auto(src="@/assets/images/french_press.svg" width="50"
                 title="good for french press" alt="french press")
-              img.mx-auto(src="../assets/images/portafilter_tamper_icon.svg" width="50"
+              img.mx-auto(src="@/assets/images/portafilter_tamper_icon.svg" width="50"
                 title="good for espresso" alt="espresso")
 
     //- show in bigger browser width
@@ -70,11 +70,11 @@
         .devider.w-25.mx-auto.my-4.border-gray-500
 
         .d-flex.justify-content-around.mt-2
-          img.mx-auto(src="../assets/images/aeropress_coffee.svg" width="50"
+          img.mx-auto(src="@/assets/images/aeropress_coffee.svg" width="50"
             title="good for aeropress" alt="aeropress")
-          img.mx-auto(src="../assets/images/french_press.svg" width="50"
+          img.mx-auto(src="@/assets/images/french_press.svg" width="50"
             title="good for french press" alt="french press")
-          img.mx-auto(src="../assets/images/portafilter_tamper_icon.svg" width="50"
+          img.mx-auto(src="@/assets/images/portafilter_tamper_icon.svg" width="50"
             title="good for espresso" alt="espresso")
 
         .devider.w-25.mx-auto.my-4.border-gray-500
@@ -92,14 +92,14 @@
             v-model="qty")
 
           button.btn.btn-cyan-600.text-light.w-75.my-2(type="button"
-            @click.prevent.stop="addCart(tempProduct.id)"
+            @click.stop="addCart(tempProduct.id)"
             :disabled="status === tempProduct.id")
             .spinner-border.spinner-border-sm.mx-4(v-if="status === tempProduct.id")
               .visually-hidden Loading...
             span(v-else) 加入購物車
 
           button.btn.btn-outline-gray-600.w-75(type="button"
-            @click.prevent="updateFavorite(tempProduct.id)")
+            @click="updateFavorite(tempProduct.id)")
             span(v-if="isFavorite") 取消收藏
             span(v-else) 加入收藏
           .fs-12.text-gray-400.mt-1(v-if="isFavorite") （已加入收藏）
@@ -111,46 +111,9 @@
 
 </template>
 
-<style lang="scss" scoped>
-.card {
-  max-width: 500px;
-}
-
-.card-text {
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -28px;
-    padding-top: 40px;
-    background: url('../assets/images/barista_coffee.svg') no-repeat center;
-  }
-}
-
-.card-img {
-  overflow: hidden;
-  width: 100%;
-  height: 400px;
-  position: relative;
-
-  @media (max-width: 576px) {
-    height: 300px;
-  }
-
-  &-top {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  }
-}
-
-</style>
-
 <script>
+import { useMeta } from 'vue-meta';
+
 export default {
   data() {
     return {
@@ -169,11 +132,14 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${id}
       `;
-      const http = await fetch(api);
-      const fetchData = await http.json();
 
-      this.tempProduct = await fetchData.product;
-      document.title = `${this.tempProduct.title}`;
+      try {
+        const http = await fetch(api);
+        const fetchData = await http.json();
+        this.tempProduct = await fetchData.product;
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     async addCart(id) {
@@ -183,18 +149,21 @@ export default {
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart
       `;
       const product = { data: { product_id: id, qty: this.qty } };
-      const http = await fetch(api, {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product),
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(product),
+        });
+        const fetchData = await http.json();
 
-      this.pushToast(fetchData, this.tempProduct.title);
-      this.emitter.emit('add-cart', this.qty);
-
-      this.qty = 1;
-      this.status = '';
+        this.pushToast(fetchData, this.tempProduct.title);
+        this.emitter.emit('add-cart', this.qty);
+        this.qty = 1;
+        this.status = '';
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     getFavorites() {
@@ -227,10 +196,57 @@ export default {
     },
   },
   async created() {
-    await this.getProduct();
+    try {
+      await this.getProduct();
+    } catch (error) {
+      console.error(error);
+    }
 
     this.getFavorites();
     this.isFavorite = this.isInFavorites();
   },
+  updated() {
+    useMeta({
+      title: this.tempProduct.title,
+    });
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.card {
+  max-width: 500px;
+}
+
+.card-text {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -28px;
+    padding-top: 40px;
+    background: url('../../assets/images/barista_coffee.svg') no-repeat center;
+  }
+}
+
+.card-img {
+  overflow: hidden;
+  width: 100%;
+  height: 400px;
+  position: relative;
+
+  @media (max-width: 576px) {
+    height: 300px;
+  }
+
+  &-top {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+</style>

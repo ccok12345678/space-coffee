@@ -1,7 +1,9 @@
 <template lang="pug">
 .container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!articles.length")
 
-  img.favor-img.w-25(src="../assets/images/ufo_space_icon.svg")
+  img.favor-img.w-25(
+    src="@/assets/images/ufo_space_icon.svg"
+    alt="No article")
   h3.fs-4.text-gray-600.mt-3 部落格沒有文章！
 
 .container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!!articles.length")
@@ -31,7 +33,9 @@
 
     .w-100.my-3
     .col-4.col-sm-2
-      img.img-fluid(src="../assets/images/coffee-svgrepo-com.svg")
+      img.img-fluid(
+        src="@/assets/images/coffee-svgrepo-com.svg"
+        alt="A cup of coffee make a day!")
 
 Pagination(:pages="pagination" @emit-page="getArticles")
 </template>
@@ -40,6 +44,9 @@ Pagination(:pages="pagination" @emit-page="getArticles")
 import Pagination from '@/components/Pagination.vue';
 
 export default {
+  metaInfo: {
+    title: '宇宙咖啡部落格',
+  },
   data() {
     return {
       articles: [],
@@ -57,16 +64,18 @@ export default {
 
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/articles?page=${page}`;
 
-      const http = await fetch(api);
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api);
+        const fetchData = await http.json();
 
-      this.articles = fetchData.articles;
-      this.pagination = fetchData.pagination;
+        this.articles = fetchData.articles;
+        this.pagination = fetchData.pagination;
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
   created() {
-    document.title = '宇宙咖啡部落格 | 宇宙咖啡';
-
     this.getArticles();
   },
 };

@@ -43,7 +43,7 @@ export function userName(name) {
     startWords = name.substring(0, 1);
     endWords = name.substring(2, 3);
     hiddenWords = '*';
-  } else if (name.length === 2) {
+  } else if (name.length === 2 || name.length === 1) {
     startWords = name.substring(0, 1);
     endWords = '';
     hiddenWords = '*';

@@ -97,7 +97,7 @@
 
                 button.btn.hover-red.ms-auto(type="button" title="刪除品項"
                   :disabled="!tempOrder.isEditable"
-                  @click.prevent="removeItem(key)") X
+                  @click="removeItem(key)") X
 
       .modal-footer
 
@@ -109,7 +109,7 @@
         //- show in edit
         button.btn.btn-cyan-600.text-light(type="button"
           v-if="tempOrder.isEditable"
-          @click.prevent="updateOrder") 送出修改
+          @click="updateOrder") 送出修改
 
         button.btn.btn-outline-gray-600(type="button"
           data-bs-dismiss="modal" aria-label="Close") 取消

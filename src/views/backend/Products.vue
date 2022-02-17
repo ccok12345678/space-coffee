@@ -1,6 +1,8 @@
 <template lang="pug">
 a.btn.btn-secondary.btn-fixed.fs-3.hover-half-transparent.text-light.border-0(
-  title="新增品項" @click.prevent="openModal(true)")
+  href="#"
+  title="新增品項"
+  @click.prevent="openModal(true)")
   i.bi.bi-clipboard-plus
 
 section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
@@ -24,7 +26,7 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
       tr(v-for="item in products" :key="item.id")
         td
           .img.overflow-hidden
-            img.img-fluid(:src="item.imageUrl")
+            img.img-fluid(:src="item.imageUrl" :alt="item.title")
 
         td
           a.link-dark.text-decoration-none(href="#"
@@ -46,11 +48,11 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!products.length")
         td
           button.border-0.hover-gray.py-2.px-2.d-block.w-100(
             type="button" title="編輯"
-            @click.prevent="openModal(false, item)")
+            @click="openModal(false, item)")
             i.bi.bi-pencil-square
           button.border-0.hover-red.py-2.px-2.d-block.w-100(
             type="button" title="刪除"
-            @click.prevent="checkDelete(item)")
+            @click="checkDelete(item)")
             i.bi.bi-trash
 
 Pagination(:pages="pagination" @emit-page="getProducts")
@@ -69,10 +71,13 @@ VueLoading(:active="isLoading")
 
 <script>
 import Pagination from '@/components/Pagination.vue';
-import ProductModal from '@/components/Modal_Product.vue';
-import DeleteModal from '@/components/Modal_Delete.vue';
+import ProductModal from '@/components/backend/ModalProduct.vue';
+import DeleteModal from '@/components/backend/ModalDelete.vue';
 
 export default {
+  metaInfo: {
+    title: '產品',
+  },
   data() {
     return {
       products: [],
@@ -139,18 +144,22 @@ export default {
         method = 'put'; page = this.currentPage;
       }
 
-      const http = await fetch(api, {
-        method,
-        headers: {
-          Authorization: this.tokenValue,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ data: { ...product } }),
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          method,
+          headers: {
+            Authorization: this.tokenValue,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ data: { ...product } }),
+        });
+        const fetchData = await http.json();
 
-      this.getProducts(page);
-      this.pushToast(fetchData, '產品');
+        this.getProducts(page);
+        this.pushToast(fetchData, '產品');
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isNew = false;
     },

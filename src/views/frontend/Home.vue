@@ -15,14 +15,15 @@ ToastMessages
 </template>
 
 <script>
-import UserNavbar from '@/components/User_Navbar.vue';
-import UserFooter from '@/components/User_Footer.vue';
-import UserFrontPage from '@/components/User_FrontPage.vue';
+import UserNavbar from '@/components/frontend/UserNavbar.vue';
+import UserFooter from '@/components/frontend/UserFooter.vue';
+import UserFrontPage from '@/components/frontend/UserFrontPage.vue';
+import UserFixedBtn from '@/components/frontend/UserFixedBtn.vue';
+import ToastMessages from '@/components/ToastMessages.vue';
+
 import emitter from '@/methods/emitter';
 import scrollTop from '@/methods/scrollTop';
-import UserFixedBtn from '@/components/User_FixedBtn.vue';
 import pushToast from '@/methods/pushToast';
-import ToastMessages from '@/components/ToastMessages.vue';
 
 export default {
   name: 'Home',
@@ -54,25 +55,31 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all
       `;
+      let data;
 
-      const http = await fetch(api);
-      const data = await http.json();
+      try {
+        const http = await fetch(api);
+        data = await http.json();
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isLoading = false;
-
       return data.products;
     },
 
     async sortProducts() {
-      const data = await this.getProducts();
-
-      this.products = data;
-
-      this.products.forEach((item) => {
-        if (!this.categories.includes(item.category)) {
-          this.categories.push(item.category);
-        }
-      });
+      try {
+        const data = await this.getProducts();
+        this.products = data;
+        this.products.forEach((item) => {
+          if (!this.categories.includes(item.category)) {
+            this.categories.push(item.category);
+          }
+        });
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
   created() {

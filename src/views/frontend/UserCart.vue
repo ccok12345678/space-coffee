@@ -5,7 +5,9 @@
   .w-100.text-center.text-gray-600(
     v-if="carts.total === 0")
 
-    img.cart-img.w-25(src="../assets/images/alien_ship.svg")
+    img.cart-img.w-25(
+      src="@/assets/images/alien_ship.svg"
+      alt="Empty Here!")
     h5 購物車是空的，快去選購吧！
 
   //- cart content
@@ -24,7 +26,7 @@
 
             button.btn.hover-red.px-3.mx-2(
                 type="button" title="清空購物車"
-                @click.prevent="deleteCart")
+                @click="deleteCart")
               i.bi.bi-trash-fill
 
           .devider.w-25.boder-dark.my-2.mx-auto
@@ -58,7 +60,7 @@
           .col-2.col-md-1.d-flex.align-items-center
             button.btn.hover-red.px-1.d-block.w-100(
               type="button" title="刪除"
-              @click.prevent="deleteCart(false, item.id)")
+              @click="deleteCart(false, item.id)")
                   i.bi.bi-trash
 
           .devider.w-100.border-secondary
@@ -99,11 +101,132 @@
 
       .text-center.text-md-end
         button.btn.btn-cyan-600.text-light.w-30(type="button"
-          @click.prevent="goOrder")
+          @click="goOrder")
           | 填寫資料
           i.bi.bi-box-arrow-right.ms-2
 
 </template>
+
+<script>
+import ProgressBar from '@/components/frontend/UserProgressBar.vue';
+
+export default {
+  metaInfo: {
+    title: '購物車',
+  },
+  data() {
+    return {
+      carts: {},
+      coupon: '',
+      status: '',
+      isUpdating: false,
+    };
+  },
+  components: {
+    ProgressBar,
+  },
+  inject: ['pushToast', 'scrollTop'],
+  methods: {
+    async getCart() {
+      const api = `
+        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart
+      `;
+      try {
+        const http = await fetch(api);
+        const fetchData = await http.json();
+
+        this.carts = fetchData.data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async deleteCart(isAll = true, id) {
+      let api;
+
+      if (isAll) {
+        api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/carts`;
+      } else {
+        api = `
+          ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}
+        `;
+      }
+
+      try {
+        const http = await fetch(api, { method: 'delete' });
+        const fetchData = await http.json();
+
+        this.pushToast(fetchData, '購物車');
+        this.getCart();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async addCoupon() {
+      this.isUpdating = true;
+      const api = `
+        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/coupon
+      `;
+      const couponData = { data: { code: this.coupon } };
+
+      try {
+        const http = await fetch(api, {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(couponData),
+        });
+        const fetchData = await http.json();
+
+        this.pushToast(fetchData, '優惠卷');
+        this.getCart();
+        this.coupon = '';
+      } catch (error) {
+        console.error(error);
+      }
+
+      this.isUpdating = false;
+    },
+
+    async updateCart(id, qty) {
+      this.status = id;
+
+      const api = `
+        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}
+      `;
+      const cartData = {
+        data: {
+          product_id: id,
+          qty,
+        },
+      };
+
+      try {
+        const http = await fetch(api, {
+          method: 'put',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(cartData),
+        });
+        const fetchData = await http.json();
+
+        this.pushToast(fetchData, '購物車');
+        this.getCart();
+        this.status = '';
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    goOrder() {
+      this.$router.push('/order');
+    },
+  },
+  created() {
+    this.scrollTop();
+    this.getCart();
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .cart-img {
@@ -132,108 +255,3 @@
   }
 }
 </style>
-
-<script>
-import ProgressBar from '@/components/User_ProgressBar.vue';
-
-export default {
-  data() {
-    return {
-      carts: {},
-      coupon: '',
-      status: '',
-      isUpdating: false,
-    };
-  },
-  components: {
-    ProgressBar,
-  },
-  inject: ['pushToast', 'scrollTop'],
-  methods: {
-    async getCart() {
-      const api = `
-        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart
-      `;
-      const http = await fetch(api);
-      const fetchData = await http.json();
-
-      this.carts = fetchData.data;
-    },
-
-    async deleteCart(isAll = true, id) {
-      let api;
-
-      if (isAll) {
-        api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/carts`;
-      } else {
-        api = `
-          ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}
-        `;
-      }
-
-      const http = await fetch(api, { method: 'delete' });
-      const fetchData = await http.json();
-
-      this.pushToast(fetchData, '購物車');
-      this.getCart();
-    },
-
-    async addCoupon() {
-      this.isUpdating = true;
-      const api = `
-        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/coupon
-      `;
-      const couponData = { data: { code: this.coupon } };
-
-      const http = await fetch(api, {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(couponData),
-      });
-      const fetchData = await http.json();
-
-      this.pushToast(fetchData, '優惠卷');
-      this.getCart();
-
-      this.coupon = '';
-      this.isUpdating = false;
-    },
-
-    async updateCart(id, qty) {
-      this.status = id;
-
-      const api = `
-        ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart/${id}
-      `;
-      const cartData = {
-        data: {
-          product_id: id,
-          qty,
-        },
-      };
-
-      const http = await fetch(api, {
-        method: 'put',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cartData),
-      });
-      const fetchData = await http.json();
-
-      this.pushToast(fetchData, '購物車');
-      this.getCart();
-
-      this.status = '';
-    },
-
-    goOrder() {
-      this.$router.push('/order');
-    },
-  },
-  created() {
-    this.scrollTop();
-    this.getCart();
-
-    document.title = '購物車 | 宇宙咖啡';
-  },
-};
-</script>

@@ -98,8 +98,10 @@ ref="sidebarOffcanvas")
         i.me-2.bi.bi-shop
         | 商店
 
-      button.nav-item.nav-link.py-2.px-0.px-sm-1.py-md-3(title="登出"
-        @click.prevent="logOut")
+      button.nav-item.nav-link.py-2.px-0.px-sm-1.py-md-3(
+        type="button"
+        title="登出"
+        @click="logOut")
         i.bi.bi-box-arrow-left.me-2
         span 登出
 
@@ -119,46 +121,23 @@ export default {
   methods: {
     async logOut() {
       const api = `${process.env.VUE_APP_API}/logout`;
-      const http = await fetch(api, {
-        method: 'post',
-        headers: { Authorization: this.tokenValue },
-      });
-      const data = await http.json();
 
-      console.log(data);
-
-      if (data.success) {
-        window.self.location.assign('/space-coffee/dist/#/login');
-      }
-    },
-    changePageTitle() {
-      switch (this.$route.name) {
-        case 'Products':
-          document.title = '產品 · Space Coffee 後台管理';
-          break;
-        case 'Orders':
-          document.title = '訂單 · Space Coffee 後台管理';
-          break;
-        case 'Coupons':
-          document.title = '優惠卷 · Space Coffee 後台管理';
-          break;
-        case 'Articles':
-          document.title = '部落格 · Space Coffee 後台管理';
-          break;
-        default:
-          document.title = 'Space Coffee · Space Coffee 後台管理';
-          break;
+      try {
+        const http = await fetch(api, {
+          method: 'post',
+          headers: { Authorization: this.tokenValue },
+        });
+        const data = await http.json();
+        if (data.success) {
+          window.self.location.assign('/space-coffee/dist/#/login');
+        }
+      } catch (error) {
+        console.error(error);
       }
     },
     hideOffcanvas() {
       this.offcanvas.hide();
     },
-  },
-  created() {
-    this.changePageTitle();
-  },
-  updated() {
-    this.changePageTitle();
   },
 };
 </script>

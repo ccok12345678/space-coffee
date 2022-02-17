@@ -40,40 +40,6 @@
 
 </template>
 
-<style lang="scss" csoped>
-$circle-size: 35px;
-$circle-size-sm: 25px;
-.progress-bar {
-  display: flex;
-
-  @media (max-width:374.98px) {
-    display: none;
-  }
-}
-.circle {
-  width: $circle-size;
-  height: $circle-size;
-  font-size: 1.5rem;
-
-  @media (max-width: 576px) {
-    width: $circle-size-sm;
-    height: $circle-size-sm;
-    font-size: 1rem;
-  }
-}
-.bar {
-  width: 55px;
-  height: 0;
-  border-top: 3px solid rgb(52, 204, 241);
-
-  @media (max-width:576px) {
-    width: 35px;
-    border-width: 1.75px;
-  }
-}
-
-</style>
-
 <script>
 export default {
   data() {
@@ -122,3 +88,37 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" csoped>
+$circle-size: 35px;
+$circle-size-sm: 25px;
+.progress-bar {
+  display: flex;
+
+  @media (max-width:374.98px) {
+    display: none;
+  }
+}
+.circle {
+  width: $circle-size;
+  height: $circle-size;
+  font-size: 1.5rem;
+
+  @media (max-width: 576px) {
+    width: $circle-size-sm;
+    height: $circle-size-sm;
+    font-size: 1rem;
+  }
+}
+.bar {
+  width: 55px;
+  height: 0;
+  border-top: 3px solid rgb(52, 204, 241);
+
+  @media (max-width:576px) {
+    width: 35px;
+    border-width: 1.75px;
+  }
+}
+
+</style>

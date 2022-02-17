@@ -27,15 +27,18 @@ footer.bg-gray-200.font-monospace
               title="聯絡宇宙咖啡 ✉️")
 
           li.nav-item
-            a.nav-link.py-1(href="teleport:+886-1111111"
+            a.nav-link.py-1(href="tel:+886-1111111"
               title="聯絡宇宙咖啡 📡")
-              img(src="../assets/images/broadcast.svg" height="25")
+              img(src="@/assets/images/broadcast.svg" height="25")
 
         ul.list-group.list-group-flush.ps-3.mt-2.fs-12
           li.list-group-item.px-0.border-0
             small.text-muted Address: 火衛二中山路二段324號
           li.list-group-item.px-0
-            small.text-muted Phone: +44556-7655555
+            small.text-muted
+              |Phone:
+              a.text-muted.text-decoration-none(href="tel:+44556-7655555"
+                title="撥打電話") +44556-7655555
 
       .devider.w-50.mx-auto.px-5.mt-4.d-block.d-md-none.border-cyan-800
 

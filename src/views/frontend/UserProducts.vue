@@ -11,7 +11,7 @@
       .row.gy-4.d-flex.justify-content-center
 
         .col-md-3.text-center(v-if="isLoading")
-          img.img-fluid(src="../assets/images/ufo-svgrepo.svg")
+          img.img-fluid(src="@/assets/images/ufo-svgrepo.svg" alt="almost there!")
           p.fs-5.text-gray-600.mt-3 就快到了！
 
         .col-md-4.col-sm-6(v-for="item of tempProducts" :key="item.id")
@@ -19,7 +19,8 @@
 </template>
 
 <script>
-import UserProductCard from '@/components/User_ProductCard.vue';
+import { useMeta } from 'vue-meta';
+import UserProductCard from '@/components/frontend/UserProductCard.vue';
 
 export default {
   data() {
@@ -40,8 +41,14 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all
       `;
-      const http = await fetch(api);
-      const fetchData = await http.json();
+      let fetchData;
+
+      try {
+        const http = await fetch(api);
+        fetchData = await http.json();
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isLoading = false;
 
@@ -58,26 +65,27 @@ export default {
           || roast.test(product.title));
     },
   },
-  created() {
-    document.title = `${this.classing} | 宇宙咖啡`;
-
+  async created() {
     this.classing = this.$route.params.classing;
 
-    this.getProducts()
-      .then((data) => {
-        this.products = data;
-        this.classifyProducts();
-      });
+    try {
+      this.products = await this.getProducts();
+      this.classifyProducts();
+    } catch (error) {
+      console.error(error);
+    }
   },
   watch: {
     $route() {
       this.classing = this.$route.params.classing;
       this.classifyProducts();
-      // document.title = `${this.classing} | 宇宙咖啡`;
+      document.title = `${this.classing} | 宇宙咖啡 Space Coffee`;
     },
   },
   updated() {
-    document.title = `${this.classing} | 宇宙咖啡`;
+    useMeta({
+      title: this.classing,
+    });
   },
 };
 </script>

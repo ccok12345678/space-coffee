@@ -14,7 +14,10 @@ article.container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!isLoading
       | {{ article.description }}
 
     .col-sm-8.mb-3(v-if="!!article.image")
-      img.img-fluid(:src="article.image" :title="article.title")
+      img.img-fluid(
+        :src="article.image"
+        :title="article.title"
+        :alt="article.title")
 
     p.col-md-8
       | {{ article.content }}
@@ -30,13 +33,8 @@ article.container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!isLoading
 
 </template>
 
-<style lang="scss" scoped>
-p {
-  white-space: pre-wrap;
-}
-</style>
-
 <script>
+import { useMeta } from 'vue-meta';
 import Placeholder from '@/components/Placeholder.vue';
 
 export default {
@@ -59,11 +57,13 @@ export default {
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/article/${articleId}
       `;
 
-      const http = await fetch(api);
-      const fetchData = await http.json();
-
-      this.article = fetchData.article;
-
+      try {
+        const http = await fetch(api);
+        const fetchData = await http.json();
+        this.article = fetchData.article;
+      } catch (error) {
+        console.error(error);
+      }
       this.isLoading = false;
     },
   },
@@ -71,7 +71,15 @@ export default {
     this.getArticle();
   },
   updated() {
-    document.title = `${this.article.title}｜宇宙咖啡`;
+    useMeta({
+      title: this.article.title,
+    });
   },
 };
 </script>
+
+<style lang="scss" scoped>
+p {
+  white-space: pre-wrap;
+}
+</style>

@@ -40,7 +40,7 @@
           div(v-else)
             span.text-danger.me-2 未付款
             button.btn.btn-cyan-600.text-light(type="button"
-              @click.prevent="payOrder"
+              @click="payOrder"
               :disabled="isPaying")
               | 進行付款
               .spinner-border.spinner-border-sm(v-if="isPaying")
@@ -62,9 +62,12 @@
 </template>
 
 <script>
-import ProgressBar from '@/components/User_ProgressBar.vue';
+import ProgressBar from '@/components/frontend/UserProgressBar.vue';
 
 export default {
+  metaInfo: {
+    title: '已建立訂單',
+  },
   data() {
     return {
       orderId: '',
@@ -81,11 +84,15 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/order/${this.orderId}
       `;
-      const http = await fetch(api);
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api);
+        const fetchData = await http.json();
 
-      if (fetchData.success) {
-        this.order = fetchData.order;
+        if (fetchData.success) {
+          this.order = fetchData.order;
+        }
+      } catch (error) {
+        console.error(error);
       }
     },
 
@@ -95,18 +102,19 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/pay/${this.orderId}
       `;
-      const http = await fetch(api, { method: 'post' });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, { method: 'post' });
+        const fetchData = await http.json();
 
-      this.pushToast(fetchData, '訂單');
-      this.getOrder();
-
+        this.pushToast(fetchData, '訂單');
+        this.getOrder();
+      } catch (error) {
+        console.error(error);
+      }
       this.isPaying = false;
     },
   },
   created() {
-    document.title = '訂單確認｜宇宙咖啡';
-
     this.scrollTop();
 
     this.orderId = this.$route.params.orderId;

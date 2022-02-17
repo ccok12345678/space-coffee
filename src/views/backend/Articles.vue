@@ -1,6 +1,8 @@
 <template lang="pug">
 a.btn.btn-secondary.btn-fixed.fs-3.hover-half-transparent.text-light.border-0(
-  title="新增文章" @click.prevent="openModal(true)")
+  href="#"
+  title="新增文章"
+  @click.prevent="openModal(true)")
   i.bi.bi-file-earmark-plus
 
 .alert.alert-info(v-if="!articles.length")
@@ -28,11 +30,11 @@ section.w-100.overflow-auto.text-nowrap.text-center(v-if="!!articles.length")
 
         td
           button.border-0.hover-gray.py-2.d-block.w-100(type="button" title="編輯"
-            @click.prevent="openModal(false, article)")
+            @click="openModal(false, article)")
             i.bi.bi-pencil-square
 
           button.border-0.hover-red.py-2.d-block.w-100(type="button" title="刪除"
-            @click.prevent="checkDelete(article)")
+            @click="checkDelete(article)")
             i.bi.bi-trash
 
 ArticleModal(ref="articleModal"
@@ -49,10 +51,13 @@ VueLoading(:active="isLoading")
 
 <script>
 import Pagination from '@/components/Pagination.vue';
-import ArticleModal from '@/components/Modal_Article.vue';
-import DeleteModal from '@/components/Modal_Delete.vue';
+import ArticleModal from '@/components/backend/ModalArticle.vue';
+import DeleteModal from '@/components/backend/ModalDelete.vue';
 
 export default {
+  metaInfo: {
+    title: '部落格',
+  },
   data() {
     return {
       articles: [],
@@ -72,20 +77,23 @@ export default {
   methods: {
     async getArticles(page = 1) {
       this.isLoading = true;
-
       this.currentPage = page;
 
       const api = `
           ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/articles?page=${page}
         `;
 
-      const http = await fetch(api, {
-        headers: { Authorization: this.tokenValue },
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          headers: { Authorization: this.tokenValue },
+        });
+        const fetchData = await http.json();
 
-      this.articles = fetchData.articles;
-      this.pagination = fetchData.pagination;
+        this.articles = fetchData.articles;
+        this.pagination = fetchData.pagination;
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isLoading = false;
     },

@@ -10,28 +10,22 @@
       router-view
 
       .bg-dashboard(v-if="$route.name === 'Dashboard'")
+
 ToastMessages
 </template>
 
-<style lang="scss" scoped>
-.bg-dashboard {
-  width: 100%;
-  height: 100%;
-  background-image: url('../assets/images/ufo-catch-cow.svg');
-  background-repeat: no-repeat;
-  background-size:contain;
-  background-position: center center;
-}
-</style>
-
 <script>
-import SideBar from '@/components/SideBar.vue';
+import SideBar from '@/components/backend/SideBar.vue';
+import ToastMessages from '@/components/ToastMessages.vue';
 import tokenValue from '@/methods/tokenValue';
 import emitter from '@/methods/emitter';
 import pushToast from '@/methods/pushToast';
-import ToastMessages from '@/components/ToastMessages.vue';
 
 export default {
+  metaInfo: {
+    title: '',
+    titleTemplate: (chunk) => (chunk ? `${chunk} | 管理後台` : '管理後台'),
+  },
   components: {
     SideBar,
     ToastMessages,
@@ -69,3 +63,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.bg-dashboard {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/images/ufo-catch-cow.svg');
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center center;
+}
+</style>

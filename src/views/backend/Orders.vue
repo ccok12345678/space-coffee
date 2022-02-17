@@ -45,11 +45,11 @@ section.w-100.overflow-auto.text-nowrap(v-if="!!orders.length")
         td
 
           button.border-0.hover-gray.p-2.d-block.w-100(type="button" title="檢視編輯"
-            @click.prevent="openModal(order, true)")
+            @click="openModal(order, true)")
             i.bi.bi-pencil-square
 
           button.border-0.hover-red.p-2.d-block.w-100(type="button" title="刪除"
-            @click.prevent="checkDelete(order)")
+            @click="checkDelete(order)")
             i.bi.bi-trash
 
 Pagination(:pages="pagination" @emit-page="getOrders")
@@ -65,11 +65,14 @@ VueLoading(:active="isLoading")
 </template>
 
 <script>
+import OrderModal from '@/components/backend/ModalOrder.vue';
+import DeleteModal from '@/components/backend/ModalDelete.vue';
 import Pagination from '@/components/Pagination.vue';
-import OrderModal from '@/components/Modal_Order.vue';
-import DeleteModal from '@/components/Modal_Delete.vue';
 
 export default {
+  metaInfo: {
+    title: '訂單',
+  },
   data() {
     return {
       orders: [],
@@ -94,13 +97,17 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/orders?page=${this.currentPage}
       `;
-      const http = await fetch(api, {
-        headers: { Authorization: this.tokenValue },
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          headers: { Authorization: this.tokenValue },
+        });
+        const fetchData = await http.json();
 
-      this.orders = fetchData.orders;
-      this.pagination = fetchData.pagination;
+        this.orders = fetchData.orders;
+        this.pagination = fetchData.pagination;
+      } catch (error) {
+        console.error(error);
+      }
 
       this.isLoading = false;
     },
@@ -150,15 +157,18 @@ export default {
       const api = `
         ${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${order.id}
       `;
-      const http = await fetch(api, {
-        method: 'delete',
-        headers: { Authorization: this.tokenValue },
-      });
-      const fetchData = await http.json();
+      try {
+        const http = await fetch(api, {
+          method: 'delete',
+          headers: { Authorization: this.tokenValue },
+        });
+        const fetchData = await http.json();
 
-      this.pushToast(fetchData, '訂單');
-
-      this.getOrders(this.currentPage);
+        this.pushToast(fetchData, '訂單');
+        this.getOrders(this.currentPage);
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
   created() {

@@ -71,7 +71,7 @@
           //- image preview
           .vstack.mt-(v-if="tempProduct.imageUrl")
             button.btn.me-auto.hover-red(type="button"
-              @click.prevent="tempProduct.imageUrl = ''" title="移除") X
+              @click="tempProduct.imageUrl = ''" title="移除") X
             img.img-fluid.img-thumbnail(
               :src="tempProduct.imageUrl"
               alt="圖片連結無效")
@@ -92,12 +92,12 @@
                 placeholder="圖片網址🔗"
                 v-model.trim="imageUrl")
               button.btn.btn-sm.btn-outline-gray-500(type="button"
-                @click.prevent="addImage")
+                @click="addImage")
                 | 新增圖片
             //- preview
             .mt-2.vstack(v-for="(imgUrl, key) in tempProduct.imagesUrl" :key="key")
               button.btn.me-auto.hover-red(title="移除"
-                @click.prevent="removeImg(imgUrl)") X
+                @click="removeImg(imgUrl)") X
               img.img-fluid.img-thumbnail(:src="imgUrl" title="圖片預覽" alt="圖片連結無效")
 
       .modal-footer.p-0.pt-2.mt-3
@@ -109,12 +109,6 @@
         button.btn.btn-outline-gray-600.w-20(type="button" data-bs-dismiss="modal")
           | 取消
 </template>
-
-<style lang="scss" scoped>
-.textarea {
-  height: 100px;
-}
-</style>
 
 <script>
 import modalMixin from '@/mixins/modalMixin';
@@ -194,3 +188,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.textarea {
+  height: 100px;
+}
+</style>

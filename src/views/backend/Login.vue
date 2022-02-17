@@ -9,7 +9,10 @@
 
     .card-body.d-flex.flex-column
 
-      img.mx-auto(src="@/assets/images/ufo-catch-cow.svg" width="100")
+      img.mx-auto(
+        src="@/assets/images/ufo-catch-cow.svg"
+        width="100"
+        alt="Login")
 
       form.d-flex.flex-column(
         @submit.prevent="logIn")
@@ -32,8 +35,10 @@
 </template>
 
 <script>
-
 export default {
+  metaInfo: {
+    title: '管理員登入',
+  },
   data() {
     return {
       email: '',
@@ -56,19 +61,15 @@ export default {
         });
         const data = await http.json();
 
-        console.log('Log in:', data);
         if (data.success) {
           const { token, expired } = data;
           document.cookie = `SpaceCoffeeToken=${token}; expired=${new Date(expired)}`;
           this.$router.push('/dashboard/products');
         }
       } catch (error) {
-        console.log('Log in error:', error);
+        console.error('Log in error:', error);
       }
     },
-  },
-  mounted() {
-    document.title = '管理員登入｜Space Coffee';
   },
 };
 </script>
