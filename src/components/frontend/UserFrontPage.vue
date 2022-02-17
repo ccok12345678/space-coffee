@@ -77,7 +77,6 @@ export default {
     },
   },
   created() {
-    document.title = '宇宙咖啡 Space Coffee | 瀰漫星際的咖啡香';
     this.randomPicks = sampleSize(this.products, 4);
   },
 };

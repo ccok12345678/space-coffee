@@ -75,6 +75,9 @@ import ProductModal from '@/components/backend/ModalProduct.vue';
 import DeleteModal from '@/components/backend/ModalDelete.vue';
 
 export default {
+  metaInfo: {
+    title: '產品',
+  },
   data() {
     return {
       products: [],

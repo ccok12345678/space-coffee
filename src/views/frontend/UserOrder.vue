@@ -82,6 +82,9 @@
 import ProgressBar from '@/components/frontend/UserProgressBar.vue';
 
 export default {
+  metaInfo: {
+    title: '訂購人資料',
+  },
   data() {
     return {
       carts: {},
@@ -149,7 +152,6 @@ export default {
     },
   },
   async created() {
-    document.title = '訂購人資料｜宇宙咖啡';
     this.scrollTop();
 
     try {

@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import UserProductCard from '@/components/frontend/UserProductCard.vue';
 
 export default {
@@ -65,8 +66,6 @@ export default {
     },
   },
   async created() {
-    document.title = `${this.classing} | 宇宙咖啡`;
-
     this.classing = this.$route.params.classing;
 
     try {
@@ -80,11 +79,13 @@ export default {
     $route() {
       this.classing = this.$route.params.classing;
       this.classifyProducts();
-      // document.title = `${this.classing} | 宇宙咖啡`;
+      document.title = `${this.classing} | 宇宙咖啡 Space Coffee`;
     },
   },
   updated() {
-    document.title = `${this.classing} | 宇宙咖啡`;
+    useMeta({
+      title: this.classing,
+    });
   },
 };
 </script>

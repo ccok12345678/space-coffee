@@ -23,7 +23,8 @@ import pushToast from '@/methods/pushToast';
 
 export default {
   metaInfo: {
-    title: 'back',
+    title: '',
+    titleTemplate: (chunk) => (chunk ? `${chunk} | 管理後台` : '管理後台'),
   },
   components: {
     SideBar,

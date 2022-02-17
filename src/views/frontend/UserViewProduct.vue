@@ -112,6 +112,8 @@
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
+
 export default {
   data() {
     return {
@@ -135,7 +137,6 @@ export default {
         const http = await fetch(api);
         const fetchData = await http.json();
         this.tempProduct = await fetchData.product;
-        document.title = `${this.tempProduct.title}`;
       } catch (error) {
         console.error(error);
       }
@@ -203,6 +204,11 @@ export default {
 
     this.getFavorites();
     this.isFavorite = this.isInFavorites();
+  },
+  updated() {
+    useMeta({
+      title: this.tempProduct.title,
+    });
   },
 };
 </script>

@@ -65,6 +65,9 @@
 import ProgressBar from '@/components/frontend/UserProgressBar.vue';
 
 export default {
+  metaInfo: {
+    title: '已建立訂單',
+  },
   data() {
     return {
       orderId: '',
@@ -112,8 +115,6 @@ export default {
     },
   },
   created() {
-    document.title = '訂單確認｜宇宙咖啡';
-
     this.scrollTop();
 
     this.orderId = this.$route.params.orderId;

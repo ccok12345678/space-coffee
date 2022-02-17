@@ -36,6 +36,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: '管理員登入',
+  },
   data() {
     return {
       email: '',
@@ -67,9 +70,6 @@ export default {
         console.error('Log in error:', error);
       }
     },
-  },
-  mounted() {
-    document.title = '管理員登入｜Space Coffee';
   },
 };
 </script>

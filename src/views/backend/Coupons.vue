@@ -63,6 +63,9 @@ import CouponModal from '@/components/backend/ModalCoupon.vue';
 import DeleteModal from '@/components/backend/ModalDelete.vue';
 
 export default {
+  metaInfo: {
+    title: '優惠卷',
+  },
   data() {
     return {
       coupons: [],

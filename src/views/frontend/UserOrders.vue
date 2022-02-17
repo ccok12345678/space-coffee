@@ -56,6 +56,9 @@
 import Pagination from '@/components/Pagination.vue';
 
 export default {
+  metaInfo: {
+    title: '所有訂單',
+  },
   data() {
     return {
       orders: [],
@@ -87,7 +90,6 @@ export default {
     },
   },
   created() {
-    document.title = '檢視訂單｜宇宙咖啡';
     this.scrollTop();
     this.getOrders();
   },

@@ -33,6 +33,9 @@
 import UserProductCard from '@/components/frontend/UserProductCard.vue';
 
 export default {
+  metaInfo: {
+    title: '收藏清單',
+  },
   data() {
     return {
       products: [],
@@ -84,8 +87,6 @@ export default {
     },
   },
   async created() {
-    document.title = '收藏清單 | 宇宙咖啡';
-
     try {
       this.products = await this.getProducts();
       this.collectFavorites();

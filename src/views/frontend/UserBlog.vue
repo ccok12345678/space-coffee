@@ -44,6 +44,9 @@ Pagination(:pages="pagination" @emit-page="getArticles")
 import Pagination from '@/components/Pagination.vue';
 
 export default {
+  metaInfo: {
+    title: '宇宙咖啡部落格',
+  },
   data() {
     return {
       articles: [],
@@ -73,8 +76,6 @@ export default {
     },
   },
   created() {
-    document.title = '宇宙咖啡部落格 | 宇宙咖啡';
-
     this.getArticles();
   },
 };

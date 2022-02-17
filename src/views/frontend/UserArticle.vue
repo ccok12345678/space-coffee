@@ -34,6 +34,7 @@ article.container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!isLoading
 </template>
 
 <script>
+import { useMeta } from 'vue-meta';
 import Placeholder from '@/components/Placeholder.vue';
 
 export default {
@@ -70,7 +71,9 @@ export default {
     this.getArticle();
   },
   updated() {
-    document.title = `${this.article.title}｜宇宙咖啡`;
+    useMeta({
+      title: this.article.title,
+    });
   },
 };
 </script>

@@ -70,6 +70,9 @@ import DeleteModal from '@/components/backend/ModalDelete.vue';
 import Pagination from '@/components/Pagination.vue';
 
 export default {
+  metaInfo: {
+    title: '訂單',
+  },
   data() {
     return {
       orders: [],

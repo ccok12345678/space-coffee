@@ -55,6 +55,9 @@ import ArticleModal from '@/components/backend/ModalArticle.vue';
 import DeleteModal from '@/components/backend/ModalDelete.vue';
 
 export default {
+  metaInfo: {
+    title: '部落格',
+  },
   data() {
     return {
       articles: [],
