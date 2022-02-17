@@ -159,10 +159,10 @@ export default {
     },
   },
   created() {
-    this.changePageTitle();
+    // this.changePageTitle();
   },
   updated() {
-    this.changePageTitle();
+    // this.changePageTitle();
   },
 };
 </script>

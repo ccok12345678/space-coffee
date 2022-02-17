@@ -10,6 +10,7 @@
       router-view
 
       .bg-dashboard(v-if="$route.name === 'Dashboard'")
+
 ToastMessages
 </template>
 
@@ -21,6 +22,9 @@ import emitter from '@/methods/emitter';
 import pushToast from '@/methods/pushToast';
 
 export default {
+  metaInfo: {
+    title: 'back',
+  },
   components: {
     SideBar,
     ToastMessages,
