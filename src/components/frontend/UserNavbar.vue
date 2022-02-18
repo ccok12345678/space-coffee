@@ -1,5 +1,5 @@
 <template lang="pug">
-header
+header.sticky-mobile
 
   //- UserTopbar
   nav.navbar.navbar-expand-md.navbar-light.bg-white

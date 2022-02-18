@@ -114,3 +114,13 @@ table button {
   background-size: cover;
   background-position: center center;
 }
+
+.sticky-mobile {
+  @include media-breakpoint-down(md) {
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+  }
+}
