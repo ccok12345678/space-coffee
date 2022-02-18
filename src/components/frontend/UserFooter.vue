@@ -4,12 +4,21 @@ footer.bg-gray-200.font-monospace
     .row
 
       .col-md-4.d-flex.flex-column.px-5.px-md-4.pt-5.pb-3.py-md-5
-        h6.text-gray-600.mb-4.mx-auto.mx-md-0.text-cyan-800 訂閱宇宙電報
-        form.w-75.w-md-100.mx-auto.mx-md-0
-          label.form-label.visually-hidden 請輸入信箱：
-          input.form-control.form-control-sm.ms-3.mb-2.rounded-0(type="email"
-            placeholder="Email Address" disabled)
-          button.btn.btn-gray-300.btn-sm.ms-3(type="submit" disabled) Subscribe
+        h6.text-gray-600.mb-4.mx-auto.mx-md-0.text-cyan-800
+          | 訂閱宇宙電報
+        form.w-75.w-md-100.mx-auto.mx-md-0(
+          @submit.prevent="openModal")
+          label.form-label.visually-hidden(
+            for="subscribeEmail")
+            | 請輸入信箱：
+          input#subscribeEmail.form-control.form-control-sm.ms-3.mb-2.rounded-0(
+            required
+            v-model="email"
+            type="email"
+            placeholder="訂閱以獲得優惠！"
+            name="subscribeEmail")
+          button.btn.btn-gray-300.btn-sm.ms-3(type="submit")
+            | Subscribe
 
       .devider.w-50.mx-auto.px-5.my-4.d-block.d-md-none
 
@@ -57,4 +66,25 @@ footer.bg-gray-200.font-monospace
 
       .pb-3 made by ccok.
 
+UserCouponModal(ref="userCouponModal")
 </template>
+
+<script>
+import UserCouponModal from '@/components/frontend/UserCouponModal.vue';
+
+export default {
+  components: {
+    UserCouponModal,
+  },
+  data() {
+    return {
+      email: '',
+    };
+  },
+  methods: {
+    openModal() {
+      this.$refs.userCouponModal.showModal();
+    },
+  },
+};
+</script>
