@@ -46,12 +46,6 @@ section.container-lg.d-flex.flex-column.align-items-center.py-5.mb-5
 
 </template>
 
-<style lang="scss" scoped>
-img {
-  min-height: 351px;
-}
-</style>
-
 <script>
 import { sampleSize } from 'lodash';
 import UserProductCard from '@/components/frontend/UserProductCard.vue';
@@ -81,3 +75,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+img {
+  min-height: 351px;
+}
+</style>
