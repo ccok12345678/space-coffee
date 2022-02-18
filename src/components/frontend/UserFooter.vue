@@ -43,7 +43,8 @@ footer.bg-gray-200.font-monospace
       .devider.w-50.mx-auto.px-5.mt-4.d-block.d-md-none.border-cyan-800
 
       .col-md-4.d-flex
-        .display-3.text-brand.text-nowrap.py-5.m-auto.text-cyan-800
+        router-link.display-3.text-brand.text-nowrap.py-5.m-auto.text-cyan-800.text-decoration-none(
+          to="/" title="回首頁")
           | Space Coffee
 
     .devider.w-100.mx-auto.my-3.border-gray-500
