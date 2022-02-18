@@ -1,14 +1,14 @@
 <template lang="pug">
 UserNavbar(:areas="categories" :products="products")
 
-UserFrontPage(:products="products"
-  v-if="$route.name === 'Home'")
-
-router-view
-
-UserFixedBtn
+.wrap
+  UserFrontPage(:products="products"
+    v-if="$route.name === 'Home'")
+  router-view
 
 UserFooter
+
+UserFixedBtn
 
 ToastMessages
 
@@ -87,3 +87,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.wrap {
+  //  - footer height
+  min-height: calc(100vh - 317px);
+}
+</style>
