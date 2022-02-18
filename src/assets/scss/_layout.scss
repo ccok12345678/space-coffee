@@ -46,6 +46,16 @@
     box-shadow: none;
     }
   }
+    &-half-transparent-orange {
+    background: #ffc107bb;
+    &:hover {
+    background: $yellow;
+    }
+    &:focus, &:active {
+    background: $yellow;
+    box-shadow: none;
+    }
+  }
 }
 
 .link-dark:hover {
@@ -55,7 +65,7 @@
 .btn-fixed {
   position: fixed;
   bottom: 60px;
-  right: 50px;
+  right: 25px;
 
 
   @include media-breakpoint-up(sm) {

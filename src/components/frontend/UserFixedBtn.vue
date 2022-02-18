@@ -1,16 +1,16 @@
 <template lang="pug">
 .btn-group-vertical.btn-fixed
 
-  button.btn.btn-secondary.text-light.border-0.p-2.px-3.mb-1.hover-half-transparent-cyan(
+  button.btn.btn-warning.text-light.border-0.p-2.px-3.mb-1.hover-half-transparent-orange(
     type="button"
     title="購物車"
     @click="goCart"
     v-if="isCart"
   )
-    span.badge.position-absolute.top-1.start-100.translate-middle.rounded-pill.bg-warning(
+    span.badge.position-absolute.top-1.start-100.translate-middle.rounded-pill.bg-cyan-400(
       v-if="goodsNum > 0")
       | {{ goodsNum }}
-    i.bi.bi-cart3
+    i.fs-4.bi.bi-cart3
 
   button.btn.btn-secondary.hover-half-transparent-cyan.text-light.border-0.p-2.px-3(
     type="button"
@@ -18,19 +18,8 @@
     @click="scrollTop"
     v-if="isShowScrollBtn"
   )
-    i.bi.bi-arrow-up-circle
+    i.fs-4.bi.bi-arrow-up-circle
 </template>
-
-<style lang="scss" scoped>
-.badge {
-  opacity: .7;
-}
-button[title="購物車"]:hover {
-  .badge {
-  opacity: 1;
-  }
-}
-</style>
 
 <script>
 export default {
@@ -119,3 +108,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.btn-group-vertical {
+  z-index: 4;
+}
+.badge {
+  opacity: .7;
+}
+button[title="購物車"]:hover {
+  .badge {
+  opacity: 1;
+  }
+}
+</style>
