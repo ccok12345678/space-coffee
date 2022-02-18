@@ -1,9 +1,13 @@
 <template lang="pug">
-a.item-box.bg-cover.text-light.text-decoration-none.text-nowrap.border.p-0(
+a.item-box.text-light.text-decoration-none.text-nowrap.border.p-0(
   href="#"
-  :style="`background-image: url(${tempPick.imageUrl}};`"
   @click.prevent="goProduct" :disabled="status === tempPick.id"
   )
+
+  img.item-box-background(
+    :src="tempPick.imageUrl"
+    :title="tempPick.title"
+    :alt="tempPick.title")
 
   .item-box-caption.py-2.w-100.pt-4.text-center.vstack
     span {{ tempPick.category }}：
@@ -19,34 +23,6 @@ a.item-box.bg-cover.text-light.text-decoration-none.text-nowrap.border.p-0(
       span(v-else) 購買
 
 </template>
-
-<style lang="scss" scoped>
-.item-box {
-  display: flex;
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
-
-  &-caption {
-    background: rgba(0, 0, 0, 0.5);
-    transition: .3s ease;
-    transform: translateY(100px);
-
-    @media (min-width: 768px) {
-      transform: translateY(250px);
-    }
-  }
-}
-.item-box:hover  {
-    .item-box-caption {
-      backdrop-filter: blur(3px);
-
-      @media (min-width: 576px) {
-        transform: translateY(100px);
-      }
-    }
-  }
-</style>
 
 <script>
 export default {
@@ -92,3 +68,40 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.item-box {
+  display: flex;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+
+  &-caption {
+    background: rgba(0, 0, 0, 0.5);
+    transition: .3s ease;
+    transform: translateY(50px);
+    z-index: 2;
+
+    @media (min-width: 768px) {
+      transform: translateY(50px);
+    }
+  }
+
+  &-background {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 1;
+  }
+}
+.item-box:hover  {
+  .item-box-caption {
+    backdrop-filter: blur(3px);
+
+    @media (min-width: 576px) {
+      transform: translateY(100px);
+    }
+  }
+}
+</style>

@@ -82,7 +82,8 @@
             label.form-label.mb-1(for="uploadImg") 或上傳檔案：
             input#uploadImg.form-control.form-control-sm(type="file"
               ref="imgInput"
-              @change.prevent="uploadImg")
+              @change.prevent="uploadImg"
+              :key="tempProduct.id")
 
           //- mutiple images
           .mt-4
