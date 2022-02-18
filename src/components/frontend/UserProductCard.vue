@@ -81,7 +81,6 @@ export default {
     background: rgba(0, 0, 0, 0.5);
     transition: .3s ease;
     transform: translateY(50px);
-    z-index: 2;
 
     @media (min-width: 768px) {
       transform: translateY(50px);
@@ -92,7 +91,6 @@ export default {
     position: absolute;
     top: 50%; left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    z-index: 1;
   }
 }
 .item-box:hover  {
