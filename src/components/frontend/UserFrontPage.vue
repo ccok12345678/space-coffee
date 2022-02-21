@@ -1,20 +1,14 @@
 <template lang="pug">
 section.container-lg.pb-4.mb-3.mb-sm-5.overflow-hidden.d-flex.flex-column.align-items-center
 
-  //- for bigger width
-  img.img-fluid.d-none.d-md-block(src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1280&q=80"
-  alt="Space Coffee")
-
-  //- for small ones
-  img.d-block.d-md-none(src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=768&q=80"
-  alt="Space Coffee")
+  Banner
 
   .devider.w-75.border-gray-500.my-4
 
-  .text-cyan-600.text-center.fs-5.font-monospace
-    p 為了找到最好的咖啡
+  main.text-cyan-600.text-center.fs-5.mt-5
+    p 為了找到最好的咖啡，
     p 我們願意
-    p 飛越宇宙
+    p.mb-0 飛越宇宙
 
 section.container-lg.d-flex.flex-column.align-items-center.py-5.mb-5
 
@@ -44,11 +38,15 @@ section.container-lg.d-flex.flex-column.align-items-center.py-5.mb-5
     .col-md-8.col-12
       UserProductCard(:tempPick="randomPicks[1]")
 
+.container-lg.text-md-start.text-center
+  h4.text-info.text-brand Subscribe for discount now! 🪐
+
 </template>
 
 <script>
 import { sampleSize } from 'lodash';
 import UserProductCard from '@/components/frontend/UserProductCard.vue';
+import Banner from '@/components/frontend/Banner.vue';
 
 export default {
   data() {
@@ -58,6 +56,7 @@ export default {
   },
   components: {
     UserProductCard,
+    Banner,
   },
   props: {
     products: {
