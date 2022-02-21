@@ -14,7 +14,7 @@
     //- delete button
     button.btn.btn-sm.hover-red.px-2.mb-2.ms-2(
     type="button" title="清空收藏清單"
-    @click="deleteFavors")
+    @click="clearFavors")
       i.bi.bi-trash-fill
 
   .devider.w-50.border-gray-500.mb-5
@@ -26,6 +26,9 @@
 
         .col-md-4.col-sm-6(v-for="item of favorites" :key="item.id")
           UserProductCard(:tempPick="item")
+          button.btn(type="button" title="移除收藏"
+            @click="removeFavor(item.id)")
+            small X 移除收藏
 
 </template>
 
@@ -81,9 +84,19 @@ export default {
       }
     },
 
-    deleteFavors() {
+    clearFavors() {
       localStorage.setItem(this.key, '');
       this.favorites = [];
+    },
+
+    removeFavor(id) {
+      const favorites = JSON.parse(localStorage.getItem(this.key));
+      const newFavorites = favorites.filter((item) => item.id !== id);
+
+      localStorage.setItem(this.key, JSON.stringify(newFavorites));
+
+      this.favorites = [];
+      this.collectFavorites();
     },
   },
   async created() {
