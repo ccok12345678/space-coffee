@@ -15,7 +15,7 @@ footer.bg-gray-200.font-monospace
             required
             v-model="email"
             type="email"
-            placeholder="訂閱以獲得優惠！"
+            placeholder="輸入信箱訂閱！"
             name="subscribeEmail")
           button.btn.btn-gray-300.btn-sm.ms-3(type="submit")
             | Subscribe
