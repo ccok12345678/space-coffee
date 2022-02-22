@@ -63,7 +63,7 @@
     //- show in bigger browser width
     .col-lg-4.order-1.order-lg-2.d-none.d-lg-block
 
-      aside.d-flex.flex-column
+      aside.d-flex.flex-column.sticky-top
 
         h5.mx-auto {{ tempProduct.title }}
 
