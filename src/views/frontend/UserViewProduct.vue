@@ -62,8 +62,11 @@
 
             .devider.w-50.mx-auto.my-4.border-gray-500.d-block.d-lg-none
 
-          //- coffee recipe
-          CoffeeRecipe
+        //- coffee recipe
+        CoffeeRecipe
+
+        //- relative products
+        RelativeProducts(:product="tempProduct")
 
     //- show in bigger browser width
     .col-lg-4.order-1.order-lg-2.d-none.d-lg-block
@@ -118,7 +121,9 @@
 
 <script>
 import { useMeta } from 'vue-meta';
+import scrollTop from '@/methods/scrollTop';
 import CoffeeRecipe from '@/components/frontend/CoffeeRecipe.vue';
+import RelativeProducts from '@/components/frontend/RelativeProducts.vue';
 
 export default {
   data() {
@@ -133,8 +138,18 @@ export default {
   },
   components: {
     CoffeeRecipe,
+    RelativeProducts,
   },
   inject: ['pushToast', 'emitter'],
+  watch: {
+    async $route() {
+      await this.getProduct();
+      if (this.tempProduct !== undefined) {
+        document.title = this.tempProduct.title;
+      }
+      scrollTop();
+    },
+  },
   methods: {
     async getProduct() {
       const { id } = this.$route.params;

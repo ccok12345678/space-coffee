@@ -7,7 +7,7 @@ article.d-flex.flex-column.align-items-center
     img.figure-img.img-fluid.mb-0(src="@/assets/photos/coffee_recipe01.jpg")
     figcaption.figure-caption
       | source:
-      a(href="https://www.pakutaso.com/photo/41537.html" title="PAKUTASO")
+      a.text-muted(href="https://www.pakutaso.com/photo/41537.html" title="PAKUTASO")
         |  PAKUTASO
 
   p.h5 試試#[strong 愛樂壓]！
@@ -18,11 +18,11 @@ article.d-flex.flex-column.align-items-center
       src="@/assets/photos/aeropress.jpg")
     figcaption.figure-caption
       | Photo by
-      a(href="https://unsplash.com/@oakandbondcoffee?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText")  Oak & Bond Coffee Co
+      a.text-muted(href="https://unsplash.com/@oakandbondcoffee?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText")  Oak & Bond Coffee Co
       |  on
-      a(href="https://unsplash.com/s/photos/aeropress?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText")  Unsplash
+      a.text-muted(href="https://unsplash.com/s/photos/aeropress?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText")  Unsplash
 
-  p.h5 不會愛樂壓？沒關係
+  p.h5.mt-3 不會愛樂壓？沒關係
   p.h5.mb-3 請專家來示範
 
   iframe.w-100.d-none.d-sm-block(height="350" src="https://www.youtube.com/embed/j6VlT_jUVPc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
