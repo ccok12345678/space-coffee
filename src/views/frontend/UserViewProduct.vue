@@ -60,10 +60,15 @@
               img.mx-auto(src="@/assets/images/portafilter_tamper_icon.svg" width="50"
                 title="good for espresso" alt="espresso")
 
+            .devider.w-50.mx-auto.my-4.border-gray-500.d-block.d-lg-none
+
+          //- coffee recipe
+          CoffeeRecipe
+
     //- show in bigger browser width
     .col-lg-4.order-1.order-lg-2.d-none.d-lg-block
 
-      aside.d-flex.flex-column.sticky-top
+      aside.d-flex.flex-column.sticky-top.pt-3
 
         h5.mx-auto {{ tempProduct.title }}
 
@@ -113,6 +118,7 @@
 
 <script>
 import { useMeta } from 'vue-meta';
+import CoffeeRecipe from '@/components/frontend/CoffeeRecipe.vue';
 
 export default {
   data() {
@@ -124,6 +130,9 @@ export default {
       favorites: [],
       isFavorite: false,
     };
+  },
+  components: {
+    CoffeeRecipe,
   },
   inject: ['pushToast', 'emitter'],
   methods: {
