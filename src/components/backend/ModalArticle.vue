@@ -40,7 +40,7 @@
             form(@submit.prevent="addTag").hstack
               input.form-control.w-40(type="text"
                 v-model.trim="tag"
-                @keyup.enter.prevent="addTag")
+                @keyup.enter="addTag")
               button.btn.p-1.text-info(type="submit" title="新增標籤"
               )
                 i.fs-5.bi.bi-file-earmark-plus

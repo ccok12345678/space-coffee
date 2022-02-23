@@ -33,7 +33,7 @@ section.w-100.overflow-auto.text-nowrap.text-center(v-if="!!coupons.length")
           .form-switch.text-center
             input#productEnabled.form-check-input.me-0.p-2.shadow-0(type="checkbox" role="switch"
               v-model="coupon.is_enabled" :true-value="1" :false-value="0"
-              @change.prevent="updateCoupon(coupon)")
+              @change="updateCoupon(coupon)")
 
         td
           button.border-0.hover-gray.py-2.d-block.w-100(type="button" title="編輯"

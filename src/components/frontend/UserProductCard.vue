@@ -15,7 +15,7 @@ a.item-box.text-light.text-decoration-none.text-nowrap.border.p-0(
     span NT$ {{ $filters.currency(tempPick.price) }} / {{ tempPick.unit }}
 
     button.btn.btn-outline-light.px-3.mt-1.mx-auto(type="button"
-      @click.prevent.stop="addCart(tempPick.id)"
+      @click.stop="addCart(tempPick.id)"
       :disabled="status === tempPick.id")
 
       .spinner-border.spinner-border-sm(v-if="status === tempPick.id")
