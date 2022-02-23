@@ -1,6 +1,7 @@
 <template lang="pug">
 .container-lg.d-flex.justify-content-center.py-5.w-100.bg-cover.mb-2(
-  :style="`background-image:url(${newArrival.imageUrl})`")
+  :style="`background-image:url(${newArrival.imageUrl})`"
+  v-if="newArrival.imageUrl")
   .banner-head.p-sm-4.p-0
     p.text-gray-200.mb-1.pt-3.pt-md-1
       | 土星環精品，腦海迷航必備：
@@ -27,7 +28,8 @@
       @click.prevent="addCart(newArrival)") 直接放進購物車！
 
 .container-lg.d-flex.justify-content-center.py-5.w-100.bg-cover(
-  :style="`background-image:url(${special.imageUrl})`")
+  :style="`background-image:url(${special.imageUrl})`"
+  v-if="special.imageUrl")
 
   .banner-head.p-sm-4.p-0
     p.text-gray-200.mb-1.pt-3.pt-md-1
