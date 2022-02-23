@@ -14,6 +14,6 @@ git add -A
 git commit -m 'deploy'
 
 # 部署到 https://<USERNAME>.git.io/<REPO>
-git push -f git@github.com:ccok12345678/space-coffee.git main:gh-pages
+git push -f git@github.com:ccok12345678/space-coffee.git master:gh-pages
 
 cd -
