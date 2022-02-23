@@ -117,7 +117,7 @@ export default {
 
 <style lang="scss" scoped>
 .banner {
-  background-image: url('https://images.unsplash.com/photo-1462332420958-a05d1e002413?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1280&q=80');
+  background-image: url('../../assets/photos/banner-background.jpg');
 }
 .banner-head {
   background: rgba(0, 0, 0, .5);
