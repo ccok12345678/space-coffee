@@ -1,5 +1,7 @@
 module.exports = {
-  publicPath: '/space-coffee/dist/',
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/space-coffee/'
+    : '/',
   transpileDependencies: [
     'vue-meta',
   ],
