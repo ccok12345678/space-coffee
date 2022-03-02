@@ -8,22 +8,28 @@ header.sticky-mobile
       router-link.navbar-brand.text-brand(:to="{ name: 'Home' }" title="宇宙咖啡")
         h1 Space Coffee #[span.visually-hidden 宇宙咖啡]
 
-      button#navbarToggler.navbar-toggler.border-0.d-flex.d-md-none(
+      button#navbarToggler.navbar-toggler.border-0.d-flex.ms-auto.d-md-none(
       type="button"
-      data-bs-toggle="collapse"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#navbarOffcanvas"
+      aria-controls="navbarOffcanvas"
       aria-expanded="false")
           small.fw-bold.my-auto.me-1.text-black.text-spacing-sm MENU
           span.navbar-toggler-icon
 
       UserNavbarCollapse(:products="products" :areas="areas")
+      .d-md-none
+        UserNavbarOffcanvas(:products="products" :areas="areas")
 </template>
 
 <script>
 import UserNavbarCollapse from './UserNavbarCollapse.vue';
+import UserNavbarOffcanvas from './UserNavbarOffcanvas.vue';
 
 export default {
   components: {
     UserNavbarCollapse,
+    UserNavbarOffcanvas,
   },
   props: {
     areas: {
@@ -38,7 +44,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .navbar {
   z-index: 100;
   position: sticky;

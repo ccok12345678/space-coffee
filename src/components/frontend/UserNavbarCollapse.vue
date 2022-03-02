@@ -12,7 +12,8 @@
       .dropdown.border-0.mx-2
 
         a#area.nav-link.link-gray-500.dropdown-toggle.py-2.hover-text-gray(
-          href="#coffeeArea"
+          href="#"
+          @click.privent=""
           data-bs-toggle="dropdown"
           role="button"
           aria-expanded="false")
@@ -27,7 +28,7 @@
 
       .dropdown.mx-2
         a#roast.nav-link.link-gray-500.dropdown-toggle.py-2.hover-text-gray(
-          href="#coffeeRoast"
+          href="#"
           data-bs-toggle="dropdown"
           role="button"
           aria-expanded="false")
