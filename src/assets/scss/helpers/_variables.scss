@@ -1186,7 +1186,7 @@ $dropdown-link-hover-color:         shade-color($dropdown-link-color, 10%) !defa
 $dropdown-link-hover-bg:            $gray-200 !default;
 
 $dropdown-link-active-color:        $component-active-color !default;
-$dropdown-link-active-bg:           $component-active-bg !default;
+$dropdown-link-active-bg:           $gray-400; // $component-active-bg !default;
 
 $dropdown-link-disabled-color:      $gray-500 !default;
 
