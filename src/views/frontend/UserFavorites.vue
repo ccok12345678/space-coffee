@@ -14,7 +14,7 @@
     //- delete button
     button.btn.btn-sm.hover-red.px-2.mb-2.ms-2(
     type="button" title="清空收藏清單"
-    @click="clearFavors")
+    @click="openModal")
       i.bi.bi-trash-fill
 
   .devider.w-50.border-gray-500.mb-5
@@ -30,10 +30,15 @@
             @click="removeFavor(item.id)")
             small X 移除收藏
 
+UserAlertModal(
+  ref="alertModal"
+  @emit-clear="clearFavors")
+
 </template>
 
 <script>
 import UserProductCard from '@/components/frontend/UserProductCard.vue';
+import UserAlertModal from '@/components/frontend/UserAlertModal.vue';
 
 export default {
   metaInfo: {
@@ -48,6 +53,7 @@ export default {
   },
   components: {
     UserProductCard,
+    UserAlertModal,
   },
   methods: {
     async getProducts() {
@@ -84,9 +90,14 @@ export default {
       }
     },
 
+    openModal() {
+      this.$refs.alertModal.showModal();
+    },
+
     clearFavors() {
       localStorage.setItem(this.key, '');
       this.favorites = [];
+      this.$refs.alertModal.hideModal();
     },
 
     removeFavor(id) {
