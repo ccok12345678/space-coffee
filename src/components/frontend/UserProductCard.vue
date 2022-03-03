@@ -96,11 +96,7 @@ export default {
 }
 .item-box:hover  {
   .item-box-caption {
-    backdrop-filter: blur(3px);
-
-    @media (min-width: 576px) {
-      transform: translateY(100px);
-    }
+    backdrop-filter: blur(2px);
   }
 }
 </style>
