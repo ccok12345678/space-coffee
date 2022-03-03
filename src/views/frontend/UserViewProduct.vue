@@ -32,11 +32,14 @@
               .visually-hidden Loading...
             span(v-else) 加入購物車
 
-          button.btn.btn-outline-gray-600.w-75(type="button"
-            @click="updateFavorite(tempProduct.id)")
-            span(v-if="isFavorite") 取消收藏
+          button.btn.w-75(type="button"
+            @click="updateFavorite(tempProduct.id)"
+            title="點擊以加入/取消收藏"
+            :class="{ 'btn-outline-success': isFavorite, 'btn-outline-gray-600': !isFavorite }")
+            span(v-if="isFavorite")
+              i.bi.bi-check-lg.me-1
+              | 已收藏
             span(v-else) 加入收藏
-          .fs-12.text-gray-400.mt-1(v-if="isFavorite") （已加入收藏）
 
         .card-body.px-3.px-md-5
 
@@ -106,11 +109,14 @@
               .visually-hidden Loading...
             span(v-else) 加入購物車
 
-          button.btn.btn-outline-gray-600.w-75(type="button"
-            @click="updateFavorite(tempProduct.id)")
-            span(v-if="isFavorite") 取消收藏
+          button.btn.w-75(type="button"
+            @click="updateFavorite(tempProduct.id)"
+            title="點擊以加入/取消收藏"
+            :class="{ 'btn-outline-success': isFavorite, 'btn-outline-gray-600': !isFavorite }")
+            span(v-if="isFavorite")
+              i.bi.bi-check-lg.me-1
+              | 已收藏
             span(v-else) 加入收藏
-          .fs-12.text-gray-400.mt-1(v-if="isFavorite") （已加入收藏）
 
         .devider.w-25.mx-auto.my-4.border-gray-500
 

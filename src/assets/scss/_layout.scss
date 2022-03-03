@@ -37,27 +37,27 @@ a {
   &-half-transparent {
     background: #6c757d77 ;
     &:hover {
-    background: #6c757d ;
+      background: #6c757d ;
     }
   }
   &-half-transparent-cyan {
     background: #0dcaf077;
     &:hover {
-    background: $cyan-500;
+      background: $cyan-500;
     }
     &:focus, &:active {
-    background: #0dcaf0;
-    box-shadow: none;
+      background: #0dcaf0;
+      box-shadow: none;
     }
   }
     &-half-transparent-orange {
     background: #ffc107bb;
     &:hover {
-    background: $yellow;
+      background: $yellow;
     }
     &:focus, &:active {
-    background: $yellow;
-    box-shadow: none;
+      background: $yellow;
+      box-shadow: none;
     }
   }
 }
