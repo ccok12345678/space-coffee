@@ -27,30 +27,6 @@
     a.btn.btn-outline-cyan-400.border-0(href="#"
       @click.prevent="addCart(newArrival)") 直接放進購物車！
 
-.container-lg.d-flex.justify-content-center.py-5.w-100.bg-cover(
-  :style="`background-image:url(${special.imageUrl})`"
-  v-if="special.imageUrl")
-
-  .banner-head.p-sm-4.p-0
-    p.text-gray-200.mb-1.pt-3.pt-md-1
-      | 太陽系最佳配方豆，本店誠意之作：
-
-    .devider.my-2.border-danger
-
-    .d-none.d-md-flex
-      p.fs-3.mb-1.mb-md-2.text-light
-        | 宇宙特調 『{{ special.title }}』
-
-    .d-flex.flex-column.d-md-none
-      p.fs-5.mb-1.mb-md-2.text-light
-        | 宇宙特調 『{{ special.title }}』
-
-    router-link.btn.btn-outline-cyan-400.border-0(
-      :to="`/product/${special.id}`") 瞭解更多
-    span.text-light.mx-1 或
-    a.btn.btn-outline-cyan-400.border-0(href="#"
-      @click.prevent="addCart(special)") 直接放進購物車！
-
 main.text-cyan-600.text-center.fs-5.font-monospace.my-4
   p 一個人很好，
   p 有咖啡喝，更好。
@@ -67,7 +43,6 @@ export default {
   data() {
     return {
       newArrival: {},
-      special: {},
     };
   },
   inject: ['emitter', 'pushToast'],
@@ -107,7 +82,6 @@ export default {
   async created() {
     try {
       this.newArrival = await this.getProduct('-MsZI3bMFPOKFwOi1_Jj');
-      this.special = await this.getProduct('-MsZJr16FHvslJoxeAis');
     } catch (error) {
       console.error(error);
     }
