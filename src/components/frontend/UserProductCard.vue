@@ -1,7 +1,8 @@
 <template lang="pug">
-a.item-box.text-light.text-decoration-none.text-nowrap.border.p-0(
-  href="#"
-  @click.prevent="goProduct" :disabled="status === tempPick.id"
+button.item-box.text-light.text-decoration-none.text-nowrap.border.p-0(
+  type="button"
+  @click="goProduct"
+  :disabled="status === tempPick.id"
   )
 
   img.item-box-background(
