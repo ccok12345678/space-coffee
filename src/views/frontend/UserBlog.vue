@@ -10,7 +10,7 @@
 
   h3.fs-4.text-gray-600 宇宙咖啡部落格
 
-  .devider.w-50.border-gray-500.mb-3
+  .divider.w-50.border-gray-500.mb-3
 
   .row.justify-content-center.w-100
 
@@ -29,7 +29,7 @@
         .col-12.col-md-6.text-gray-500.d-flex.align-items-center
           | {{ article.description }}
 
-        .col-12.devider.my-2.m-auto.border-gray-300
+        .col-12.divider.my-2.m-auto.border-gray-300
 
     .w-100.my-3
     .col-4.col-sm-2

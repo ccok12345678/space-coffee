@@ -29,7 +29,7 @@
                 @click="deleteCart")
               i.bi.bi-trash-fill
 
-          .devider.w-25.boder-dark.my-2.mx-auto
+          .divider.w-25.boder-dark.my-2.mx-auto
 
         template(v-for="(item, key) in carts.carts" :key="item.id")
           .col-1.text-start.fs-5.d-flex.align-items-center
@@ -63,7 +63,7 @@
               @click="deleteCart(false, item.id)")
                   i.bi.bi-trash
 
-          .devider.w-100.border-secondary
+          .divider.w-100.border-secondary
 
       .row.justify-content-md-end.justify-content-center
 
@@ -79,7 +79,7 @@
               | NT$ {{ $filters.currency(carts.final_total) }}#[br]
               small.text-success.fw-normal(v-if="carts.total > carts.final_total") 已使用優惠卷
 
-        .devider.w-75.my-3.border-secondary
+        .divider.w-75.my-3.border-secondary
 
         //- coupon apply
         .col-4.d-flex
@@ -97,7 +97,7 @@
                   .visually-hidden Loading...
                 span(v-else) 套用
 
-        .devider.w-75.my-3.border-secondary
+        .divider.w-75.my-3.border-secondary
 
       .text-center.text-md-end
         button.btn.btn-cyan-600.text-light.w-30(type="button"

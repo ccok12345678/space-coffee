@@ -6,7 +6,7 @@
     p.text-gray-200.mb-1.pt-3.pt-md-1
       | 土星環精品，腦海迷航必備：
 
-    .devider.my-2
+    .divider.my-2
 
     .d-none.d-md-flex
       p.fs-3.mb-1.mb-md-2.text-light

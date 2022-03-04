@@ -9,7 +9,7 @@
 
       h4.text-gray-700 已建立訂單
 
-      .devider.w-25.boder-dark.my-3
+      .divider.w-25.boder-dark.my-3
 
       main.row.w-100
         .col-3.d-flex.justify-content-center.align-items-center.fw-bold.border.p-0

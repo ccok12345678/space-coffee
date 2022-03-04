@@ -20,7 +20,7 @@ footer.bg-gray-200.font-monospace
           button.btn.btn-gray-300.btn-sm.ms-3(type="submit")
             | Subscribe
 
-      .devider.w-50.mx-auto.px-5.my-4.d-block.d-md-none
+      .divider.w-50.mx-auto.px-5.my-4.d-block.d-md-none
 
       .col-md-4.d-flex.flex-column.px-5.px-md-2.py-3.py-md-5.text-center.text-md-start
         h6.text-gray-600.mb-3.text-cyan-800 尋找宇宙咖啡
@@ -49,14 +49,14 @@ footer.bg-gray-200.font-monospace
               a.text-muted.text-decoration-none(href="tel:+44556-7655555"
                 title="撥打電話") +44556-7655555
 
-      .devider.w-50.mx-auto.px-5.mt-4.d-block.d-md-none.border-cyan-800
+      .divider.w-50.mx-auto.px-5.mt-4.d-block.d-md-none.border-cyan-800
 
       .col-md-4.d-flex
         router-link.display-3.text-brand.text-nowrap.py-5.m-auto.text-cyan-800.text-decoration-none(
           to="/" title="回首頁")
           | Space Coffee
 
-    .devider.w-100.mx-auto.my-3.border-gray-500
+    .divider.w-100.mx-auto.my-3.border-gray-500
 
     .text-gray-500.text-center.w-75.mx-auto.d-flex.justify-content-between.flex-column.flex-md-row
 

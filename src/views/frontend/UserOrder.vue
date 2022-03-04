@@ -60,14 +60,14 @@
             v-model="message")
             label(for="userMessage") 附加說明（非必填）：
 
-        .devider.w-75.my-3.border-secondary
+        .divider.w-75.my-3.border-secondary
 
         .col-7.text-end
           | 訂單金額：
         .col-5.text-center.fw-bold
           | NT$ {{ $filters.currency(carts.final_total) }}
 
-        .devider.w-75.my-3
+        .divider.w-75.my-3
 
         .col-10
 

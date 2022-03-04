@@ -3,7 +3,7 @@ section.d-flex.flex-column.align-items-center.py-5.mb-3
 
   h3.fs-5.text-gray-600 宇航精選
 
-  .devider.w-50.border-gray-500.mb-5
+  .divider.w-50.border-gray-500.mb-5
 
   .row.gy-4.w-100
 

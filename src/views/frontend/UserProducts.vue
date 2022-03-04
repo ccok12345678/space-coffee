@@ -3,7 +3,7 @@
 
   h3.fs-4.text-gray-600 {{ classing }}
 
-  .devider.w-50.border-gray-500.mb-5
+  .divider.w-50.border-gray-500.mb-5
 
   .row.d-flex.justify-content-center.w-100
     .col-md-11

@@ -28,11 +28,11 @@ article.d-flex.flex-column.align-items-center
   iframe.w-100.d-none.d-sm-block(height="350" src="https://www.youtube.com/embed/j6VlT_jUVPc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
   iframe.w-100.d-sm-none(height="250" src="https://www.youtube.com/embed/j6VlT_jUVPc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 
-  .devider.w-75.my-3
+  .divider.w-75.my-3
 
   p.h5.mb-0.text-cyan-600.text-brand.text-uppercase.fw-bold
     | See You Space coffeeboy...
 
-  .devider.w-75.my-3
+  .divider.w-75.my-3
 
 </template>

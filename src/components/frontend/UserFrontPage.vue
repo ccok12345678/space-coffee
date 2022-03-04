@@ -3,8 +3,6 @@ section.container-lg.pb-4.mb-3.mb-sm-5.overflow-hidden.d-flex.flex-column.align-
 
   Banner
 
-  //- .devider.w-75.border-gray-500.my-4
-
   UserRecomend.w-100(:products="products")
 
   main.text-cyan-600.text-center.fs-5.mt-3.mb-5

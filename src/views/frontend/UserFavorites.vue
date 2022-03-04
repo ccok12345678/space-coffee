@@ -17,7 +17,7 @@
     @click="openModal")
       i.bi.bi-trash-fill
 
-  .devider.w-50.border-gray-500.mb-5
+  .divider.w-50.border-gray-500.mb-5
 
   .row.d-flex.justify-content-center.w-100
 
