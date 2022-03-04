@@ -14,10 +14,21 @@
     //- delete button
     button.btn.btn-sm.hover-red.px-2.mb-2.ms-2(
     type="button" title="清空收藏清單"
-    @click="openModal")
+    @click="openModal('alertModal')")
       i.bi.bi-trash-fill
 
-  .divider.w-50.border-gray-500.mb-5
+  .divider.w-50.border-gray-500.mb-3
+
+  button.fs-5.btn.mb-4.text-cyan(
+    type="button"
+    title="領取優惠碼"
+    v-if="favorites.length >= 6"
+    @click="openModal('promotionModal')")
+    | 🎊 恭喜！#[br]
+    | 完成收集活動，點此領取優惠！
+
+  h5.text-gray-500.mb-3(v-else)
+    | 增加收藏以獲取優惠！
 
   .row.d-flex.justify-content-center.w-100
 
@@ -34,11 +45,15 @@ UserAlertModal(
   ref="alertModal"
   @emit-clear="clearFavors")
 
+UserPromotionModal(
+  ref="promotionModal")
+
 </template>
 
 <script>
 import UserProductCard from '@/components/frontend/UserProductCard.vue';
 import UserAlertModal from '@/components/frontend/UserAlertModal.vue';
+import UserPromotionModal from '@/components/frontend/UserPromotionModal.vue';
 
 export default {
   metaInfo: {
@@ -53,6 +68,7 @@ export default {
   },
   components: {
     UserProductCard,
+    UserPromotionModal,
     UserAlertModal,
   },
   methods: {
@@ -90,8 +106,8 @@ export default {
       }
     },
 
-    openModal() {
-      this.$refs.alertModal.showModal();
+    openModal(modal) {
+      this.$refs[modal].showModal();
     },
 
     clearFavors() {
