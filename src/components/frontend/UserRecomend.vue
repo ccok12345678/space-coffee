@@ -5,27 +5,25 @@ section.container-lg.d-flex.flex-column.align-items-center.py-5.mb-5
 
   .devider.w-50.border-gray-500.mb-5
 
-  .row.gy-2.w-100.d-flex.justify-content-center
+  .row.gy-4.w-100
 
-    .col-md-4.d-none.d-md-flex.align-items-center
-      img.img-fluid(src="https://images.unsplash.com/photo-1458819714733-e5ab3d536722?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
-      alt="Good Coffee makes a day")
-
-    .col-md-8.col-12
-      UserProductCard(:tempPick="randomPicks[2]")
-
-      .row
-
-        .col-sm-6.mt-3
-          UserProductCard(:tempPick="randomPicks[3]")
-
-        .col-sm-6.mt-3
-          UserProductCard(:tempPick="randomPicks[0]")
-
-    .w-100
-
-    .col-md-8.col-12
+    .col-md-4.col-sm-6.col-12
+      .d-none.d-md-block.py-5
+      UserProductCard.mb-4(:tempPick="randomPicks[0]")
       UserProductCard(:tempPick="randomPicks[1]")
+
+    .col-md-4.col-sm-6.col-12
+      UserProductCard.mb-4.mb-md-0(:tempPick="randomPicks[2]")
+      .p-4.text-center.d-none.d-md-block
+        img.img-fluid(src="@/assets/images/satellite.png"
+          alt="satellite image")
+      UserProductCard(:tempPick="randomPicks[3]")
+
+    .col-md-4.d-none.d-md-block
+      .d-none.d-md-block.py-5
+      UserProductCard.mb-4(:tempPick="randomPicks[4]")
+      UserProductCard(:tempPick="randomPicks[5]")
+
 </template>
 
 <script>
@@ -49,17 +47,18 @@ export default {
   },
   watch: {
     products() {
-      this.randomPicks = sampleSize(this.products, 5);
+      this.randomPicks = sampleSize(this.products, 6);
     },
   },
   created() {
-    this.randomPicks = sampleSize(this.products, 5);
+    this.randomPicks = sampleSize(this.products, 6);
   },
 };
 </script>
 
 <style lang="scss" scoped>
 img {
-  min-height: 351px;
+  height: 150px;
+  width: 150px;
 }
 </style>
