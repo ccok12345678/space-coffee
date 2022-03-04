@@ -3,6 +3,8 @@ section.container-lg.pb-4.mb-3.mb-sm-5.overflow-hidden.d-flex.flex-column.align-
 
   Banner
 
+  UserPromotions.w-100
+
   UserRecomend.w-100(:products="products")
 
   main.text-cyan-600.text-center.fs-5.mt-3.mb-5
@@ -24,11 +26,13 @@ section.container-lg.pb-4.mb-3.mb-sm-5.overflow-hidden.d-flex.flex-column.align-
 <script>
 import Banner from '@/components/frontend/Banner.vue';
 import UserRecomend from '@/components/frontend/UserRecomend.vue';
+import UserPromotions from '@/components/frontend/UserPromotions.vue';
 
 export default {
   components: {
     Banner,
     UserRecomend,
+    UserPromotions,
   },
   props: {
     products: {
