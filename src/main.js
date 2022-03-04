@@ -34,8 +34,8 @@ defineRule('required', required);
 defineRule('email', email);
 configure({
   generateMessage: localize({ zh_TW: zhTW }),
-  validateOnInput: false,
-  validateOnBlur: true,
+  validateOnInput: true,
+  // validateOnBlur: true,
 });
 setLocale('zh_TW'); // 手動設定語系
 
