@@ -35,7 +35,8 @@
           button.btn.w-75(type="button"
             @click="updateFavorite(tempProduct.id)"
             title="點擊以加入/取消收藏"
-            :class="{ 'btn-outline-success': isFavorite, 'btn-outline-gray-600': !isFavorite }")
+            :class="{ 'btn-outline-success': isFavorite, 'btn-outline-gray-600': !isFavorite }"
+            :key="tempProduct.id")
             span(v-if="isFavorite")
               i.bi.bi-check-lg.me-1
               | 已收藏
@@ -112,7 +113,8 @@
           button.btn.w-75(type="button"
             @click="updateFavorite(tempProduct.id)"
             title="點擊以加入/取消收藏"
-            :class="{ 'btn-outline-success': isFavorite, 'btn-outline-gray-600': !isFavorite }")
+            :class="{ 'btn-outline-success': isFavorite, 'btn-outline-gray-600': !isFavorite }"
+            :key="tempProduct.id")
             span(v-if="isFavorite")
               i.bi.bi-check-lg.me-1
               | 已收藏
@@ -236,6 +238,7 @@ export default {
     this.isFavorite = this.isInFavorites();
   },
   updated() {
+    this.isFavorite = this.isInFavorites();
     useMeta({
       title: this.tempProduct.title,
     });
