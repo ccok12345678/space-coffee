@@ -11,10 +11,11 @@
           alt="Loading...")
 
         p.fs-5.text-danger.mb-0
-          | 清除所有收藏商品？
+          | 確認清除所有物件？
 
       .p-3.text-center
-        button.btn.btn-danger.w-70.mb-2(type='button' @click="checkClear")
+        button.btn.btn-danger.w-70.mb-2(type='button' @click="checkClear"
+        data-bs-dismiss='modal')
           i.bi.bi-trash.me-2
           | 確認清除
         button.btn.btn-outline-gray-600.w-70(type='button' data-bs-dismiss='modal')

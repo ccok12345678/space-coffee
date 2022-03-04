@@ -26,7 +26,7 @@
 
             button.btn.hover-red.px-3.mx-2(
                 type="button" title="清空購物車"
-                @click="deleteCart")
+                @click="openModal")
               i.bi.bi-trash-fill
 
           .divider.w-25.boder-dark.my-2.mx-auto
@@ -105,10 +105,15 @@
           | 填寫資料
           i.bi.bi-box-arrow-right.ms-2
 
+AlertModal(
+  ref="alertModal"
+  @emit-clear="deleteCart")
+
 </template>
 
 <script>
 import ProgressBar from '@/components/frontend/UserProgressBar.vue';
+import AlertModal from '@/components/frontend/UserAlertModal.vue';
 
 export default {
   metaInfo: {
@@ -124,6 +129,7 @@ export default {
   },
   components: {
     ProgressBar,
+    AlertModal,
   },
   inject: ['pushToast', 'scrollTop'],
   methods: {
@@ -139,6 +145,10 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+
+    openModal() {
+      this.$refs.alertModal.showModal();
     },
 
     async deleteCart(isAll = true, id) {
