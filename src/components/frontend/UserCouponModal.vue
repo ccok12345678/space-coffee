@@ -9,15 +9,17 @@
       .modal-body.text-center
 
         p.mb-4 恭喜獲得了訂閱專屬優惠85折🌠
-        p.mb-4 優惠碼： {{ coupon }}
-          span.text-success(
+        p.mb-4 優惠碼：
+          span.text-gray-500(
             v-if="isCopied")
+            | {{ coupon }}
             | (已複製)
-          a.text-decoration-none.text-gray-500(
+          a.text-decoration-none.text-success(
             href="#"
             title="複製優惠碼"
             v-else
             @click.prevent="copyCoupon")
+            | {{ coupon }}
             |  (複製)
         p.mb-1 馬上到購物車使用吧！
 
