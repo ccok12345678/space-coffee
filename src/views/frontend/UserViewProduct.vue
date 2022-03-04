@@ -35,7 +35,8 @@
           button.btn.w-75(type="button"
             @click="updateFavorite(tempProduct.id)"
             title="點擊以加入/取消收藏"
-            :class="{ 'btn-outline-success': isFavorite, 'btn-outline-gray-600': !isFavorite }")
+            :class="{ 'btn-outline-success': isFavorite, 'btn-outline-gray-600': !isFavorite }"
+            :key="tempProduct.id")
             span(v-if="isFavorite")
               i.bi.bi-check-lg.me-1
               | 已收藏
@@ -44,7 +45,7 @@
         .card-body.px-3.px-md-5
 
           .d-block.d-lg-none.d-flex.flex-column
-            .devider.w-50.mx-auto.mb-4.border-gray-500
+            .divider.w-50.mx-auto.mb-4.border-gray-500
             h6.mb-2.mx-auto 風味描述
             p.mb-0 {{ tempProduct.description }}
 
@@ -53,7 +54,7 @@
               strong.mx-auto 產地：{{ tempProduct.category }}#[br]
               | {{ tempProduct.content }}
 
-            .devider.w-50.mx-auto.my-4.border-gray-500
+            .divider.w-50.mx-auto.my-4.border-gray-500
 
             .d-flex.justify-content-around.mt-2.d-block.d-lg-none
               img.mx-auto(src="@/assets/images/aeropress_coffee.svg" width="50"
@@ -63,7 +64,7 @@
               img.mx-auto(src="@/assets/images/portafilter_tamper_icon.svg" width="50"
                 title="good for espresso" alt="espresso")
 
-            .devider.w-50.mx-auto.my-4.border-gray-500.d-block.d-lg-none
+            .divider.w-50.mx-auto.my-4.border-gray-500.d-block.d-lg-none
 
         //- coffee recipe
         CoffeeRecipe
@@ -78,7 +79,7 @@
 
         h5.mx-auto {{ tempProduct.title }}
 
-        .devider.w-25.mx-auto.my-4.border-gray-500
+        .divider.w-25.mx-auto.my-4.border-gray-500
 
         .d-flex.justify-content-around.mt-2
           img.mx-auto(src="@/assets/images/aeropress_coffee.svg" width="50"
@@ -88,7 +89,7 @@
           img.mx-auto(src="@/assets/images/portafilter_tamper_icon.svg" width="50"
             title="good for espresso" alt="espresso")
 
-        .devider.w-25.mx-auto.my-4.border-gray-500
+        .divider.w-25.mx-auto.my-4.border-gray-500
 
         .mx-auto.d-flex.flex-column.align-items-center
 
@@ -112,13 +113,14 @@
           button.btn.w-75(type="button"
             @click="updateFavorite(tempProduct.id)"
             title="點擊以加入/取消收藏"
-            :class="{ 'btn-outline-success': isFavorite, 'btn-outline-gray-600': !isFavorite }")
+            :class="{ 'btn-outline-success': isFavorite, 'btn-outline-gray-600': !isFavorite }"
+            :key="tempProduct.id")
             span(v-if="isFavorite")
               i.bi.bi-check-lg.me-1
               | 已收藏
             span(v-else) 加入收藏
 
-        .devider.w-25.mx-auto.my-4.border-gray-500
+        .divider.w-25.mx-auto.my-4.border-gray-500
 
         h6.mb-1.mx-auto 風味描述
         p.mb-0.w-75.mx-auto {{ tempProduct.description }}
@@ -236,6 +238,7 @@ export default {
     this.isFavorite = this.isInFavorites();
   },
   updated() {
+    this.isFavorite = this.isInFavorites();
     useMeta({
       title: this.tempProduct.title,
     });

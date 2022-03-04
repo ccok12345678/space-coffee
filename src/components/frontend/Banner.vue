@@ -6,7 +6,7 @@
     p.text-gray-200.mb-1.pt-3.pt-md-1
       | 土星環精品，腦海迷航必備：
 
-    .devider.my-2
+    .divider.my-2
 
     .d-none.d-md-flex
       p.fs-3.mb-1.mb-md-2.text-light
@@ -31,11 +31,11 @@ main.text-cyan-600.text-center.fs-5.font-monospace.my-4
   p 一個人很好，
   p 有咖啡喝，更好。
 
-.banner.w-100.bg-cover.p-5.text-center.mb-2
-  .p-5.my-5.display-1.text-light.text-brand.d-none.d-md-block
-    | Coffee Or Die
-  .p-4.my-5.display-3.text-light.text-brand.d-md-none
-    | Coffee Or Die
+//- .banner.w-100.bg-cover.p-5.text-center.mb-2
+//-   .p-5.my-5.display-1.text-light.text-brand.d-none.d-md-block
+//-     | Coffee Or Die
+//-   .p-4.my-5.display-3.text-light.text-brand.d-md-none
+//-     | Coffee Or Die
 </template>
 
 <script>
@@ -90,9 +90,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.banner {
-  background-image: url('../../assets/photos/banner-background.jpg');
-}
 .banner-head {
   background: rgba(0, 0, 0, .5);
   width: 75%;

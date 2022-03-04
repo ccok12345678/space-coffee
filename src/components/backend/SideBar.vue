@@ -51,7 +51,7 @@ nav.nav.navbar-dark.bg-dark
         span.d-none.d-md-inline-block 登出
 
     footer.d-flex.flex-column.p-3.mt-auto.d-none.d-md-block
-      .devider.w-75.border-secondary.mx-auto
+      .divider.w-75.border-secondary.mx-auto
       small.text-muted.pt-2.mx-auto © 2022 Space coffee, made by ccok
 
 //- offcanvas nav content

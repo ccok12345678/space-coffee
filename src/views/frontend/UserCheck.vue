@@ -9,7 +9,7 @@
 
       h4.text-gray-700 已建立訂單
 
-      .devider.w-25.boder-dark.my-3
+      .divider.w-25.boder-dark.my-3
 
       main.row.w-100
         .col-3.d-flex.justify-content-center.align-items-center.fw-bold.border.p-0
@@ -40,7 +40,7 @@
           div(v-else)
             span.text-danger.me-2 未付款
             button.btn.btn-cyan-600.text-light(type="button"
-              @click="payOrder"
+              @click="openModal"
               :disabled="isPaying")
               | 進行付款
               .spinner-border.spinner-border-sm(v-if="isPaying")
@@ -59,10 +59,17 @@
         .col-9.border.py-2
           router-link.text-decoration-none(:to="{ name: 'UserOrders' }") 察看其他訂單
 
+PayModal(
+  ref="payModal"
+  :order="order"
+  :isPaying="isPaying"
+  @emit-pay="payOrder")
+
 </template>
 
 <script>
 import ProgressBar from '@/components/frontend/UserProgressBar.vue';
+import PayModal from '@/components/frontend/UserPayModal.vue';
 
 export default {
   metaInfo: {
@@ -77,6 +84,7 @@ export default {
   },
   components: {
     ProgressBar,
+    PayModal,
   },
   inject: ['pushToast', 'scrollTop'],
   methods: {
@@ -94,6 +102,10 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+
+    openModal() {
+      this.$refs.payModal.showModal();
     },
 
     async payOrder() {

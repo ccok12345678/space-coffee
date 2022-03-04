@@ -15,7 +15,7 @@
 
       h4.text-gray-700 所有訂單
 
-      .devider.w-25.boder-dark.my-3
+      .divider.w-25.boder-dark.my-3
 
       main.row.w-100.gy-3
 
@@ -30,7 +30,7 @@
               .mb-2 訂單編號：
               .text-end {{ order.id }}
 
-              .devider.w-100.border-gray-300.my-2
+              .divider.w-100.border-gray-300.my-2
 
               .mb-2.d-flex.justify-content-between
                 span 訂單金額：
@@ -42,7 +42,7 @@
                   span.text-info(v-if="order.is_paid") 已付款
                   span.text-danger(v-else) 未付款
 
-              .devider.w-100.border-gray-300.my-3
+              .divider.w-100.border-gray-300.my-3
 
               router-link.btn.btn-outline-gray-600.w-100(:to="`/order/${order.id}`")
                 | 檢視

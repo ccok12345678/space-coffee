@@ -6,7 +6,7 @@ article.container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!isLoading
 
   h3.fs-4.text-gray-600 {{ article.title }}
 
-  .devider.w-50.border-gray-500.mb-3
+  .divider.w-50.border-gray-500.mb-3
 
   .row.justify-content-center.w-100
 
@@ -22,7 +22,7 @@ article.container-lg.d-flex.flex-column.align-items-center.my-5(v-if="!isLoading
     p.col-md-8
       | {{ article.content }}
 
-    .col-12.col-md-8.devider.border-gray-500.mb-3
+    .col-12.col-md-8.divider.border-gray-500.mb-3
 
     .col-md-8.mb-2.text-gray-600
       small 編輯日期：{{ $filters.date(article.create_at) }}

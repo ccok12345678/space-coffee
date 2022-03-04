@@ -96,6 +96,7 @@ $theme-colors: (
   "gray-600":   $gray-600,
   "gray-700":   $gray-700,
   "cyan-400":   tint-color($cyan, 20%),
+  "cyan":       $cyan,
   "cyan-600":   shade-color($cyan, 20%),
   "cyan-800":   shade-color($cyan, 60%),
   "orange-600": shade-color($orange, 20%),

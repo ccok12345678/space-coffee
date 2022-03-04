@@ -15,9 +15,9 @@ ToastMessages
 </template>
 
 <script>
+import UserFrontPage from '@/views/frontend/UserFrontPage.vue';
 import UserNavbar from '@/components/frontend/UserNavbar.vue';
 import UserFooter from '@/components/frontend/UserFooter.vue';
-import UserFrontPage from '@/components/frontend/UserFrontPage.vue';
 import UserFixedBtn from '@/components/frontend/UserFixedBtn.vue';
 import ToastMessages from '@/components/ToastMessages.vue';
 

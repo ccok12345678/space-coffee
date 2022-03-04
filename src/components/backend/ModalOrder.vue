@@ -45,7 +45,7 @@
               v-model="tempOrder.user.address" :readonly="!tempOrder.isEditable"
               :class=" {'form-control-plaintext': !tempOrder.isEditable} ")
 
-        .devider.border-gray-500.w-100.mb-3
+        .divider.border-gray-500.w-100.mb-3
 
         h6.fw-bold 訂單狀態
 
@@ -79,7 +79,7 @@
               span.text-success(v-if="tempOrder.is_paid") 已付款
               span.text-danger(v-else) 未付款
 
-        .devider.border-gray-500.w-100.mb-3
+        .divider.border-gray-500.w-100.mb-3
 
         h6.fw-bold 訂單內容
 

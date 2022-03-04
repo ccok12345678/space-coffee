@@ -13,7 +13,7 @@ aside#navbarOffcanvas.offcanvas.offcanvas-start.text-center(
         title="首頁")
         | 首頁
 
-    .devider.w-75.border-2.mx-auto.border-gray-300
+    .divider.w-75.border-2.mx-auto.border-gray-300
 
     #navAccordion.accordion
 
