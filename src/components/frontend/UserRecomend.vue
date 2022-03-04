@@ -1,5 +1,5 @@
 <template lang="pug">
-section.container-lg.d-flex.flex-column.align-items-center.py-5.mb-5
+section.d-flex.flex-column.align-items-center.py-5.mb-3
 
   h3.fs-5.text-gray-600 宇航精選
 
