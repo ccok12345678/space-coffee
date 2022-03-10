@@ -1,0 +1,1 @@
+.progress-bar{display:flex}@media (max-width:374.98px){.progress-bar{display:none}}.circle{width:35px;height:35px;font-size:1.5rem}@media (max-width:576px){.circle{width:25px;height:25px;font-size:1rem}}.bar{width:55px;height:0;border-top:3px solid #34ccf1}@media (max-width:576px){.bar{width:35px;border-width:1.75px}}
