@@ -13,7 +13,7 @@
         .col-12.text-center
           h5.mb-3 訂購人資料
 
-        .col-4.d-flex.flex-column.mt-2
+        .col-4.col-md-3.d-flex.flex-column.mt-2
           label.ms-auto.my-auto(for="name") *姓名：
         .col-8.mt-2
           Field#name.form-control.w-85.shadow-none(type="text" name="姓名"
@@ -21,10 +21,11 @@
           v-model.trim="user.name"
           rules="required"
           :class="{ 'is-invalid': errors['姓名'] }")
-        .col-8.offset-4
+        .col-8.offset-4.offset-md-3
           ErrorMessage.fs-12.ms-auto.text-danger(name="姓名")
 
-        .col-4.d-flex.flex-column(:class="{ 'mt-4': !errors['姓名'], 'mt-2': errors['姓名'] }")
+        .col-4.col-md-3.d-flex.flex-column(
+          :class="{ 'mt-4': !errors['姓名'], 'mt-2': errors['姓名'] }")
           label.ms-auto.my-auto(for="tel") *聯絡電話：
         .col-8(:class="{ 'mt-4': !errors['姓名'], 'mt-2': errors['姓名'] }")
           Field#tel.form-control.w-85.shadow-none(type="tel" name="tel"
@@ -32,10 +33,11 @@
           v-model.trim="user.tel"
           :rules="isPhone" rules="reauired"
           :class="{ 'is-invalid': errors['tel'] }")
-        .col-8.offset-4
+        .col-8.offset-4.offset-md-3
           ErrorMessage.text-danger.ms-auto.fs-12(name="tel")
 
-        .col-4.d-flex.flex-column(:class="{'mt-4': !errors['tel'],'mt-2': errors['tel']}")
+        .col-4.col-md-3.d-flex.flex-column(
+          :class="{'mt-4': !errors['tel'],'mt-2': errors['tel']}")
           label.my-auto.ms-auto(for="email") *E-Mail：
         .col-8(:class="{'mt-4': !errors['tel'],'mt-2': errors['tel']}")
           Field#email.form-control.w-85.shadow-none(type="email" name="email"
@@ -43,10 +45,11 @@
           v-model.trim="user.email"
           rules="email|required"
           :class="{'is-invalid': errors['email']}")
-        .col-8.offset-4
+        .col-8.offset-4.offset-md-3
           ErrorMessage.fs-12.ms-auto.text-danger(name="email")
 
-        .col-4.d-flex.flex-column(:class="{'mt-4': !errors['email'],'mt-2': errors['email']}")
+        .col-4.col-md-3.d-flex.flex-column(
+          :class="{'mt-4': !errors['email'],'mt-2': errors['email']}")
           label.my-auto.ms-auto(for="address") *收件地址：
         .col-8(:class="{'mt-4': !errors['email'],'mt-2': errors['email']}")
           Field#address.form-control.w-85.shadow-none(type="text" name="地址"
@@ -54,10 +57,10 @@
           v-model.trim="user.address"
           rules="required"
           :class="{ 'is-invalid': errors['地址'] }")
-        .col-8.offset-4
+        .col-8.offset-4.offset-md-3
           ErrorMessage.fs-12.ms-auto.text-danger(name="地址")
 
-        .col-8.offset-4(:class="{'mt-4': !errors['地址'],'mt-2': errors['地址']}")
+        .col-8.offset-4.offset-md-3(:class="{'mt-4': !errors['地址'],'mt-2': errors['地址']}")
           .form-floating.mb-2.w-85
             textarea#userMessage.form-control.textarea(name="userMessage"
             v-model="message")
